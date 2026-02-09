@@ -1,11 +1,10 @@
 ---
-import Welcome from '../components/Welcome.astro';
+//このファイルはトップページに当たる.astroが書かれています。
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import './index.css'
 ---
 
-<Layout>
-	<Welcome />
+<Layout title ="メイン">
+	<h1>私のポートフォリオサイトへようこそ!</h1>
+	<p>ここに自己紹介やサイトの説明が入ります。</p>
 </Layout>

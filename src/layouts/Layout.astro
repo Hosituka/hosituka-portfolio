@@ -1,23 +1,30 @@
-<!doctype html>
-<html lang="en">
+<!doctype html>		
+<!--ここは全てのwebページで共通する内容を書くところです。-->
+<html lang="en">	
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>私のポートフォリオサイト</title>
 	</head>
 	<body>
+		<!--ここはグローバルナビゲーション-->
+		<nav>
+			<ul>
+				<li><a href="/">ホーム</a></li>
+				<li><a href="hoge2">作品</a></li>
+				<li><a href="hoge3">開発日誌</a></li>
+				<li><a href="hoge4">SNS</a></li>
+			</ul>
+		</nav>
+		<!--ここに各ページのメインとなる事を書く-->
 		<slot />
+		<!--ここはフッター-->
+		<footer>
+
+		</footer>
 	</body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
