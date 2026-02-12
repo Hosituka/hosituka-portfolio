@@ -1,0 +1,64 @@
+---
+//#グローバルナビゲーションに関するアストロファイル
+export interface Props {
+    topURL:string;
+    worksURL:string;
+    devLogURL:string;
+    sNS_URL:string;
+}
+
+const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
+---
+<!-- ##グローバルナビゲーションの要素ノード-->
+<nav>
+    <ul>
+        <li><a href={topURL}>ホーム</a></li>
+        <li><a href={worksURL}>作品</a></li>
+        <li><a href={devLogURL}>開発日誌</a></li>
+        <li><a href={sNS_URL}>SNS</a></li>
+    </ul>
+</nav>
+<!-- ##グローバルナビゲーションのスタイル-->
+<style>
+    nav {
+		position: fixed;
+		z-index: 1000;
+		top: 0px;
+
+		width: 100%;
+		height: var(--nav-height);
+		opacity: 0.9;
+		background-color: #333;
+		border-bottom: 2px solid black;
+	}
+
+	nav ul {
+		margin: 0px;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+
+		width: 100%;
+		height: 100%;
+		list-style: none;
+	}
+
+	nav ul li a {
+		display: block;
+
+		font-size: 20px;
+		color: white;
+		padding: 10px 10px; /* PC表示でのpaddingを少し調整 */
+		text-decoration: none;
+		transition: background-color 0.3s;
+
+	}
+	nav ul li a:hover {
+		background-color: #555;
+	}
+
+
+
+
+
+</style>

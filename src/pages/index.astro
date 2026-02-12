@@ -1,10 +1,12 @@
 ---
 //このファイルはトップページに当たる.astroが書かれています。
+import Grobal_nav from '../components/GrobalNav.astro';
 import Layout from '../layouts/Layout.astro';
-import './index.css'
----
 
-<Layout title ="メイン">
+import './index.css';
+---
+<Layout title='ホーム'>
+	<Grobal_nav topURL ="/" worksURL="/works.astro"devLogURL="/devLog.astro"  sNS_URL="/sns.astro" />
 	<h1>私のポートフォリオサイトへようこそ!</h1>
 	<p>ここに自己紹介やサイトの説明が入ります。</p>
 </Layout>
