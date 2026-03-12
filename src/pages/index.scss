@@ -95,16 +95,20 @@
     }
 }
 //レスポンシブ対応用のスタイルここではLayoutとappearanceの区別はしない
-@media (max-width:700px) {
+@media (max-width:510px) {
     header{
-        height:125px;
+        height:145px;
         #page-title-container{
             flex-direction: column;
+            bottom:10px;
             h1{
-                font-size: 30px;
+                line-height: 40px;
+                font-size: 40px;
             }
         }
     }
+}
+@media (max-width:700px) {
     main{
         #about-me-section{
           /*h2{
