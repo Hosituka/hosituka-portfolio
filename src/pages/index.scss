@@ -1,0 +1,121 @@
+//#配置に関するスタイル
+@layer Layout{
+    header{
+        position:relative;
+        #page-title-container{
+            display:flex;
+            position:absolute;
+            bottom:3px;
+            left:50%;
+            transform:translate(-50%);
+          /*h1{
+
+            }*/
+        }
+    }
+    main{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        #about-me-section{
+            margin-top:10px;
+            h2{
+                position:relative;
+                //各セクションの見出しで左側をこんもりさせるための疑似要素
+                &::after{
+                    position:absolute;
+                    top:-15px;
+                    left:0px;
+                }
+            }
+            #about-me-main{
+                display:flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap:20px;
+                /*#about-me-text{
+                
+                }*/
+            }
+        }
+    }
+}
+//#見た目や内部の配置に関するスタイル
+@layer Appearance{
+    header{
+        min-height:100px;
+        border-bottom:1px solid black;
+        #page-title-container{
+            h1{
+                text-align: center;   
+                font-size: 40px;
+                color:yellow;
+                -webkit-text-stroke-width: 1px;
+                -webkit-text-stroke-color: black;
+                paint-order: stroke;
+                white-space: nowrap;
+            }
+        }
+    }
+    main{
+        background-color:  ghostwhite;
+        height:600px;
+        #about-me-section{
+            max-width: 700px;
+            h2{
+                background-color: #333;
+                color:white;
+                padding-left:10px;
+                padding-bottom: 10px;
+                //各セクションの見出しで左側をこんもりさせるための疑似要素
+                &::after{
+                    width:150px;
+                    height:15px;
+                    content:"";
+                    background-color: #333;
+                    border-top-left-radius:40px;
+                    border-top-right-radius:40px;
+                }
+
+            }
+            #about-me-main{
+                box-sizing: border-box;
+                padding:20px;
+                border:1px solid #333;
+                background-color:  white;
+
+                #about-me-text{
+                    width:250px;
+                    height:200px;
+                    line-height: 1.6;
+                }
+            }
+        }
+    }
+}
+//レスポンシブ対応用のスタイルここではLayoutとappearanceの区別はしない
+@media (max-width:700px) {
+    header{
+        height:125px;
+        #page-title-container{
+            flex-direction: column;
+            h1{
+                font-size: 30px;
+            }
+        }
+    }
+    main{
+        #about-me-section{
+          /*h2{
+            }*/
+            #about-me-main{
+                flex-direction: column;
+
+                padding:10px;
+              /*#about-me-text{
+                }*/
+            }
+        }
+    }
+}

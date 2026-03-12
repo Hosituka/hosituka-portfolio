@@ -1,0 +1,26 @@
+/*全てのwebページで共通してほしいスタイルを書くcss*/
+@charset "UTF-8";
+
+
+@layer CssReset;
+/*マジックナンバー防ぐよう*/
+:root{
+	--nav-height:50px;
+}
+@Layer CssReset{
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	body,
+	h1, h2, h3, h4, h5, h6,
+	p,
+	ul, ol, li,
+	figure, figcaption, blockquote, dl, dd {
+		margin: 0;
+		padding: 0;
+	}
+
+}

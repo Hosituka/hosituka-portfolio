@@ -1,0 +1,239 @@
+---
+//#私について簡潔に書いてある、つまり名刺を表すUIコンポーネント
+---
+<!-- ##要素ノード-->
+<div id="card-container">
+	<div id="card">
+		<div id="front">
+			<h3>ほしつか</h3>
+			<ul>
+				<li>ゲームプログラマー</li>
+				<li>webプログラマー<br>(願望)</li>
+			</ul>
+			<p>Since 2020.12</p>
+			<img src="/myIcon.webp" alt="ほしつかのアイコン">
+
+		</div>
+		<div id="back">
+			<div class="infomation-group">
+				<h3>スキル</h3>
+				<ul>
+					<li>UnityとC#</li>
+					<li>ShaderGraph</li>
+					<li>HtmlとCSS</li>
+				</ul>
+
+			</div>
+			<div class="infomation-group">
+				<h3>勉強中</h3>
+				<ul>
+					<li>Webフレームワーク<br>(Astro)</li>
+					<li>TSとJS</li>
+					<li>SCSS</li>
+					<li>Blender</li>
+					<li>GIMP</li>
+				</ul>
+
+			</div>
+			<p>Since 2020.12</p>
+
+		</div>
+	</div>
+</div>	
+<!-- ##スタイル-->
+ 
+<style lang="scss">
+	
+@layer Layout{
+	#card-container{
+		perspective: 2000px;
+		#card{
+			transform-style:preserve-3d;
+			position:relative;
+			&.is-flipped{
+				transform:rotateY(180deg);
+			}
+			#front{
+				position:absolute;
+				h3{
+					position:absolute;
+					top:45px;
+					left:30px;
+
+				}
+				ul{
+					display:flex;
+					flex-direction:column;
+					gap:10px;
+					position:absolute;
+					top:105px;
+					left:30px;
+				}
+				img{
+					position:absolute;
+					top:20px;
+					right:10px;
+				}
+				p{
+					position:absolute;
+					bottom:5px;
+					right:5px;
+				}
+
+			}
+			#back{
+				position:absolute;
+				display:flex;
+				justify-content: left;
+				gap:25px;
+				transform:rotateY(180deg);
+				.infomation-group{
+					margin-top:6px;
+					margin-left:25px;
+					h3{
+					}
+					ul{
+						display:flex;
+						flex-direction:column;
+						gap:5px;
+
+					}
+				}
+				p{
+					position:absolute;
+					bottom:5px;
+					right:5px;
+				}
+
+			}
+		}
+	}
+}
+@layer Appearance{
+	#card-container{
+		#card{
+			width:350px;
+			aspect-ratio: 91 / 55;
+			transition:transform 1s;
+			#front, #back{
+				width:100%;
+				height:100%;
+				backface-visibility: hidden;
+				border:1px solid gainsboro;
+				will-change: transform;
+				outline:1px solid transparent;
+			}
+			#front{
+				background-color: white;
+				border-top-left-radius: 40px;
+				box-shadow: 4px 4px 8px darkgoldenrod; 
+				background: linear-gradient(45deg, 
+							yellow   5px,yellow 10px,
+							transparent 10px,transparent 20px, 
+							yellow 20px, yellow 25px, 
+							transparent 25px,transparent 35px,
+							yellow 35px, yellow 40px, 
+							transparent 40px,transparent 50px,
+							yellow 50px, yellow 55px, 
+							transparent 55px,transparent 65px,
+							yellow 65px, yellow 70px, 
+							transparent 70px,transparent 80px,
+							yellow 80px, yellow 85px, 
+							transparent 85px,),
+							linear-gradient(225deg, 
+							yellow   5px,yellow 10px,
+							transparent 10px,transparent 20px, 
+							yellow 20px, yellow 25px, 
+							transparent 25px,transparent 35px,
+							yellow 35px, yellow 40px, 
+							transparent 40px,transparent 50px,
+							yellow 50px, yellow 55px, 
+							transparent 55px,transparent 65px,
+							yellow 65px, yellow 70px, 
+							transparent 70px,transparent 80px,
+							yellow 80px, yellow 85px, 
+							transparent 85px,);
+				h3{
+					font-size:30px;
+				}
+				ul{
+					li{
+						text-indent:-5px;
+						font-size:15px;
+					}
+				}
+				img{
+					width:150px;
+					height:150px;
+					border-radius: 50%;
+					border:1px,solid, gainsboro;
+				}
+				p{
+					color:darkgoldenrod;
+					font-style: italic;
+				}
+
+			}
+			#back{
+				background-color: white;
+				border-top-right-radius: 40px;
+				box-shadow: 4px 4px 8px darkgoldenrod; 
+				background: linear-gradient(135deg, 
+							yellow   5px,yellow 10px,
+							transparent 10px,transparent 20px, 
+							yellow 20px, yellow 25px, 
+							transparent 25px,transparent 35px,
+							yellow 35px, yellow 40px, 
+							transparent 40px,transparent 50px,
+							yellow 50px, yellow 55px, 
+							transparent 55px,transparent 65px,
+							yellow 65px, yellow 70px, 
+							transparent 70px,transparent 80px,
+							yellow 80px, yellow 85px, 
+							transparent 85px,),
+							linear-gradient(315deg, 
+							yellow   5px,yellow 10px,
+							transparent 10px,transparent 20px, 
+							yellow 20px, yellow 25px, 
+							transparent 25px,transparent 35px,
+							yellow 35px, yellow 40px, 
+							transparent 40px,transparent 50px,
+							yellow 50px, yellow 55px, 
+							transparent 55px,transparent 65px,
+							yellow 65px, yellow 70px, 
+							transparent 70px,transparent 80px,
+							yellow 80px, yellow 85px, 
+							transparent 85px,);
+				.infomation-group{
+					h3{
+						font-size:20px;
+					}
+					ul{
+						li{
+							text-indent:-5px;
+							font-size:15px;
+						}
+					}
+
+				}
+				p{
+					color:darkgoldenrod;
+					font-style: italic;
+				}
+
+			}
+		}
+	}
+}
+@media (max-width:700px) {
+}
+    
+
+</style>
+<script>
+	const card:HTMLElement|null = document.getElementById('card');
+	
+	card?.addEventListener('click',()=>{
+		card.classList.toggle('is-flipped');
+	});
+</script>

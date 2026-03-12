@@ -1,8 +1,0 @@
-@charset "UTF-8";
-/*ユーザーエージェントスタイルシートを統一するスタイルシートをlayerとして読み込んでいる、*/
-@import url("../global-styles/Normalize.css") layer(normalize);
-/*webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/
-@import url("../global-styles/Layout.css") layer(global);
-
-@layer normalize, global, Layout, appearance;
-

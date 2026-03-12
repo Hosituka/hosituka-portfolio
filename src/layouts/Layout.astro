@@ -5,8 +5,7 @@ interface Props {
 const {title}:Props = Astro.props;
 ---
 <!doctype html>		
-<!--ここは全てのwebページで共通する内容を書く
-ところです。-->
+<!--ここは全てのwebページで共通する内容を書くところです。cssレイヤーの都合から各ページコンポーネントのフロントマターで一番最初に読み込んでください-->
 <html lang="ja">	
 	<head>
 		<meta charset="UTF-8" />
@@ -21,4 +20,15 @@ const {title}:Props = Astro.props;
 		<slot />
 	</body>
 </html>
+
+<style lang="scss">
+//#ここで全てのコンポーネントで共通するcssレイヤーの順序と読み込みを行っている
+@charset "UTF-8";
+/*##ユーザーエージェントスタイルシートを統一するスタイルシートをlayerとして読み込んでいる、*/
+@import url("../global-styles/Normalize.css") layer(Normalize);
+/*##webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/
+@import url("../global-styles/CssReset.css") layer(CssReset);
+
+@layer Normalize, CssReset, Layout, Appearance;
+</style>
 

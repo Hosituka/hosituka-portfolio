@@ -1,12 +1,28 @@
 ---
-//このファイルはトップページに当たる.astroが書かれています。
-import Grobal_nav from '../components/GrobalNav.astro';
+//このファイルはトップページに当たります。
 import Layout from '../layouts/Layout.astro';
 
-import './index.css';
+import GrobalNav from '../components/GlobalNav.astro';
+import AboutMeCard from '../components/AboutMeCard.astro'
+import './index.scss';
+
 ---
 <Layout title='ホーム'>
-	<Grobal_nav topURL ="/" worksURL="/works.astro"devLogURL="/devLog.astro"  sNS_URL="/sns.astro" />
-	<h1>私のポートフォリオサイトへようこそ!</h1>
-	<p>ここに自己紹介やサイトの説明が入ります。</p>
+	<GrobalNav topURL ="/" worksURL="/works.astro"devLogURL="/devLog.astro"  sNS_URL="/sns.astro" />
+	<header>
+		<div id="page-title-container">
+			<h1>Hositukaの</h1><h1>ホームページ</h1>
+		</div>
+	</header>
+	<main>
+		<section id="about-me-section">
+			<h2>私について</h2>
+			<div id="about-me-main">
+				<AboutMeCard/>
+				<div id="about-me-text">
+					<p>主にブラウザ上で遊ぶゲームをunityで作っています。最近はweb(フロントエンド)の勉強も始めました。拙い部分が目立つと思いますが、温かい目で見守ってください。</p>
+				</div>
+			</div>
+		</section>
+	</main>
 </Layout>
