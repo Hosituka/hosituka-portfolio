@@ -20,7 +20,7 @@
 				<ul>
 					<li>UnityとC#</li>
 					<li>ShaderGraph</li>
-					<li>HtmlとCSS</li>
+					<li>HTMLとCSS</li>
 				</ul>
 
 			</div>
@@ -53,6 +53,11 @@
 			&.is-flipped{
 				transform:rotateY(180deg);
 			}
+			&:not(.is-flipped):hover{
+				transform: rotateY(20deg); 
+				cursor: pointer; 
+			}
+			
 			#front{
 				position:absolute;
 				h3{
@@ -226,6 +231,11 @@
 	}
 }
 @media (max-width:700px) {
+	#card-container{
+		#card{
+			width:320px;
+		}
+	}
 }
     
 
