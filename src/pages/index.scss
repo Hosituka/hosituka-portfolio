@@ -1,5 +1,6 @@
 //#配置に関するスタイル
 $dark-yellow : rgb(235, 220, 0);
+$dark-gray: #333;
 
 @layer Layout{
     header{
@@ -48,10 +49,17 @@ $dark-yellow : rgb(235, 220, 0);
                     grid-area:sns;
                     display:flex;
                     justify-content: center;
-                    gap:10px;
+                    gap:13px;
                 }
 
             }
+        }
+        #main-works{
+            margin-top:35px;
+          /*h2{
+
+            }*/
+
         }
     }
 }
@@ -79,7 +87,7 @@ $dark-yellow : rgb(235, 220, 0);
         #about-me-section{
             max-width: 700px;
             h2{
-                background-color: #333;
+                background-color: $dark-gray;
                 color:white;
                 padding-left:10px;
                 padding-bottom: 10px;
@@ -89,7 +97,7 @@ $dark-yellow : rgb(235, 220, 0);
                     width:150px;
                     height:15px;
                     content:"";
-                    background-color: #333;
+                    background-color: $dark-gray;
                     border-top-left-radius:40px;
                     border-top-right-radius:40px;
                 }
@@ -108,14 +116,36 @@ $dark-yellow : rgb(235, 220, 0);
                 }
                 #sns-container{
                     width:250px;
-                    height:50px;
                     a{
+                        outline:3px solid gray;
+                        outline-offset: -2px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                        height:50px;
+                        width:50px;
                         img{
                             height:50px;
+                            width:50px;
+                            object-fit: cover;
+                        }
+                        .is-small{
+                            padding:6px;      
                         }
                     }
                 }
             }
+        }
+        #main-works{
+            width:100%;
+            h2{
+                background-color: #333;
+                color:white;
+                border-top-left-radius:25px;
+                border-top-right-radius:25px;
+                text-align: center;
+                padding: 5px 0 5px 0px;
+            }
+
         }
     }
 }
@@ -137,13 +167,13 @@ $dark-yellow : rgb(235, 220, 0);
             #about-me-main{
                 grid-template-areas: 
                     "card"
-                    "text"
-                    "sns";
+                    "sns"
+                    "text";
                 grid-template-columns: 1fr;
                 justify-items: center;
                 padding:10px;
-                #about-me-text{
-                    margin-top:15px;
+                #sns-container{
+                    margin:15px 0px 10px 0px;
                 }
             }
         }

@@ -3,7 +3,8 @@
 import Layout from '../layouts/Layout.astro';
 
 import GrobalNav from '../components/GlobalNav.astro';
-import AboutMeCard from '../components/AboutMeCard.astro'
+import AboutMeCard from '../components/AboutMeCard.astro';
+import Footer from '../components/Footer.astro';
 import './index.scss';
 
 ---
@@ -33,10 +34,14 @@ import './index.scss';
 						<img src="Icon/GitHubLogo.svg" alt="GitHubLogo">
 					</a>
 					<a href="https://connpass.com/user/hosituka/">
-						<img src="Icon/ConnpassLogo.webp" alt="ConnpassLogo">
+						<img class="is-small" src="Icon/ConnpassLogo.webp" alt="ConnpassLogo">
 					</a>
 				</div>
 			</div>
 		</section>
+		<section id="main-works">
+			<h2>主要な作品</h2>
+		</section>
 	</main>
+	<Footer/>
 </Layout>
