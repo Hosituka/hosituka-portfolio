@@ -26,7 +26,7 @@
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
                 &::after{
                     position:absolute;
-                    top:-15px;
+                    top:-13px;
                     left:0px;
                 }
             }
@@ -95,7 +95,7 @@
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
                 &::after{
                     width:150px;
-                    height:15px;
+                    height:19px;
                     content:"";
                     background-color: $dark-gray;
                     border-top-left-radius:40px;
