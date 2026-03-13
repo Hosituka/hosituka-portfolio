@@ -44,7 +44,7 @@ const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
 		width: 100%;
 		height: var(--nav-height);
 		opacity: 0.9;
-		background-color: #333;
+		background-color: $dark-gray;
 		border-bottom: 2px solid black;
 		border-bottom-left-radius: 40px;
 		border-bottom-right-radius: 40px;
@@ -55,7 +55,7 @@ const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
 			li{
 				a{
 					font-size: 20px;
-					color: $dark-yellow;
+					color: white;
 					padding: 10px 0px 10px 0px; /* PC表示でのpaddingを少し調整 */
 					text-decoration: none;
 					transition: background-color 0.3s;
