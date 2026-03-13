@@ -1,6 +1,5 @@
+@use '../global-styles/_variables' as *;
 //#配置に関するスタイル
-$dark-yellow : rgb(235, 220, 0);
-$dark-gray: #333;
 
 @layer Layout{
     header{

@@ -20,6 +20,7 @@ const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
 </nav>
 <!-- ##グローバルナビゲーションのスタイル-->
 <style lang="scss">
+@use '../global-styles/_variables' as *;
 @layer Layout{
 	nav {
 		position: fixed;
@@ -54,7 +55,7 @@ const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
 			li{
 				a{
 					font-size: 20px;
-					color: white;
+					color: $dark-yellow;
 					padding: 10px 0px 10px 0px; /* PC表示でのpaddingを少し調整 */
 					text-decoration: none;
 					transition: background-color 0.3s;

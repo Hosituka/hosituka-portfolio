@@ -7,6 +7,7 @@
 </footer>
 
 <style lang="scss">
+@use '../global-styles/_variables' as *;
 @layer Layout{
 	footer{
 		position:sticky;
@@ -24,7 +25,7 @@
 		width:100%;
 		height:50px;
 		border-top:1px solid black;
-		background-color: white;
+		background-color: $dark-yellow;
 		opacity:0.9;
 		#Copyright{
 			color: black;

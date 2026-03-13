@@ -1,7 +1,8 @@
 ---
 //#私について簡潔に書いてある、つまり名刺を表すUIコンポーネント
 ---
-<div class="about-me-card">
+
+<about-me-card>
 	<div class="card">
 		<div class="front">
 			<h3>ほしつか</h3>
@@ -39,14 +40,12 @@
 
 		</div>
 	</div>
-</div>	
+</about-me-card>	
  
 <style lang="scss">
-$white-yellow:rgb(255, 255, 185);
-$dark-yellow : rgb(235, 220, 0);
-
+@use '../global-styles/_variables' as *;
 @layer Layout{
-	.about-me-card{
+	about-me-card{
 		perspective: 2000px;
 		.card{
 			transform-style:preserve-3d;
@@ -124,7 +123,7 @@ $dark-yellow : rgb(235, 220, 0);
 	}
 }
 @layer Appearance{
-	.about-me-card{
+	about-me-card{
 		.card{
 			width:350px;
 			aspect-ratio: 91 / 55;
@@ -263,14 +262,17 @@ $dark-yellow : rgb(235, 220, 0);
 
 </style>
 <script>
-	//全ての
-	const containers = document.querySelectorAll('.about-me-card')
-	containers.forEach(container =>{
-		const card:HTMLElement|null = document.querySelector('.card');
+	class AboutMeCard extends HTMLElement{
+		connectedCallback(){
+			const card:Element|null = this.querySelector('.card')
+			if(card===null){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+				return;}
 
-		card?.addEventListener('click',()=>{
-			card.classList.toggle('is-flipped');
-		});
-	});
+			card.addEventListener('click',()=>{
+				card.classList.toggle('is-flipped');
+			});
+		}
+	}
+	customElements.define('about-me-card',AboutMeCard);
 
 </script>
