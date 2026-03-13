@@ -37,7 +37,7 @@
                     "card text"
                     "card sns";
                 grid-template-columns: auto 1fr;
-                .about-me-card{
+                about-me-card{
                     grid-area:card;
                 }
                 #about-me-text{
@@ -90,7 +90,7 @@
                 color:white;
                 padding-left:10px;
                 padding-bottom: 10px;
-                font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+                font-family: sans-serif;
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
                 &::after{
                     width:150px;
@@ -142,6 +142,7 @@
                 border-top-left-radius:25px;
                 border-top-right-radius:25px;
                 text-align: center;
+                font-family: sans-serif;
                 padding: 5px 0 5px 0px;
             }
 
