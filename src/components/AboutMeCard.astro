@@ -75,12 +75,9 @@
 			}
 			.front{
 				.back-ground{
-					.main-color{
-						position:absolute;}
-					.stripes{
-						position:absolute;}
-					.simple-noise{
-						position:absolute;}
+					& > *{
+						position:absolute;
+					}
 				}
 				.content{
 					h3{
@@ -95,6 +92,10 @@
 						gap:10px;
 						top:105px;
 						left:30px;
+						li{
+							display: flex;
+							align-items: baseline;
+						}
 					}
 					img{
 						position:absolute;
@@ -103,7 +104,7 @@
 					}
 					p{
 						position:absolute;
-						bottom:5px;
+						bottom:1px;
 						right:5px;
 					}
 				}
@@ -131,12 +132,16 @@
 							display:flex;
 							flex-direction:column;
 							gap:5px;
+							li{
+								display: flex;
+								align-items: baseline;
+							}
 
 						}
 					}
 					p{
 						position:absolute;
-						bottom:5px;
+						bottom:1px;
 						right:5px;
 					}
 				}
@@ -170,7 +175,7 @@
 					}
 					.main-color{
 						box-shadow: 4px 4px 8px darkgoldenrod; 
-						background-color: $dark-yellow;
+						background-color: $yellow;
 						outline:1px solid transparent;
 						border:1px solid gainsboro;
 					}
@@ -206,7 +211,7 @@
 					.simple-noise{
 						background-image: url('texture/simpleNoise.webp');
 						mix-blend-mode: multiply;
-						opacity: 5%;
+						opacity: 8%;
 					}
 
 				}
@@ -217,9 +222,15 @@
 					}
 					ul{
 						li{
-							text-indent:-5px;
+							list-style: none;
 							font-size:15px;
-							font-family: sans-serif;
+							font-family: serif;
+							&::before{
+								font-weight: 900;
+								content: '・';
+								color :black;
+							}
+
 						}
 					}
 					img{
@@ -245,12 +256,12 @@
 					}
 					.main-color{
 						box-shadow: 4px 4px 8px darkgoldenrod; 
-						background-color: $dark-yellow;
+						background-color: $yellow;
 						border:1px solid gainsboro;
 					}
 					.stripes{
 						background: linear-gradient(135deg, 
-							black   5px,black 10px,
+							white   5px,white 10px,
 							transparent 10px,transparent 20px, 
 							white 20px, white 25px, 
 							transparent 25px,transparent 35px,
@@ -280,7 +291,7 @@
 					.simple-noise{
 						background-image: url('texture/simpleNoise.webp');
 						mix-blend-mode: multiply;
-						opacity: 5%;
+						opacity: 8%;
 					}
 				}
 				.content{
@@ -291,15 +302,21 @@
 						}
 						ul{
 							li{
-								text-indent:-5px;
+								list-style: none;
 								font-size:15px;
 								font-family: serif;
+								&::before{
+									font-weight: 900;
+									content: '・';
+									color :black;
+								}
+
 							}
 						}
-						p{
-							color:darkgoldenrod;
-							font-style: italic;
-						}
+					}
+					p{
+						color:darkgoldenrod;
+						font-style: italic;
 					}
 
 				}
