@@ -20,8 +20,9 @@
         flex-direction: column;
         align-items: center;
         gap:30px;
+        margin-top:30px;
+        margin-bottom:30px;
         .about-me-section{
-            margin-top:8px;
             h2{
                 position:relative;
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
@@ -59,16 +60,19 @@
 
             }
             .carousel-container{
-            }*/
-            .main-works-footer{
-                margin-bottom: 50px;
             }
+            .main-works-footer{
+            }*/
 
         }
     }
 }
 //#見た目や内部の配置に関するスタイル
 @layer Appearance{
+    body{
+        background-color:  ghostwhite;
+    }
+
     header{
         min-height:100px;
         border-bottom:1px solid black;
@@ -87,7 +91,6 @@
         }
     }
     main{
-        background-color:  ghostwhite;
         .about-me-section{
             max-width: 700px;
             h2{
