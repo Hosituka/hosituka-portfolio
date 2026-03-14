@@ -11,19 +11,19 @@ import './index.scss';
 <Layout title='ホーム'>
 	<GrobalNav topURL ="/" worksURL="/works.astro"devLogURL="/devLog.astro"  sNS_URL="/sns.astro" />
 	<header>
-		<div id="page-title-container">
+		<div class="page-title-container">
 			<h1>Hositukaの</h1><h1>ホームページ</h1>
 		</div>
 	</header>
 	<main>
-		<section id="about-me-section">
+		<section class="about-me-section">
 			<h2>私について</h2>
-			<div id="about-me-main">
+			<divd class="about-me-main">
 				<AboutMeCard/>
-				<p id="about-me-text">
+				<p class="about-me-text">
 					主にブラウザ上で遊ぶゲームをunityで作っています。最近はweb(フロントエンド)の勉強も始めました。拙い部分が目立つと思いますが、温かい目で見守ってください。
 				</p>
-				<div id="sns-container">
+				<div class="sns-container">
 					<a href="https://unityroom.com/users/hosi">
 						<img src="Icon/UnityRoomLogo.webp" alt="UnityRoomLogo">
 					</a>
@@ -39,8 +39,14 @@ import './index.scss';
 				</div>
 			</div>
 		</section>
-		<section id="main-works">
+		<section class="main-works">
 			<h2>主要な作品</h2>
+			<div class="carousel-container">
+			</div>
+			<div class="main-works-footer">
+
+			</div>
+
 		</section>
 	</main>
 	<Footer/>

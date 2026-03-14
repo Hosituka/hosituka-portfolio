@@ -5,39 +5,50 @@
 <about-me-card>
 	<div class="card">
 		<div class="front">
-			<h3>ほしつか</h3>
-			<ul>
-				<li>ゲームプログラマー</li>
-				<li>webプログラマー<br>(願望)</li>
-			</ul>
-			<p>Since 2020.12</p>
-			<img src="/Icon/MyIcon.webp" alt="ほしつかのアイコン">
+			<div class="back-ground">
+				<div class="main-color"></div>
+				<div class="stripes"></div>
+				<div class="simple-noise"></div>
+			</div>
+			<div class="content">
+				<h3>ほしつか</h3>
+				<ul>
+					<li>ゲームプログラマー</li>
+					<li>webプログラマー<br>(願望)</li>
+				</ul>
+				<p>Since 2020.12</p>
+				<img src="/Icon/MyIcon.webp" alt="ほしつかのアイコン">
+			</div>
 
 		</div>
 		<div class="back">
-			<div class="infomation-group">
-				<h3>スキル</h3>
-				<ul>
-					<li>UnityとC#</li>
-					<li>ShaderGraph</li>
-					<li>HTMLとCSS</li>
-				</ul>
-
+			<div class="back-ground">
+				<div class="main-color"></div>
+				<div class="stripes"></div>
+				<div class="simple-noise"></div>
 			</div>
-			<div class="infomation-group">
-				<h3>勉強中</h3>
-				<ul>
-					<li>Webフレームワーク<br>(Astro)</li>
-					<li>TSとJS</li>
-					<li>SCSS</li>
-					<li>Blender</li>
-					<li>GIMP</li>
-					<li>GitとGitHub</li>
-				</ul>
-
+			<div class="content">
+				<div class="infomation-group">
+					<h3>スキル</h3>
+					<ul>
+						<li>UnityとC#</li>
+						<li>ShaderGraph</li>
+						<li>HTMLとCSS</li>
+					</ul>
+				</div>
+				<div class="infomation-group">
+					<h3>勉強中</h3>
+					<ul>
+						<li>Webフレームワーク<br>(Astro)</li>
+						<li>TSとJS</li>
+						<li>SCSS</li>
+						<li>Blender</li>
+						<li>GIMP</li>
+						<li>GitとGitHub</li>
+					</ul>
+				</div>
+				<p>Since 2020.12</p>
 			</div>
-			<p>Since 2020.12</p>
-
 		</div>
 	</div>
 </about-me-card>	
@@ -56,68 +67,79 @@
 			&:hover{
 				cursor: pointer; 
 			}
-			
-			.front{
+			.front,.back{
 				position:absolute;
-				&::before{
+				.back-ground,.content{
 					position:absolute;
-					z-index: -1;
 				}
-
-				h3{
-					position:absolute;
-					top:45px;
-					left:30px;
-				}
-				ul{
-					display:flex;
-					flex-direction:column;
-					gap:10px;
-					position:absolute;
-					top:105px;
-					left:30px;
-				}
-				img{
-					position:absolute;
-					top:20px;
-					right:10px;
-				}
-				p{
-					position:absolute;
-					bottom:5px;
-					right:5px;
-				}
-
 			}
-			.back{
-				position:absolute;
-				display:flex;
-				justify-content: left;
-				gap:25px;
-				transform:rotateY(180deg);
-				&::after{
-					position:absolute;
-					z-index: -1;
+			.front{
+				.back-ground{
+					.main-color{
+						position:absolute;}
+					.stripes{
+						position:absolute;}
+					.simple-noise{
+						position:absolute;}
 				}
-
-				.infomation-group{
-					margin-top:6px;
-					margin-left:25px;
+				.content{
 					h3{
+						position:absolute;
+						top:45px;
+						left:30px;
 					}
 					ul{
+						position:absolute;
 						display:flex;
 						flex-direction:column;
-						gap:5px;
-
+						gap:10px;
+						top:105px;
+						left:30px;
+					}
+					img{
+						position:absolute;
+						top:20px;
+						right:10px;
+					}
+					p{
+						position:absolute;
+						bottom:5px;
+						right:5px;
 					}
 				}
-				p{
+			}
+			.back{
+				transform:rotateY(180deg);
+				.back-ground{
 					position:absolute;
-					bottom:5px;
-					right:5px;
+					.main-color{
+						position:absolute;}
+					.stripes{
+						position:absolute;}
+					.simple-noise{
+						position:absolute;}
 				}
+				.content{
+					display:flex;
+					justify-content: left;
+					gap:25px;
 
+					.infomation-group{
+						margin-top:6px;
+						margin-left:25px;
+						ul{
+							display:flex;
+							flex-direction:column;
+							gap:5px;
+
+						}
+					}
+					p{
+						position:absolute;
+						bottom:5px;
+						right:5px;
+					}
+				}
 			}
 		}
 	}
@@ -133,131 +155,161 @@
 				width:100%;
 				height:100%;
 				backface-visibility: hidden;
-				border:1px solid gainsboro;
 				will-change: transform;
-				outline:1px solid transparent;
+				.back-ground, .content{
+					width:100%;
+					height:100%;
+				}
 			}
 			.front{
-				background-color: $dark-yellow;
-				border-top-left-radius: 40px;
-				box-shadow: 4px 4px 8px darkgoldenrod; 
-				&::before{
-					content:"";
-					width:100%;
-					height:100%;
-					background: linear-gradient(45deg, 
-						white   5px,white 10px,
-						transparent 10px,transparent 20px, 
-						white 20px, white 25px, 
-						transparent 25px,transparent 35px,
-						white 35px, white 40px, 
-						transparent 40px,transparent 50px,
-						white 50px, white 55px, 
-						transparent 55px,transparent 65px,
-						white 65px, white 70px, 
-						transparent 70px,transparent 80px,
-						white 80px, white 85px, 
-						transparent 85px,),
-						linear-gradient(225deg, 
-						white   5px,white 10px,
-						transparent 10px,transparent 20px, 
-						white 20px, white 25px, 
-						transparent 25px,transparent 35px,
-						white 35px, white 40px, 
-						transparent 40px,transparent 50px,
-						white 50px, white 55px, 
-						transparent 55px,transparent 65px,
-						white 65px, white 70px, 
-						transparent 70px,transparent 80px,
-						white 80px, white 85px, 
-						transparent 85px,);
-
-				}
-
-				h3{
-					font-size:30px;
-					font-family: sans-serif;
-				}
-				ul{
-					li{
-						text-indent:-5px;
-						font-size:15px;
-						font-family: sans-serif;
+				.back-ground{
+					& > *{
+						width:100%;
+						height:100%;
+						border-top-left-radius: 40px;
 					}
-				}
-				img{
-					width:150px;
-					height:150px;
-					border-radius: 50%;
-					outline:3px solid white;
-				}
-				p{
-					color:darkgoldenrod;
-					font-style: italic;
-				}
+					.main-color{
+						box-shadow: 4px 4px 8px darkgoldenrod; 
+						background-color: $dark-yellow;
+						outline:1px solid transparent;
+						border:1px solid gainsboro;
+					}
+					.stripes{
+						background: linear-gradient(45deg, 
+							white   5px,white 10px,
+							transparent 10px,transparent 20px, 
+							white 20px, white 25px, 
+							transparent 25px,transparent 35px,
+							white 35px, white 40px, 
+							transparent 40px,transparent 50px,
+							white 50px, white 55px, 
+							transparent 55px,transparent 65px,
+							white 65px, white 70px, 
+							transparent 70px,transparent 80px,
+							white 80px, white 85px, 
+							transparent 85px,),
+							linear-gradient(225deg, 
+							white   5px,white 10px,
+							transparent 10px,transparent 20px, 
+							white 20px, white 25px, 
+							transparent 25px,transparent 35px,
+							white 35px, white 40px, 
+							transparent 40px,transparent 50px,
+							white 50px, white 55px, 
+							transparent 55px,transparent 65px,
+							white 65px, white 70px, 
+							transparent 70px,transparent 80px,
+							white 80px, white 85px, 
+							transparent 85px,);
 
-			}
-			.back{
-				background-color: $dark-yellow;
-				border-top-right-radius: 40px;
-				box-shadow: 4px 4px 8px darkgoldenrod; 
-				&::after{
-					content:"";
-					width:100%;
-					height:100%;
-					background: linear-gradient(135deg, 
-						white   5px,white 10px,
-						transparent 10px,transparent 20px, 
-						white 20px, white 25px, 
-						transparent 25px,transparent 35px,
-						white 35px, white 40px, 
-						transparent 40px,transparent 50px,
-						white 50px, white 55px, 
-						transparent 55px,transparent 65px,
-						white 65px, white 70px, 
-						transparent 70px,transparent 80px,
-						white 80px, white 85px, 
-						transparent 85px,),
-						linear-gradient(315deg, 
-						white   5px,white 10px,
-						transparent 10px,transparent 20px, 
-						white 20px, white 25px, 
-						transparent 25px,transparent 35px,
-						white 35px, white 40px, 
-						transparent 40px,transparent 50px,
-						white 50px, white 55px, 
-						transparent 55px,transparent 65px,
-						white 65px, white 70px, 
-						transparent 70px,transparent 80px,
-						white 80px, white 85px, 
-						transparent 85px,);
+					}
+					.simple-noise{
+						background-image: url('texture/simpleNoise.webp');
+						mix-blend-mode: multiply;
+						opacity: 5%;
+					}
 
 				}
-				.infomation-group{
+				.content{
 					h3{
-						font-size:20px;
+						font-size:30px;
 						font-family: sans-serif;
 					}
 					ul{
 						li{
 							text-indent:-5px;
 							font-size:15px;
-							font-family: serif;
+							font-family: sans-serif;
+						}
+					}
+					img{
+						width:150px;
+						height:150px;
+						border-radius: 50%;
+						outline:3px solid white;
+					}
+					p{
+						color:darkgoldenrod;
+						font-style: italic;
+					}
+
+				}
+
+			}
+			.back{
+				.back-ground{
+					& > *{
+						width:100%;
+						height:100%;
+						border-top-left-radius: 40px;
+					}
+					.main-color{
+						box-shadow: 4px 4px 8px darkgoldenrod; 
+						background-color: $dark-yellow;
+						border:1px solid gainsboro;
+					}
+					.stripes{
+						background: linear-gradient(135deg, 
+							black   5px,black 10px,
+							transparent 10px,transparent 20px, 
+							white 20px, white 25px, 
+							transparent 25px,transparent 35px,
+							white 35px, white 40px, 
+							transparent 40px,transparent 50px,
+							white 50px, white 55px, 
+							transparent 55px,transparent 65px,
+							white 65px, white 70px, 
+							transparent 70px,transparent 80px,
+							white 80px, white 85px, 
+							transparent 85px,),
+							linear-gradient(315deg, 
+							white   5px,white 10px,
+							transparent 10px,transparent 20px, 
+							white 20px, white 25px, 
+							transparent 25px,transparent 35px,
+							white 35px, white 40px, 
+							transparent 40px,transparent 50px,
+							white 50px, white 55px, 
+							transparent 55px,transparent 65px,
+							white 65px, white 70px, 
+							transparent 70px,transparent 80px,
+							white 80px, white 85px, 
+							transparent 85px,);
+
+					}
+					.simple-noise{
+						background-image: url('texture/simpleNoise.webp');
+						mix-blend-mode: multiply;
+						opacity: 5%;
+					}
+				}
+				.content{
+					.infomation-group{
+						h3{
+							font-size:20px;
+							font-family: sans-serif;
+						}
+						ul{
+							li{
+								text-indent:-5px;
+								font-size:15px;
+								font-family: serif;
+							}
+						}
+						p{
+							color:darkgoldenrod;
+							font-style: italic;
 						}
 					}
 
 				}
-				p{
-					color:darkgoldenrod;
-					font-style: italic;
-				}
-
 			}
 		}
 	}
 }
+
 @media (max-width:700px) {
-	.about-me-card{
+	about-me-card{
 		.card{
 			width:320px;
 		}
