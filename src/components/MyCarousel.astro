@@ -1,0 +1,16 @@
+---
+//#これはカルーセルのuiコンポーネントを定義する所です。カルーセルの構成要素となるカードについてはSlotで親コンポーネントから差し込まれるという仕様にする予定です。
+---
+<my-carousel>
+    <slot/>
+</my-carousel>
+
+<style>
+
+</style>
+<script>
+    class MyCarousel extends HTMLElement{
+
+    }
+    customElements.define('my-carousel',MyCarousel);
+</script>

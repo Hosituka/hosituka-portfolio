@@ -8,8 +8,14 @@ import Test3 from '../components/CardOfCarousel.astro';
 
 
 ---
-<Layout title='ホーム'>
-    <Test1/>
-    <Test2/>
-    <Test3/>
+<Layout title='uiコンポーネントのテスト用'>
+    <Test1 workTitle='GunSwapShooter' workImageURL='icon/MyIcon.webp'>
+        <ul slot="teck-list">
+            <li>hoge1</li>
+            <li>hoge2</li>
+            <li>hoge3</li>
+            <li>hoge4</li>
+            <li>hoge5</li>
+        </ul>
+    </Test1>
 </Layout>
