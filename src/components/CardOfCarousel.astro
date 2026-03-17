@@ -35,6 +35,8 @@ const {workImageURL,workTitle}:Props = Astro.props;
  
 <style lang="scss" define:vars={{workImageURL:`url(${workImageURL})`}}>
 @use '../global-styles/_variables' as *;
+$cardWidth:300px;
+$cardHeight:245px;
 @layer Layout{
 	card-of-carousel{
 		perspective: 2000px;
@@ -72,7 +74,7 @@ const {workImageURL,workTitle}:Props = Astro.props;
 				}
 			}
 			.card-teck-info{
-				transform:translateY(-225px);
+				transform:translateY(-$cardHeight - 10px);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -110,13 +112,14 @@ const {workImageURL,workTitle}:Props = Astro.props;
 @layer Appearance{
 	card-of-carousel{
 		.card{
-			width: 250px;
-			height:215px;
-			min-height:0px;
+			width: $cardWidth + 8px;
+			height:$cardHeight + 8px;
+			overflow:hidden;
 			-webkit-tap-highlight-color: transparent;
+			user-select: none;
 			.card-overview, .card-teck-info{
-				width:100%;
-				height:100%;
+				width:$cardWidth;
+				height:$cardHeight;
 				.back-ground, .content{
 					width:100%;
 					height:100%;
@@ -138,7 +141,7 @@ const {workImageURL,workTitle}:Props = Astro.props;
 					overflow: hidden;
 					outline:3px solid $yellow;;
 					&,& > *{
-						width:215px;
+						width:$cardWidth - 35px;
 						aspect-ratio: 16 / 9;	
 						border-radius: 20px;				
 					}
@@ -149,6 +152,7 @@ const {workImageURL,workTitle}:Props = Astro.props;
 					}
 					img{
 						object-fit: contain;
+						-webkit-user-drag: none;
 					}
 				}
 				.link-buttons{
@@ -164,6 +168,9 @@ const {workImageURL,workTitle}:Props = Astro.props;
 						border-radius: 30px;
 						&:active{
 							box-shadow: 0 0 0 $dark-yellow;
+						}
+						&:hover{
+							cursor: pointer; 
 						}
 					}
 					
@@ -185,7 +192,7 @@ const {workImageURL,workTitle}:Props = Astro.props;
 				}
 				:global(ul){
 					width:100%;
-					height:130px;
+					height:$cardHeight - 85px;
 					:global(li){
 						height:20px;
 						list-style:none;
@@ -211,6 +218,9 @@ const {workImageURL,workTitle}:Props = Astro.props;
 						user-select: none;
 						&:active{
 							box-shadow: 0 0 0 $dark-blue;
+						}
+						&:hover{
+							cursor: pointer; 
 						}
 					}	
 				}

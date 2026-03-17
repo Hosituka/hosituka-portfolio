@@ -1,9 +1,11 @@
 ---
 //このファイルはuiコンポーネントのテスト用に使うページコンポーネントです。
 import Layout from '../layouts/Layout.astro';
+import MyCarousel from '../components/MyCarousel.astro';
 import Test1 from '../components/CardOfCarousel.astro';
 import Test2 from '../components/CardOfCarousel.astro';
 import Test3 from '../components/CardOfCarousel.astro';
+import Test4 from '../components/CardOfCarousel.astro';
 
 
 
@@ -18,4 +20,14 @@ import Test3 from '../components/CardOfCarousel.astro';
             <li>hoge5</li>
         </ul>
     </Test1>
+    <Test2 workTitle='GunSwapShooter' workImageURL='/icon/MyIcon.webp'>
+        <ul slot="teck-list">
+            <li>hoge1</li>
+            <li>hoge2</li>
+            <li>hoge3</li>
+            <li>hoge4</li>
+            <li>hoge5</li>
+        </ul>
+    </Test2>
+
 </Layout>

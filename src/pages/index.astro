@@ -5,6 +5,15 @@ import Layout from '../layouts/Layout.astro';
 import GrobalNav from '../components/GlobalNav.astro';
 import AboutMeCard from '../components/AboutMeCard.astro';
 import Footer from '../components/Footer.astro';
+
+import Carousel1 from '../components/MyCarousel.astro';
+import CardOfCarousel1 from '../components/CardOfCarousel.astro';
+import CardOfCarousel2 from '../components/CardOfCarousel.astro';
+import CardOfCarousel3 from '../components/CardOfCarousel.astro';
+import CardOfCarousel4 from '../components/CardOfCarousel.astro';
+import CardOfCarousel5 from '../components/CardOfCarousel.astro';
+import CardOfCarousel6 from '../components/CardOfCarousel.astro';
+
 import './index.scss';
 
 ---
@@ -41,7 +50,64 @@ import './index.scss';
 		</section>
 		<section class="main-works">
 			<h2>主要な作品</h2>
-			<div class="carousel-container">
+			<div class="carousel-container" >
+				<Carousel1 speed={-1}>
+					<CardOfCarousel1 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel1>
+					<CardOfCarousel2 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel2>
+					<CardOfCarousel3 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel3>
+					<CardOfCarousel4 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel4>
+					<CardOfCarousel5 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel5>
+					<CardOfCarousel6 workTitle='test' workImageURL='icon/MyIcon.webp'>
+						<ul slot="teck-list">
+							<li>hoge1</li>
+							<li>hoge2</li>
+							<li>hoge3</li>
+							<li>hoge4</li>
+							<li>hoge5</li>
+						</ul>
+					</CardOfCarousel6>
+
+				</Carousel1>
 			</div>
 			<div class="main-works-footer">
 

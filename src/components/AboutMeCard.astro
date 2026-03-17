@@ -55,6 +55,22 @@
  
 <style lang="scss">
 @use '../global-styles/_variables' as *;
+@function getStripeValue($step:5px,$count:5){
+	$offset:$step;
+	$result:();
+	@for $countUp from 0 through $count{
+		//#白部分(step分の幅)
+		$startOfWhiteLine:$countUp * $step * 3 + $offset;
+		$result:append($result,$light-yellow $startOfWhiteLine,comma);
+		$result:append($result,$light-yellow $startOfWhiteLine + $step,comma);
+		//#透明部分(2step分の幅)
+		$startOfTransparent:$startOfWhiteLine;
+		$result:append($result,transparent $startOfTransparent,comma);
+		$result:append($result,transparent $startOfTransparent + $step * 2,comma);
+	}
+	@return $result;
+}
+
 @layer Layout{
 	about-me-card{
 		perspective: 2000px;
@@ -180,33 +196,8 @@
 						border:1px solid gainsboro;
 					}
 					.stripes{
-						background: linear-gradient(45deg, 
-							white   5px,white 10px,
-							transparent 10px,transparent 20px, 
-							white 20px, white 25px, 
-							transparent 25px,transparent 35px,
-							white 35px, white 40px, 
-							transparent 40px,transparent 50px,
-							white 50px, white 55px, 
-							transparent 55px,transparent 65px,
-							white 65px, white 70px, 
-							transparent 70px,transparent 80px,
-							white 80px, white 85px, 
-							transparent 85px,),
-							linear-gradient(225deg, 
-							white   5px,white 10px,
-							transparent 10px,transparent 20px, 
-							white 20px, white 25px, 
-							transparent 25px,transparent 35px,
-							white 35px, white 40px, 
-							transparent 40px,transparent 50px,
-							white 50px, white 55px, 
-							transparent 55px,transparent 65px,
-							white 65px, white 70px, 
-							transparent 70px,transparent 80px,
-							white 80px, white 85px, 
-							transparent 85px,);
-
+						background: linear-gradient(45deg, getStripeValue()),
+									linear-gradient(225deg, getStripeValue());
 					}
 					.simple-noise{
 						background-image: url('/texture/simpleNoise.webp');
@@ -260,32 +251,8 @@
 						border:1px solid gainsboro;
 					}
 					.stripes{
-						background: linear-gradient(135deg, 
-							white   5px,white 10px,
-							transparent 10px,transparent 20px, 
-							white 20px, white 25px, 
-							transparent 25px,transparent 35px,
-							white 35px, white 40px, 
-							transparent 40px,transparent 50px,
-							white 50px, white 55px, 
-							transparent 55px,transparent 65px,
-							white 65px, white 70px, 
-							transparent 70px,transparent 80px,
-							white 80px, white 85px, 
-							transparent 85px,),
-							linear-gradient(315deg, 
-							white   5px,white 10px,
-							transparent 10px,transparent 20px, 
-							white 20px, white 25px, 
-							transparent 25px,transparent 35px,
-							white 35px, white 40px, 
-							transparent 40px,transparent 50px,
-							white 50px, white 55px, 
-							transparent 55px,transparent 65px,
-							white 65px, white 70px, 
-							transparent 70px,transparent 80px,
-							white 80px, white 85px, 
-							transparent 85px,);
+						background: linear-gradient(135deg, getStripeValue()),
+									linear-gradient(315deg,getStripeValue());
 
 					}
 					.simple-noise{
