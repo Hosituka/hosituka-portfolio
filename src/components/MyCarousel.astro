@@ -64,70 +64,82 @@ const {speed}:Props = Astro.props;
         timerId:number= 0;
 
         Start=()=>{
-            //#カルーセルをするための準備
-            //##カルーセル出来るかどうかの確認
-            this.cardsContainer = this.querySelector('.cards-container');
-            if (!this.cardsContainer) {console.error(".cards-containerが見つかりませんでした。");
-                return;}
-            const carouselViewport:HTMLElement|null = this.querySelector('.carousel-viewport');
-            if(!carouselViewport){console.error(".carousel-viewportが見つかりませんでした。");
-                return;}
+            const CarouselInitialize=()=>{
+                //#カルーセルをするための準備
+                //##カルーセル出来るかどうかの確認
+                this.cardsContainer = this.querySelector('.cards-container');
+                if (!this.cardsContainer) {console.error(".cards-containerが見つかりませんでした。");
+                    return;}
+                const carouselViewport:HTMLElement|null = this.querySelector('.carousel-viewport');
+                if(!carouselViewport){console.error(".carousel-viewportが見つかりませんでした。");
+                    return;}
 
-            //##ここでカスタム属性の値をspeedに入れる。
-            if(this.dataset.speed!==undefined)
-            {this.speed = parseFloat(this.dataset.speed)}
-            else{this.speed = 5;}
-            //##カルーセルのスクロールを受けても余白が生じない程の量のカードを用意する。
-            const CardArray = Array.from(this.cardsContainer.children);
-            
-            for(const item of CardArray){
-                const cloneItems = item.cloneNode(true);
-                this.cardsContainer.appendChild(cloneItems);
+                //##ここでカスタム属性の値をspeedに入れる。
+                if(this.dataset.speed!==undefined)
+                {this.speed = parseFloat(this.dataset.speed)}
+                else{this.speed = 5;}
+                //##カルーセルのスクロールを受けても余白が生じない程の量のカードを用意する。
+                const CardArray = Array.from(this.cardsContainer.children);
+                
+                for(const item of CardArray){
+                    const cloneItems = item.cloneNode(true);
+                    this.cardsContainer.appendChild(cloneItems);
+                }
+                //##スクロールする閾値となる値の計算
+                //###このコンポーネントの内部scssで指定しているgap
+                const gap = 20;
+                this.scrollHalfWidth = (this.cardsContainer.scrollWidth + gap) / 2;
+
+                //#イベント関係の処理の登録&定義
+                //##PCのタッチイベント
+                carouselViewport.addEventListener("mouseenter", () => {
+                    this.hovering = true;
+                })
+                carouselViewport.addEventListener("mousedown", (mouse) => {
+                    this.dragging = true;
+                    this.prevDragX = mouse.pageX;
+                    this.currentDragX = mouse.pageX;
+                })
+                carouselViewport.addEventListener("mousemove", (mouse) => {
+                    if (!this.dragging) return;
+                    this.currentDragX = mouse.pageX;
+                })
+                carouselViewport.addEventListener("mouseup", () => {
+                    this.dragging = false;
+                })
+                carouselViewport.addEventListener("mouseleave", () => {
+                    this.StartAutoScroll();
+                })
+
+                //##スマホのタッチイベント
+                carouselViewport.addEventListener("touchstart", (touch) => {
+                    this.hovering = true;
+                    this.dragging = true;
+                    this.prevDragX = touch.touches[0].pageX;
+                    this.currentDragX = touch.touches[0].pageX;
+                    clearTimeout(this.timerId);
+                })
+                carouselViewport.addEventListener("touchmove", (touch) => {
+                    if (!this.dragging) return;
+                    this.currentDragX = touch.touches[0].pageX;
+                })
+                carouselViewport.addEventListener("touchend", (touch) => {
+                    this.timerId = setTimeout(this.StartAutoScroll, 500);
+                })
+                carouselViewport.addEventListener("touchecancel", (touch) => {
+                    this.timerId = setTimeout(this.StartAutoScroll, 500);
+                })
+
             }
-            //##スクロールする閾値となる値の計算
-            //###このコンポーネントの内部scssで指定しているgap
-            const gap = 20;
-            this.scrollHalfWidth = (this.cardsContainer.scrollWidth + gap) / 2;
-
-            //#イベント関係の処理の登録&定義
-            //##PCのタッチイベント
-            carouselViewport.addEventListener("mouseenter", () => {
-                this.hovering = true;
-            })
-            carouselViewport.addEventListener("mousedown", (mouse) => {
-                this.dragging = true;
-                this.prevDragX = mouse.pageX;
-                this.currentDragX = mouse.pageX;
-            })
-            carouselViewport.addEventListener("mousemove", (mouse) => {
-                if (!this.dragging) return;
-                this.currentDragX = mouse.pageX;
-            })
-            carouselViewport.addEventListener("mouseup", () => {
-                this.dragging = false;
-            })
-            carouselViewport.addEventListener("mouseleave", () => {
-                this.StartAutoScroll();
-            })
-
-            //##スマホのタッチイベント
-            carouselViewport.addEventListener("touchstart", (touch) => {
-                this.hovering = true;
-                this.dragging = true;
-                this.prevDragX = touch.touches[0].pageX;
-                this.currentDragX = touch.touches[0].pageX;
-                clearTimeout(this.timerId);
-            })
-            carouselViewport.addEventListener("touchmove", (touch) => {
-                if (!this.dragging) return;
-                this.currentDragX = touch.touches[0].pageX;
-            })
-            carouselViewport.addEventListener("touchend", (touch) => {
-                this.timerId = setTimeout(this.StartAutoScroll, 500);
-            })
-            carouselViewport.addEventListener("touchecancel", (touch) => {
-                this.timerId = setTimeout(this.StartAutoScroll, 500);
-            })
+            const CardInitialize=()=>{
+                this.addEventListener('sync-card-state',(e:any)=>{
+                    window.dispatchEvent(new CustomEvent('update-card-ui',{
+                        detail:e.detail
+                    }));
+                });
+            }
+            CarouselInitialize();
+            CardInitialize();
         }
         //#autoScroll用の識別子
         prevDragX:number = 0;

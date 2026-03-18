@@ -7,7 +7,7 @@ interface Props{
 const {workImageURL,workTitle}:Props = Astro.props;
 ---
 
-<card-of-carousel data-work-title={workTitle}>
+<card-of-carousel>
 	<div class="card">
 		<div class="card-overview">				
 			<h3>{workTitle}</h3>
@@ -237,13 +237,8 @@ $cardHeight:245px;
 
 </style>
 <script>
-import { transitionEnabledOnThisPage } from "astro:transitions/client";
-
-
-
 	class CardOfCarousel extends HTMLElement{
 		connectedCallback(){
-			//#Cardとしての役割を果たせるかのチェック
 			const showTeckInfoButton:Element|null = this.querySelector('.show-teck-info-button');
 			if(showTeckInfoButton===null){console.error('show-teck-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
@@ -255,36 +250,14 @@ import { transitionEnabledOnThisPage } from "astro:transitions/client";
 			const cardTeckInfo :Element|null = this.querySelector('.card-teck-info');
 			if(cardTeckInfo===null){console.error('card-teck-infoクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-			const title:string|undefined = this.dataset.workTitle;
-			if(title===undefined){console.error('data-work-titleが指定されていません。')
-				return;}
 
-			//#メインとなる処理
-			//##関数の購読
 			showTeckInfoButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('sync-card-state',{
-					bubbles:true,
-					detail:{title:title,isShow:true}
-				}));
+				cardTeckInfo.classList.add('is-show');
 			});
 			showOverviewButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('sync-card-state',{
-					bubbles:true,
-					detail:{title:title,isShow:false}
-				}));
-
+				cardTeckInfo.classList.remove('is-show');
 			})
 
-			window.addEventListener('update-card-ui',(e:any) =>{
-				if(e.detail.title !== title){return};
-				
-				if(e.detail.isShow){
-					cardTeckInfo.classList.add('is-show')
-				}
-				else{
-					cardTeckInfo.classList.remove('is-show')
-				}
-			})
 		}
 	}
 	customElements.define('card-of-carousel',CardOfCarousel);
