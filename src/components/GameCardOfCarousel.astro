@@ -1,27 +1,27 @@
 ---
-//webサイト等の遊ぶもくそもない作品を紹介するカード、GameCardOfCarouselと違い遊ぶボタンは無効です。
+//#ゲーム作品を紹介するカード、普通のカードと違い遊ぶボタンがあります。
 interface Props{
-	workImageURL:string;
-	workTitle:string;
+	gameImageURL:string;
+	gameTitle:string;
 }
-const {workImageURL: workImageURL,workTitle: workTitle}:Props = Astro.props;
+const {gameImageURL: gameImageURL,gameTitle: gameTitle}:Props = Astro.props;
 ---
 
-<card-of-carousel data-work-title={workTitle}>
+<game-card-of-carousel data-work-title={gameTitle}>
 	<div class="card">
 		<div class="card-info">				
-			<h3>{workTitle}</h3>
+			<h3>{gameTitle}</h3>
 			<div class="image-container">
 				<div class="image-background"></div>
-				<img src={workImageURL} alt="ほしつかのアイコン">
+				<img src={gameImageURL} alt="ほしつかのアイコン">
 			</div>
 			<div class="link-buttons">
 				<a class="show-overview-button">概要</a>
-				<a class="is-deactive"></a>
+				<a>遊ぶ</a>
 			</div>
 		</div>
 		<div class="card-overview">
-			<h3>{workTitle}:概要</h3>
+			<h3>{gameTitle}:概要</h3>
 			<p>
 				<slot />
 			</p>
@@ -32,14 +32,14 @@ const {workImageURL: workImageURL,workTitle: workTitle}:Props = Astro.props;
 
 		</div>
 	</div>
-</card-of-carousel>	
+</game-card-of-carousel>	
  
-<style lang="scss" define:vars={{workImageURL:`url("${workImageURL}")`}}>
+<style lang="scss" define:vars={{gameImageURL:`url("${gameImageURL}")`}}>
 @use '../global-styles/_variables' as *;
 $cardWidth:300px;
 $cardHeight:245px;
 @layer Layout{
-	card-of-carousel{
+	game-card-of-carousel{
 		perspective: 2000px;
 		.card{
 			transform-style:preserve-3d;
@@ -68,12 +68,8 @@ $cardHeight:245px;
 					justify-content:center;
 					gap:20px;
 					a{
-						&:not(.is-deactive){
-							&:active{
-								transform:translateY(5px);
-							}
-						}
-						&.is-deactive{
+						&:active{
+							transform:translateY(5px);
 						}
 					}
 				}
@@ -103,7 +99,7 @@ $cardHeight:245px;
 	}
 }
 @layer Appearance{
-	card-of-carousel{
+	game-card-of-carousel{
 		.card{
 			width: $cardWidth + 8px;
 			height:$cardHeight + 8px;
@@ -140,39 +136,36 @@ $cardHeight:245px;
 					}
 					.image-background{
 						object-fit: cover;
-						pointer-events: none;
-						background-image: var(--workImageURL);
+						background-image: var(--gameImageURL);
 						filter:blur(20px);
 					}
 					img{
-						pointer-events: none;
 						object-fit: contain;
+						-webkit-user-select: none;
+						user-select: none;
+						-webkit-touch-callout: none;
+						-webkit-user-drag: none;
 					}
 				}
 				.link-buttons{
 					width:calc(100% - 15px);
 					a{
+						background-color: $yellow;
+						box-shadow: 0 5px 0 $dark-yellow;
+						text-align: center;
+						font-family: sans-serif;
+						line-height:30px;
 						width:100px;
 						user-select: none;
 						border-radius: 30px;
-						background-color: $yellow;
-						box-shadow: 0 5px 0 $dark-yellow;
-						&:not(.is-deactive){
-							text-align: center;
-							font-family: sans-serif;
-							line-height:30px;
-							&:active{
-								box-shadow: 0 0 0 $dark-yellow;
-							}
-							&:hover{
-								cursor: pointer; 
-							}
+						&:active{
+							box-shadow: 0 0 0 $dark-yellow;
 						}
-						&.is-deactive{
-							opacity: 0.5;
-							cursor: not-allowed;
+						&:hover{
+							cursor: pointer; 
 						}
 					}
+					
 				}
 			}
 			.card-overview{
@@ -192,7 +185,7 @@ $cardHeight:245px;
 				p{
 					width:100%;
 					height:$cardHeight - 85px;
-					line-height:20px;
+					line-height:19px;
 					padding:5px 5px;
 					font-size:15px;
 					font-family: serif;
@@ -223,14 +216,14 @@ $cardHeight:245px;
 }
 
 @media (max-width:700px) {
-	card-of-carousel{
+	game-card-of-carousel{
 	}
 }
     
 
 </style>
 <script>
-	class CardOfCarousel extends HTMLElement{
+	class GameCardOfCarousel extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
 			const showInfoButton:Element|null = this.querySelector('.show-info-button');
@@ -276,6 +269,6 @@ $cardHeight:245px;
 			})
 		}
 	}
-	customElements.define('card-of-carousel',CardOfCarousel);
+	customElements.define('game-card-of-carousel',GameCardOfCarousel);
 
 </script>

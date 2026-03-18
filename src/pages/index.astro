@@ -7,12 +7,12 @@ import AboutMeCard from '../components/AboutMeCard.astro';
 import Footer from '../components/Footer.astro';
 
 import Carousel1 from '../components/MyCarousel.astro';
-import CardOfCarousel1 from '../components/CardOfCarousel.astro';
+import GameCardOfCarousel1 from '../components/GameCardOfCarousel.astro';
 import CardOfCarousel2 from '../components/CardOfCarousel.astro';
-import CardOfCarousel3 from '../components/CardOfCarousel.astro';
-import CardOfCarousel4 from '../components/CardOfCarousel.astro';
-import CardOfCarousel5 from '../components/CardOfCarousel.astro';
-import CardOfCarousel6 from '../components/CardOfCarousel.astro';
+import GameCardOfCarousel3 from '../components/GameCardOfCarousel.astro';
+import GameCardOfCarousel4 from '../components/GameCardOfCarousel.astro';
+import GameCardOfCarousel5 from '../components/GameCardOfCarousel.astro';
+import GameCardOfCarousel6 from '../components/GameCardOfCarousel.astro';
 
 import './index.scss';
 
@@ -52,19 +52,22 @@ import './index.scss';
 			<h2>主要な作品</h2>
 			<div class="carousel-container" >
 				<Carousel1 speed={-1}>
-					<CardOfCarousel1 workTitle='test1' workImageURL='/icon/MyIcon.webp'>
-						testtestetestestestestestest;
-					</CardOfCarousel1>
-					<CardOfCarousel2 workTitle='test2' workImageURL='/icon/MyIcon.webp'>
-						<ul slot="teck-list">
-							<li>hoge1</li>
-							<li>hoge2</li>
-							<li>hoge3</li>
-							<li>hoge4</li>
-							<li>hoge5</li>
-						</ul>
+					<GameCardOfCarousel1 gameTitle='GunSwapShooter' gameImageURL='/icon/MyIcon.webp'>
+						・使用技術：unity,c#,blender,shadergraph<br>
+						git/github<br>
+						・制作期間：2025/11月～2026/3月。<br>
+						・概要：webARシューティングゲーム。<br>
+						7作目です。現状コーディングの成長的にも、ゲームの楽しさ的にも一番なゲームです。ぜひ遊んでみてね。自分が喜びます。
+
+					</GameCardOfCarousel1>
+					<CardOfCarousel2 workTitle='ポートフォリオサイト' workImageURL='/icon/MyIcon.webp'>
+						・使用技術：Astro,scss,typescript,<br>
+						git/github<br>
+						・制作期間：2026の3月から現在まで。<br>
+						・概要：８作目、このサイトの事<br>
+						自己分析の一環として自分についてまとめるサイトが欲しくなって作りました。苦戦はしましたが、楽しかったです。
 					</CardOfCarousel2>
-					<CardOfCarousel3 workTitle='test3' workImageURL='/icon/MyIcon.webp'>
+					<GameCardOfCarousel3 gameTitle='test3' gameImageURL='/icon/MyIcon.webp'>
 						<ul slot="teck-list">
 							<li>hoge1</li>
 							<li>hoge2</li>
@@ -72,8 +75,8 @@ import './index.scss';
 							<li>hoge4</li>
 							<li>hoge5</li>
 						</ul>
-					</CardOfCarousel3>
-					<CardOfCarousel4 workTitle='test4' workImageURL='/icon/MyIcon.webp'>
+					</GameCardOfCarousel3>
+					<GameCardOfCarousel4 gameTitle='test4' gameImageURL='/icon/MyIcon.webp'>
 						<ul slot="teck-list">
 							<li>hoge1</li>
 							<li>hoge2</li>
@@ -81,8 +84,8 @@ import './index.scss';
 							<li>hoge4</li>
 							<li>hoge5</li>
 						</ul>
-					</CardOfCarousel4>
-					<CardOfCarousel5 workTitle='test5' workImageURL='/icon/MyIcon.webp'>
+					</GameCardOfCarousel4>
+					<GameCardOfCarousel5 gameTitle='test5' gameImageURL='/icon/MyIcon.webp'>
 						<ul slot="teck-list">
 							<li>hoge1</li>
 							<li>hoge2</li>
@@ -90,8 +93,8 @@ import './index.scss';
 							<li>hoge4</li>
 							<li>hoge5</li>
 						</ul>
-					</CardOfCarousel5>
-					<CardOfCarousel6 workTitle='test6' workImageURL='/icon/MyIcon.webp'>
+					</GameCardOfCarousel5>
+					<GameCardOfCarousel6 gameTitle='test6' gameImageURL='/icon/MyIcon.webp'>
 						<ul slot="teck-list">
 							<li>hoge1</li>
 							<li>hoge2</li>
@@ -99,7 +102,7 @@ import './index.scss';
 							<li>hoge4</li>
 							<li>hoge5</li>
 						</ul>
-					</CardOfCarousel6>
+					</GameCardOfCarousel6>
 
 				</Carousel1>
 			</div>
