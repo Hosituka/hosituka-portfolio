@@ -9,23 +9,24 @@ const {workImageURL,workTitle}:Props = Astro.props;
 
 <card-of-carousel data-work-title={workTitle}>
 	<div class="card">
-		<div class="card-overview">				
+		<div class="card-info">				
 			<h3>{workTitle}</h3>
 			<div class="image-container">
 				<div class="image-background"></div>
 				<img src={workImageURL} alt="ほしつかのアイコン">
 			</div>
 			<div class="link-buttons">
-				<a class="show-teck-info-button">技術</a>
+				<a class="show-overview-button">概要</a>
 				<a>遊ぶ</a>
 			</div>
 		</div>
-		<div class="card-teck-info">
-			<h3>使用技術</h3>
-			<slot name="teck-list">
-			</slot>
+		<div class="card-overview">
+			<h3>{workTitle}:概要</h3>
+			<p>
+				<slot />
+			</p>
 			<div class="link-buttons">
-				<a class="show-overview-button">戻る</a>
+				<a class="show-info-button">戻る</a>
 				<a>詳細</a>
 			</div>
 
@@ -43,10 +44,10 @@ $cardHeight:245px;
 		.card{
 			transform-style:preserve-3d;
 			position:relative;
-			.card-overview,.card-teck-info{
+			.card-info,.card-overview{
 				position:absolute;
 			}
-			.card-overview{
+			.card-info{
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -73,25 +74,13 @@ $cardHeight:245px;
 					}
 				}
 			}
-			.card-teck-info{
+			.card-overview{
 				transform:translateY(-$cardHeight - 10px);
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				&.is-show{
 					transform:translateY(0px);
-				}
-
-				:global(ul){
-					display:flex;
-					flex-wrap:wrap;
-					align-content:flex-start;
-					gap:5px;
-					:global(li){
-						display:flex;
-						flex-direction: row;
-						align-items: center;
-					}
 				}
 				.link-buttons{
 					margin-top: 5px;
@@ -117,7 +106,7 @@ $cardHeight:245px;
 			overflow:hidden;
 			-webkit-tap-highlight-color: transparent;
 			user-select: none;
-			.card-overview, .card-teck-info{
+			.card-info, .card-overview{
 				width:$cardWidth;
 				height:$cardHeight;
 				.back-ground, .content{
@@ -125,7 +114,7 @@ $cardHeight:245px;
 					height:100%;
 				}
 			}
-			.card-overview{
+			.card-info{
 				box-shadow: 4px 4px 8px darkgoldenrod; 
 				border:2px solid $yellow;
 				background-color: $light-yellow;
@@ -176,7 +165,7 @@ $cardHeight:245px;
 					
 				}
 			}
-			.card-teck-info{
+			.card-overview{
 				transition:transform 0.5s;
 				will-change: transform;
 				box-shadow: 4px 4px 8px darkblue; 
@@ -190,20 +179,13 @@ $cardHeight:245px;
 					font-size:20px;
 					font-family: sans-serif;
 				}
-				:global(ul){
+				p{
 					width:100%;
 					height:$cardHeight - 85px;
-					:global(li){
-						height:20px;
-						list-style:none;
-						font-size:15px;
-						font-family: serif;
-						&::before{
-							font-weight: 900;
-							content: '・';
-							color :black;
-						}
-					}
+					padding:0px 5px;
+					font-size:20px;
+					font-family: serif;
+					overflow-wrap:break-word;
 				}
 				.link-buttons{
 					width:calc(100% - 15px);
@@ -237,23 +219,19 @@ $cardHeight:245px;
 
 </style>
 <script>
-import { transitionEnabledOnThisPage } from "astro:transitions/client";
-
-
-
 	class CardOfCarousel extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
-			const showTeckInfoButton:Element|null = this.querySelector('.show-teck-info-button');
-			if(showTeckInfoButton===null){console.error('show-teck-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+			const showInfoButton:Element|null = this.querySelector('.show-info-button');
+			if(showInfoButton===null){console.error('show-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 
 			const showOverviewButton:Element|null = this.querySelector('.show-overview-button');
 			if(showOverviewButton===null){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
 
-			const cardTeckInfo :Element|null = this.querySelector('.card-teck-info');
-			if(cardTeckInfo===null){console.error('card-teck-infoクラス属性が付与されたhtml要素が見つかりませんでした');
+			const cardOverview :Element|null = this.querySelector('.card-overview');
+			if(cardOverview===null){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
 			const title:string|undefined = this.dataset.workTitle;
 			if(title===undefined){console.error('data-work-titleが指定されていません。')
@@ -261,16 +239,16 @@ import { transitionEnabledOnThisPage } from "astro:transitions/client";
 
 			//#メインとなる処理
 			//##関数の購読
-			showTeckInfoButton.addEventListener('click',()=>{
+			showInfoButton.addEventListener('click',()=>{
 				this.dispatchEvent(new CustomEvent('sync-card-state',{
 					bubbles:true,
-					detail:{title:title,isShow:true}
+					detail:{title:title,isShow:false}
 				}));
 			});
 			showOverviewButton.addEventListener('click',()=>{
 				this.dispatchEvent(new CustomEvent('sync-card-state',{
 					bubbles:true,
-					detail:{title:title,isShow:false}
+					detail:{title:title,isShow:true}
 				}));
 
 			})
@@ -279,10 +257,10 @@ import { transitionEnabledOnThisPage } from "astro:transitions/client";
 				if(e.detail.title !== title){return};
 				
 				if(e.detail.isShow){
-					cardTeckInfo.classList.add('is-show')
+					cardOverview.classList.add('is-show')
 				}
 				else{
-					cardTeckInfo.classList.remove('is-show')
+					cardOverview.classList.remove('is-show')
 				}
 			})
 		}
