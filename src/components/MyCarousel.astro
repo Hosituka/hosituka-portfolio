@@ -48,15 +48,24 @@ const {speed}:Props = Astro.props;
     class MyCarousel extends HTMLElement{
         //#このインスタンスのインスタンス関数メンバ全体で使われる識別子
         cardsContainer:HTMLElement|null=null;
-        //#connectedCallbackの関数を購読する用の識別子
+        //#この関数はインスタンスとして格納されるカスタム要素が生成された瞬間に走る処理、つまり他の要素に安全にアクセスできるとは限らない
+		connectedCallback(){
+            //#他の要素に安全にアクセスするため、次の描画前に走るコールバックとして登録する。
+            //##一回だけ走る処理の購読
+            requestAnimationFrame(this.Start);
+            //##恒常的に走る処理の購読
+            requestAnimationFrame(this.Update);              
+        }
+        //#Start内で購読する用の関数内で使われる識別子
         hovering:boolean = false;
         dragging:boolean = false;
 
         //##スマホ用の識別子
         timerId:number= 0;
-        //#一回だけ走る処理
-		connectedCallback(){
+
+        Start=()=>{
             //#カルーセルをするための準備
+            //##カルーセル出来るかどうかの確認
             this.cardsContainer = this.querySelector('.cards-container');
             if (!this.cardsContainer) {console.error(".cards-containerが見つかりませんでした。");
                 return;}
@@ -119,8 +128,6 @@ const {speed}:Props = Astro.props;
             carouselViewport.addEventListener("touchecancel", (touch) => {
                 this.timerId = setTimeout(this.StartAutoScroll, 500);
             })
-            this.autoScroll();
-            
         }
         //#autoScroll用の識別子
         prevDragX:number = 0;
@@ -133,7 +140,8 @@ const {speed}:Props = Astro.props;
         speed:number = 1;
 
         //#恒常的(毎フレーム)に走る処理
-        autoScroll=()=>{
+        Update=()=>{
+            //#現状自動でスクロールする処理が書かれている。
             if(!this.cardsContainer)return;
 
 
@@ -147,7 +155,7 @@ const {speed}:Props = Astro.props;
             this.currentX = MyCarousel.Repeat(this.currentX, -this.scrollHalfWidth)
             this.cardsContainer.style.transform = `translateX(${this.currentX}px) translateZ(0)`;
             this.prevDragX = this.currentDragX;
-            requestAnimationFrame(this.autoScroll);
+            requestAnimationFrame(this.Update);
         };
         StartAutoScroll=()=> {
             this.dragging = false;
@@ -159,7 +167,10 @@ const {speed}:Props = Astro.props;
             return t - Math.floor(t / length) * length;
         }
 
-
     }
     customElements.define('my-carousel',MyCarousel);
+            function Test():void{
+
+        }
+
 </script>

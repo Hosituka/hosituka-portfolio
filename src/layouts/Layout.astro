@@ -37,8 +37,14 @@ const {title}:Props = Astro.props;
 	
 }
 @layer Appearance{
+	
 	html {
 		box-sizing: border-box; /* 1. 大元で指定 */
+		//#ios特有のびよーんってなってもとにもどる挙動を防ぐコード
+		 overscroll-behavior: none;
+		body{
+			overscroll-behavior: none;
+		}
 	}
 	*, *::before, *::after {
 		box-sizing: inherit;    /* 2. すべての要素に「親から継承しろ」と命じる */
