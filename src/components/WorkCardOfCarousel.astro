@@ -29,7 +29,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			<div class="link-buttons">
 				<a class="show-overview-button">概要</a>
 				{playLink ?(
-					<a href={playLink}>遊ぶ</a>
+					<a href={playLink} target="_blank" rel="noopener noreferrer">遊ぶ</a>
 				):(
 					<a class="is-deactive"></a>
 				)}
@@ -43,7 +43,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			<div class="link-buttons">
 				<a class="show-info-button">戻る</a>
 				{detailLink ?(
-					<a href={detailLink}>詳細</a>
+					<a href={detailLink} target="_blank" rel="noopener noreferrer">詳細</a>
 				):(
 					<a class="is-deactive"></a>
 				)}
