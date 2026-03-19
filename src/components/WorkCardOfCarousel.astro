@@ -1,45 +1,64 @@
 ---
-//#ゲーム作品を紹介するカード、普通のカードと違い遊ぶボタンがあります。
+
 interface Props{
-	gameImageURL:string;
-	gameTitle:string;
+	workMediaURL:string;
+	workTitle:string;
+	playLink?:string;
+	detailLink?:string;
 }
-const {gameImageURL: gameImageURL,gameTitle: gameTitle}:Props = Astro.props;
+const {workMediaURL: workMediaURL,workTitle: workTitle,playLink:playLink,detailLink:detailLink}:Props = Astro.props;
+
+//#渡されたmediaが動画か否かのチェックを行う処理
+const videoExtensions:Array<string> = ['.mp4','.webm']
+const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 ---
 
-<game-card-of-carousel data-work-title={gameTitle}>
+<work-card-of-carousel data-work-title={workTitle}>
 	<div class="card">
 		<div class="card-info">				
-			<h3>{gameTitle}</h3>
-			<div class="image-container">
-				<div class="image-background"></div>
-				<img src={gameImageURL} alt="ほしつかのアイコン">
+			<h3>{workTitle}</h3>
+			<div class="media-container">
+				{isVideo ?(
+					<img class="image-background" src='icon/MyIcon.webp'></img>
+					<video src={workMediaURL} autoplay loop muted playsinline></video>
+				):(
+					<img class="image-background" src={workMediaURL}></img>
+					<img src={workMediaURL} alt="ほしつかのアイコン">
+				)}
 			</div>
 			<div class="link-buttons">
 				<a class="show-overview-button">概要</a>
-				<a>遊ぶ</a>
+				{playLink ?(
+					<a href={playLink}>遊ぶ</a>
+				):(
+					<a class="is-deactive"></a>
+				)}
 			</div>
 		</div>
 		<div class="card-overview">
-			<h3>{gameTitle}:概要</h3>
+			<h3>{workTitle}:概要</h3>
 			<p>
 				<slot />
 			</p>
 			<div class="link-buttons">
 				<a class="show-info-button">戻る</a>
-				<a>詳細</a>
+				{detailLink ?(
+					<a href={detailLink}>詳細</a>
+				):(
+					<a class="is-deactive"></a>
+				)}
 			</div>
 
 		</div>
 	</div>
-</game-card-of-carousel>	
+</work-card-of-carousel>	
  
-<style lang="scss" define:vars={{gameImageURL:`url("${gameImageURL}")`}}>
+<style lang="scss">
 @use '../global-styles/_variables' as *;
 $cardWidth:300px;
 $cardHeight:245px;
 @layer Layout{
-	game-card-of-carousel{
+	work-card-of-carousel{
 		perspective: 2000px;
 		.card{
 			transform-style:preserve-3d;
@@ -51,13 +70,16 @@ $cardHeight:245px;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				.image-container{
+				.media-container{
 					position:relative;
 					margin-top:8px;
 					.image-background{
 						position:absolute;
 					}
 					img{
+						position:absolute;
+					}
+					video{
 						position:absolute;
 					}
 				}
@@ -68,8 +90,12 @@ $cardHeight:245px;
 					justify-content:center;
 					gap:20px;
 					a{
-						&:active{
-							transform:translateY(5px);
+						&:not(.is-deactive){
+							&:active{
+								transform:translateY(5px);
+							}
+						}
+						&.is-deactive{
 						}
 					}
 				}
@@ -99,7 +125,7 @@ $cardHeight:245px;
 	}
 }
 @layer Appearance{
-	game-card-of-carousel{
+	work-card-of-carousel{
 		.card{
 			width: $cardWidth + 8px;
 			height:$cardHeight + 8px;
@@ -125,9 +151,8 @@ $cardHeight:245px;
 					text-align: center;
 					font-size:20px;
 					font-family: sans-serif;
-					
 				}
-				.image-container{
+				.media-container{
 					overflow: hidden;
 					outline:3px solid $yellow;;
 					&,& > *{
@@ -137,36 +162,42 @@ $cardHeight:245px;
 					}
 					.image-background{
 						object-fit: cover;
-						background-image: var(--gameImageURL);
+						pointer-events: none;
 						filter:blur(20px);
 					}
 					img{
+						pointer-events: none;
 						object-fit: contain;
-						-webkit-user-select: none;
-						user-select: none;
-						-webkit-touch-callout: none;
-						-webkit-user-drag: none;
+					}
+					video{
+
 					}
 				}
 				.link-buttons{
 					width:calc(100% - 15px);
 					a{
-						background-color: $yellow;
-						box-shadow: 0 5px 0 $dark-yellow;
-						text-align: center;
-						font-family: sans-serif;
-						line-height:30px;
 						width:100px;
 						user-select: none;
 						border-radius: 30px;
-						&:active{
-							box-shadow: 0 0 0 $dark-yellow;
+						background-color: $yellow;
+						box-shadow: 0 5px 0 $dark-yellow;
+						user-select: none;
+						&:not(.is-deactive){
+							text-align: center;
+							font-family: sans-serif;
+							line-height:30px;
+							&:active{
+								box-shadow: 0 0 0 $dark-yellow;
+							}
+							&:hover{
+								cursor: pointer; 
+							}
 						}
-						&:hover{
-							cursor: pointer; 
+						&.is-deactive{
+							opacity: 0.5;
+							cursor: not-allowed;
 						}
 					}
-					
 				}
 			}
 			.card-overview{
@@ -178,38 +209,46 @@ $cardHeight:245px;
 				h3{
 					width:100%;
 					line-height: 35px;
+					color:whitesmoke;
 					background-color: $blue;
 					text-align: center;
 					font-size:20px;
 					font-family: sans-serif;
-					color:whitesmoke;
 				}
 				p{
 					width:100%;
 					height:$cardHeight - 83px;
 					line-height:20px;
-					padding:5px 5px;
+					padding:2px 5px;
 					font-size:16px;
 					font-family: serif;
 					overflow-wrap:break-word;
+					
 				}
 				.link-buttons{
 					width:calc(100% - 15px);
 					a{
 						background-color: $blue;
 						box-shadow: 0 5px 0 $dark-blue;
-						text-align: center;
-						font-family: sans-serif;
-						line-height:30px;
 						width:100px;
 						border-radius: 30px;
 						user-select: none;
 						color:whitesmoke;
-						&:active{
-							box-shadow: 0 0 0 $dark-blue;
+						user-select: none;
+						&:not(.is-deactive){
+							text-align: center;
+							font-family: sans-serif;
+							line-height:30px;
+							&:active{
+								box-shadow: 0 0 0 $dark-yellow;
+							}
+							&:hover{
+								cursor: pointer; 
+							}
 						}
-						&:hover{
-							cursor: pointer; 
+						&.is-deactive{
+							opacity: 0.5;
+							cursor: not-allowed;
 						}
 					}	
 				}
@@ -219,14 +258,14 @@ $cardHeight:245px;
 }
 
 @media (max-width:700px) {
-	game-card-of-carousel{
+	card-of-carousel{
 	}
 }
     
 
 </style>
 <script>
-	class GameCardOfCarousel extends HTMLElement{
+	class WorkCardOfCarousel extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
 			const showInfoButton:Element|null = this.querySelector('.show-info-button');
@@ -272,6 +311,6 @@ $cardHeight:245px;
 			})
 		}
 	}
-	customElements.define('game-card-of-carousel',GameCardOfCarousel);
+	customElements.define('work-card-of-carousel',WorkCardOfCarousel);
 
 </script>
