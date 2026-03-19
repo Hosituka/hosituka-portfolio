@@ -115,8 +115,12 @@ $cardHeight:245px;
 					justify-content:center;
 					gap:20px;
 					a{
-						&:active{
-							transform:translateY(5px);
+						&:not(.is-deactive){
+							&:active{
+								transform:translateY(5px);
+							}
+						}
+						&.is-deactive{
 						}
 					}
 				}
