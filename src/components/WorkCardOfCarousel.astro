@@ -55,8 +55,8 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
  
 <style lang="scss">
 @use '../global-styles/_variables' as *;
-$cardWidth:300px;
-$cardHeight:245px;
+$cardWidth:355px;
+$cardHeight:280px;
 @layer Layout{
 	work-card-of-carousel{
 		perspective: 2000px;
@@ -186,6 +186,7 @@ $cardHeight:245px;
 						background-color: $yellow;
 						box-shadow: 0 5px 0 $dark-yellow;
 						user-select: none;
+						isolation: isolate;
 						&:not(.is-deactive){
 							text-align: center;
 							font-family: sans-serif;
@@ -222,11 +223,11 @@ $cardHeight:245px;
 				p{
 					width:100%;
 					height:$cardHeight - 83px;
-					line-height:20px;
+					line-height:1.6;
 					padding:2px 5px;
 					font-size:16px;
 					font-family: serif;
-					overflow-wrap:break-word;
+					overflow-wrap: anywhere;
 					
 				}
 				.link-buttons{
@@ -239,6 +240,7 @@ $cardHeight:245px;
 						user-select: none;
 						color:whitesmoke;
 						user-select: none;
+						isolation: isolate;
 						&:not(.is-deactive){
 							text-align: center;
 							font-family: sans-serif;

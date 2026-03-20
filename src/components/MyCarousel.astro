@@ -21,7 +21,7 @@ const {speed}:Props = Astro.props;
             //#カードたちを入れる箱こいつをx軸方向で動かす。
             .cards-container{
                 display:flex;
-                gap:20px;
+                gap:10px;
                 will-change: transform;
             }
         }
@@ -87,7 +87,7 @@ const {speed}:Props = Astro.props;
                 }
                 //##スクロールする閾値となる値の計算
                 //###このコンポーネントの内部scssで指定しているgap
-                const gap = 20;
+                const gap = 10;
                 this.scrollHalfWidth = (this.cardsContainer.scrollWidth + gap) / 2;
 
                 //#イベント関係の処理の登録&定義
