@@ -70,7 +70,7 @@
 //#見た目や内部の配置に関するスタイル
 @layer Appearance{
     body{
-        background-color:  ghostwhite;
+        background-color: $light-yellow;
     }
 
     header{
@@ -155,7 +155,7 @@
                 padding: 5px 0 5px 0px;
             }
             .carousel-container{
-                background-color: $light-yellow;
+                background-color: gainsboro;
                 padding:5px 0px 5px 0px;
             }
             .main-works-footer{
