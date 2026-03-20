@@ -70,7 +70,7 @@
 //#見た目や内部の配置に関するスタイル
 @layer Appearance{
     body{
-        background-color: $light-yellow;
+        background-color: ghostwhite;
     }
 
     header{
@@ -115,7 +115,7 @@
                 box-sizing: border-box;
                 padding:20px;
                 border:1px solid #333;
-                background-color:  white;
+                background-color:  $light-yellow;
 
                 .about-me-text{
                     width:250px;
@@ -125,6 +125,7 @@
                 .sns-container{
                     width:250px;
                     a{
+                        background-color: white;
                         outline:3px solid gray;
                         outline-offset: -2px;
                         overflow: hidden;
@@ -155,7 +156,7 @@
                 padding: 5px 0 5px 0px;
             }
             .carousel-container{
-                background-color: gainsboro;
+                background-color: $light-yellow;
                 padding:5px 0px 5px 0px;
             }
             .main-works-footer{
