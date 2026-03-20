@@ -199,7 +199,8 @@ $cardHeight:280px;
 							}
 						}
 						&.is-deactive{
-							filter:saturate(0.3) brightness(0.9);
+							background-color: rgba($yellow,0.6);
+							box-shadow: 0 5px 0 rgba($dark-yellow,0.6);
 							cursor: not-allowed;
 						}
 					}
@@ -233,8 +234,8 @@ $cardHeight:280px;
 				.link-buttons{
 					width:calc(100% - 15px);
 					a{
-						background-color: rgba($blue,1);
-						box-shadow: 0 5px 0 rgba($dark-blue,1);
+						background-color: $blue;
+						box-shadow: 0 5px 0 $dark-blue;
 						width:100px;
 						border-radius: 30px;
 						user-select: none;
