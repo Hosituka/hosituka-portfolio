@@ -309,8 +309,15 @@
 			if(card===null){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 
+			this.addEventListener('mouseenter',()=>{
+				card.classList.add('is-flipped');
+			});
 			card.addEventListener('click',()=>{
 				card.classList.toggle('is-flipped');
+			});
+
+			this.addEventListener('mouseleave',()=>{
+				card.classList.remove('is-flipped');
 			});
 		}
 	}

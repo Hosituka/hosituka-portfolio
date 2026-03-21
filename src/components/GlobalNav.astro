@@ -4,18 +4,18 @@ export interface Props {
     topURL:string;
     worksURL:string;
     devLogURL:string;
-    sNS_URL:string;
+    aboutMe:string;
 }
 
-const { topURL, worksURL, devLogURL, sNS_URL }:Props = Astro.props;
+const { topURL, worksURL, devLogURL, aboutMe: aboutMe }:Props = Astro.props;
 ---
 <!-- ##グローバルナビゲーションの要素ノード-->
 <nav>
     <ul>
         <li><a href={topURL}>ホーム</a></li>
+		<li><a href={aboutMe}>自己紹介</a></li>
         <li><a href={worksURL}>作品</a></li>
-        <li><a href={devLogURL}>開発日誌</a></li>
-        <li><a href={sNS_URL}>SNS</a></li>
+        <li><a href={devLogURL}>日誌</a></li>
     </ul>
 </nav>
 <!-- ##グローバルナビゲーションのスタイル-->
