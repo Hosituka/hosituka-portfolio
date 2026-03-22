@@ -168,7 +168,7 @@ const {speed}:Props = Astro.props;
             this.cardsContainer.style.transform = `translateX(${this.currentX}px) translateZ(0)`;
             this.prevDragX = this.currentDragX;
             requestAnimationFrame(this.Update);
-        };
+        }
         StartAutoScroll=()=> {
             this.dragging = false;
             this.hovering = false;
