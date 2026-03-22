@@ -1,0 +1,162 @@
+---
+//#背景のパーティクルのアニメーションに関するアストロファイル
+interface Props{
+	zIndex:number;
+	particleCount:number;
+}
+const {zIndex:zIndex,particleCount:particleCount}:Props = Astro.props; 
+---
+<!-- ##グローバルナビゲーションの要素ノード-->
+ <particle-back-ground style={`--z-index:${zIndex}`} data-particle-count={particleCount}>
+	<canvas>
+
+	</canvas>
+ </particle-back-ground>
+<!-- ##グローバルナビゲーションのスタイル-->
+<style lang="scss">
+@use '../global-styles/_variables' as *;
+@layer Layout{
+	particle-back-ground{
+		position:absolute;
+		display:block;
+		z-index: var(--z-index);
+		canvas{
+			
+		}
+	}
+
+}
+@layer Appearance{
+	particle-back-ground{
+		width:100%;
+		height:100%;
+		canvas{
+			width:100%;
+			height:100%;
+		}
+	}
+}
+
+</style>
+<script>
+import { Debug } from "astro:components";
+
+	//#ParticleBackGroundによって管理される粒の振る舞いと状態を司るクラス
+	class Particle{
+		private x:number = 0;
+		private y:number = 0;
+		private size:number = 1;
+		private speed:number = 1;
+
+		private canvasWidth:number = 0;
+		private canvasHeight:number = 0;
+		constructor(canvasWidth:number, canvasHeight:number){
+			this.canvasWidth = canvasWidth;
+			this.canvasHeight = canvasHeight;
+			this.SetTransform();
+		}
+		SetTransform=()=>{
+			this.x = Math.random() * this.canvasWidth;
+			this.y = Math.random() * this.canvasHeight;
+			this.size = Math.random() * 4 + 3;
+			this.speed = Math.random() * 1.5 + 0.25;
+		}
+		//#描画前の処理
+		Update=()=>{
+			this.y -= this.speed;
+			//#画面外に出た時
+			if(this.y < -10){
+				this.x = Math.random() * this.canvasWidth;
+				this.y = this.canvasHeight + 10;
+				this.size = Math.random() * 4 + 3;
+				this.speed = Math.random() * 1.5 + 0.25;
+			}
+		}
+		//#あるcanvasに対して描画する処理
+		Draw=(ctx:CanvasRenderingContext2D)=>{
+			//#縁が黒く中が白い丸を描画する処理
+			//##丸を書くためにパスを引く
+			ctx.beginPath()
+			ctx.arc(this.x,this.y,this.size,0,Math.PI * 2);
+
+			//##中を白くする処理
+			ctx.fillStyle = 'White';
+			ctx.fill();
+			//##縁を黒くする処理
+			ctx.strokeStyle = "black";
+			ctx.lineWidth = 1;
+			ctx.stroke();
+		}
+		//#canvasの縦横比が変わるたびに呼ばれる奴
+		SetBounds(canvasWidth:number, canvasHeight:number){
+			this.canvasWidth = canvasWidth;
+			this.canvasHeight = canvasHeight;
+		}
+	}
+	class ParticleBackGround extends HTMLElement{
+		private canvas:HTMLCanvasElement|null = null;
+		private ctx:CanvasRenderingContext2D|null = null;
+		private particles:Particle[] = [];
+
+		connectedCallback(){
+			//#初期化
+			this.canvas = this.querySelector('canvas');
+			if(this.canvas === null){console.log('canvas要素が見つかりませんでした'); return};
+			this.ctx = this.canvas.getContext('2d');
+			//##メインの動きの順序指定
+			requestAnimationFrame(this.Start);
+			requestAnimationFrame(this.Update);
+			//##リサイズを検知するための初期化
+			const observer = new ResizeObserver(() => {
+				this.OnResize();
+			});
+			observer.observe(this);
+
+		}
+
+		
+		private OnResize=()=>{
+			if(!this.canvas) return;
+			//console.log('リサイズを検知しました');
+			this.canvas.width = this.clientWidth;
+			this.canvas.height = this.clientHeight;
+			for(const particle of this.particles){
+				particle.SetBounds(this.clientWidth,this.clientHeight);
+				particle.SetTransform();
+			}
+
+
+		}
+		private Start= ():void=>{
+			if(!this.canvas) return;
+			//##解像度を指定する処理
+			this.canvas.width = this.clientWidth;
+			this.canvas.height = this.clientHeight;
+			console.log((this.clientWidth,this.clientHeight))
+			console.log(this.canvas.width);
+			//##パーティクルを生成する処理
+			//###パーティクルの生成個数を取得
+			const particleCount:number = Number(this.dataset.particleCount) || 30;
+			//###実際に生成する処理
+			for(let i = 0; i< particleCount; i++){
+				this.particles.push(new Particle(this.canvas.width,this.canvas.height));
+			}
+
+		}
+		//#描画前に毎フレーム走る処理
+		private Update=():void=>{
+			if(!this.ctx || !this.canvas) return;
+			//#前のフレームによる描画を消す
+			this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
+			//#各パーティクルの状態や振る舞いを更新
+			for(const particle of this.particles){
+				particle.Update()
+				particle.Draw(this.ctx);
+			}
+
+			requestAnimationFrame(this.Update);
+		}
+	}
+	customElements.define('particle-back-ground',ParticleBackGround);
+</script>
+

@@ -5,6 +5,7 @@ import Layout from '../layouts/Layout.astro';
 import GrobalNav from '../components/GlobalNav.astro';
 import AboutMeCard from '../components/AboutMeCard.astro';
 import Footer from '../components/Footer.astro';
+import ParticleBackGround from '../components/ParticleBackGround.astro'
 
 import Carousel1 from '../components/MyCarousel.astro';
 import CardOfCarousel1 from '../components/WorkCardOfCarousel.astro';
@@ -12,7 +13,6 @@ import CardOfCarousel2 from '../components/WorkCardOfCarousel.astro';
 import CardOfCarousel3 from '../components/WorkCardOfCarousel.astro';
 import CardOfCarousel4 from '../components/WorkCardOfCarousel.astro';
 import CardOfCarousel5 from '../components/WorkCardOfCarousel.astro';
-import CardOfCarousel6 from '../components/WorkCardOfCarousel.astro';
 
 import './index.scss';
 
@@ -25,6 +25,7 @@ import './index.scss';
 		</div>
 	</header>
 	<main>
+		<ParticleBackGround zIndex={-1} particleCount={80}/>
 		<section class="about-me-section">
 			<h2>私について</h2>
 			<div class="about-me-main">

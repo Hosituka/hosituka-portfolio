@@ -16,13 +16,13 @@
         }
     }
     main{
+        position:relative;
         display:flex;
         flex-direction: column;
         align-items: center;
         gap:20px;
-        margin-top:8px;
-        margin-bottom:30px;
         .about-me-section{
+            margin-top:8px;
             h2{
                 position:relative;
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
@@ -55,16 +55,17 @@
 
             }
         }
-       /*.main-works{
-            h2{
+        .main-works{
+            margin-bottom: 30px;
+           /*h2{
 
             }
             .carousel-container{
             }
             .main-works-footer{
-            }
+            }*/
 
-        }*/
+        }
     }
 }
 //#見た目や内部の配置に関するスタイル

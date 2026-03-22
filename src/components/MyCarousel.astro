@@ -63,7 +63,7 @@ const {speed}:Props = Astro.props;
         //##スマホ用の識別子
         timerId:number= 0;
 
-        Start=()=>{
+        private Start=()=>{
             const CarouselInitialize=()=>{
                 //#カルーセルをするための準備
                 //##カルーセル出来るかどうかの確認
@@ -131,6 +131,7 @@ const {speed}:Props = Astro.props;
                 })
 
             }
+            //#workCardOfCarousel.astro用の処理
             const CardInitialize=()=>{
                 this.addEventListener('sync-card-state',(e:any)=>{
                     window.dispatchEvent(new CustomEvent('update-card-ui',{
@@ -152,7 +153,7 @@ const {speed}:Props = Astro.props;
         speed:number = 1;
 
         //#恒常的(毎フレーム)に走る処理
-        Update=()=>{
+        private Update=()=>{
             //#現状自動でスクロールする処理が書かれている。
             if(!this.cardsContainer)return;
 

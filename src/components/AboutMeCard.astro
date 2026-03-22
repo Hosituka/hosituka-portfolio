@@ -303,22 +303,29 @@
 
 </style>
 <script>
+import { Debug } from "astro:components";
+
 	class AboutMeCard extends HTMLElement{
 		connectedCallback(){
 			const card:HTMLElement|null = this.querySelector('.card')
 			if(card===null){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 
-			this.addEventListener('mouseenter',()=>{
-				card.classList.add('is-flipped');
-			});
 			card.addEventListener('click',()=>{
 				card.classList.toggle('is-flipped');
+				console.log("クリックされました")
 			});
-
-			this.addEventListener('mouseleave',()=>{
-				card.classList.remove('is-flipped');
-			});
+			//#マウス操作可能な時に登録するイベントに対するコールバック関数；
+			const isTouchDevice:boolean=window.matchMedia('(pointer:coarse)').matches; 
+			if(!isTouchDevice){
+				this.addEventListener('mouseenter',()=>{
+					card.classList.add('is-flipped');
+				});
+				this.addEventListener('mouseleave',()=>{
+					card.classList.remove('is-flipped');
+					console.log("マウスポインターが離れました");
+				});
+			}
 		}
 	}
 	customElements.define('about-me-card',AboutMeCard);

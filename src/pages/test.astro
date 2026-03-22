@@ -1,33 +1,19 @@
 ---
 //このファイルはuiコンポーネントのテスト用に使うページコンポーネントです。
 import Layout from '../layouts/Layout.astro';
-import MyCarousel from '../components/MyCarousel.astro';
-import Test1 from '../components/WorkCardOfCarousel.astro';
-import Test2 from '../components/WorkCardOfCarousel.astro';
-import Test3 from '../components/WorkCardOfCarousel.astro';
-import Test4 from '../components/WorkCardOfCarousel.astro';
-
-
+import ParticleBackGround from '../components/ParticleBackGround.astro';
 
 ---
 <Layout title='uiコンポーネントのテスト用'>
-    <Test1 workTitle='GunSwapShooter' workMediaURL='/icon/MyIcon.webp'>
-        <ul slot="teck-list">
-            <li>hoge1</li>
-            <li>hoge2</li>
-            <li>hoge3</li>
-            <li>hoge4</li>
-            <li>hoge5</li>
-        </ul>
-    </Test1>
-    <Test2 workTitle='GunSwapShooter' workMediaURL='/icon/MyIcon.webp'>
-        <ul slot="teck-list">
-            <li>hoge1</li>
-            <li>hoge2</li>
-            <li>hoge3</li>
-            <li>hoge4</li>
-            <li>hoge5</li>
-        </ul>
-    </Test2>
-
+    <main>
+        <ParticleBackGround zIndex={1} particleCount={50}/>
+    </main>
 </Layout>
+<style lang="scss">
+    main{
+        position:absolute;
+        top:500px;
+        width:500px;
+        height:500px;
+    }
+</style>
