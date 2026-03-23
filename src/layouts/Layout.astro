@@ -4,8 +4,6 @@ interface Props {
 	title:string;
 }
 const {title}:Props = Astro.props;
-import GlobalNav from '../components/GlobalNav.astro';
-import Footer from '../components/Footer.astro';
 
 ---
 <!doctype html>		
@@ -19,9 +17,7 @@ import Footer from '../components/Footer.astro';
 		<title>{title}</title>
 	</head>
 	<body>
-		<GlobalNav topURL ="/" aboutMe="/aboutMe.astro" worksURL="/works.astro"devLogURL="/devLog.astro"  />	
 		<slot />
-		<Footer zIndex='0'/>
 	</body>
 </html>
 
@@ -32,8 +28,8 @@ import Footer from '../components/Footer.astro';
 @import url("../global-styles/Normalize.css") layer(Normalize);
 /*##webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/
 @import url("../global-styles/CssReset.css") layer(CssReset);
-
 @layer Normalize, CssReset, Layout, Appearance;
+
 @layer Layout{
 	body{
 		position:relative;
@@ -58,5 +54,3 @@ import Footer from '../components/Footer.astro';
 		box-sizing: inherit;    /* 2. すべての要素に「親から継承しろ」と命じる */
 	}
 }
-</style>
-

@@ -1,6 +1,9 @@
 ---
 //このファイルはトップページに当たります。
 import Layout from '../layouts/Layout.astro';
+import GlobalNav from '../components/GlobalNav.astro';
+
+import Footer from '../components/Footer.astro';
 
 import AboutMeCard from '../components/AboutMeCard.astro';
 import ParticleBackGround from '../components/ParticleBackGround.astro'
@@ -11,6 +14,7 @@ import './index.scss';
 
 ---
 <Layout title='ホーム'>
+	<GlobalNav topURL ="/" aboutMe="/aboutMe.astro" worksURL="/works.astro"devLogURL="/devLog.astro"  />	
 	<ParticleBackGround zIndex={1} particleDensity={0.1}/>
 	<header>
 		<div class="page-title-container">
@@ -103,4 +107,5 @@ import './index.scss';
 
 		</section>
 	</main>
+	<Footer zIndex='0'/>
 </Layout>
