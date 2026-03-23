@@ -133,8 +133,8 @@ const {speed}:Props = Astro.props;
             }
             //#workCardOfCarousel.astro用の処理
             const CardInitialize=()=>{
-                this.addEventListener('sync-card-state',(e:any)=>{
-                    window.dispatchEvent(new CustomEvent('update-card-ui',{
+                this.addEventListener('click-info-button',(e:any)=>{
+                    this.dispatchEvent(new CustomEvent('update-card-ui',{
                         detail:e.detail
                     }));
                 });

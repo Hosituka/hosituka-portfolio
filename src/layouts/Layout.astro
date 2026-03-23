@@ -4,6 +4,9 @@ interface Props {
 	title:string;
 }
 const {title}:Props = Astro.props;
+import GlobalNav from '../components/GlobalNav.astro';
+import Footer from '../components/Footer.astro';
+
 ---
 <!doctype html>		
 <html lang="ja">	
@@ -16,7 +19,9 @@ const {title}:Props = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<GlobalNav topURL ="/" aboutMe="/aboutMe.astro" worksURL="/works.astro"devLogURL="/devLog.astro"  />	
 		<slot />
+		<Footer zIndex='0'/>
 	</body>
 </html>
 
@@ -30,9 +35,12 @@ const {title}:Props = Astro.props;
 
 @layer Normalize, CssReset, Layout, Appearance;
 @layer Layout{
-	html,body{
-		height:100%;
-
+	body{
+		position:relative;
+		display:flex;
+		flex-direction: column;
+		min-height:100vh;
+		min-height:100dvh;
 	}
 	
 }

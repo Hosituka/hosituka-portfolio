@@ -1,13 +1,13 @@
 ---
 //#背景のパーティクルのアニメーションに関するアストロファイル
 interface Props{
-	zIndex:number;
-	particleCount:number;
+	zIndex?:number;
+	particleDensity:number;
 }
-const {zIndex:zIndex,particleCount:particleCount}:Props = Astro.props; 
+const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props; 
 ---
 <!-- ##グローバルナビゲーションの要素ノード-->
- <particle-back-ground style={`--z-index:${zIndex}`} data-particle-count={particleCount}>
+ <particle-back-ground style={`--z-index:${zIndex}`} data-particle-density={particleDensity}>
 	<canvas>
 
 	</canvas>
@@ -53,9 +53,6 @@ import { Debug } from "astro:components";
 		constructor(canvasWidth:number, canvasHeight:number){
 			this.canvasWidth = canvasWidth;
 			this.canvasHeight = canvasHeight;
-			this.SetTransform();
-		}
-		SetTransform=()=>{
 			this.x = Math.random() * this.canvasWidth;
 			this.y = Math.random() * this.canvasHeight;
 			this.size = Math.random() * 4 + 3;
@@ -87,11 +84,6 @@ import { Debug } from "astro:components";
 			ctx.lineWidth = 1;
 			ctx.stroke();
 		}
-		//#canvasの縦横比が変わるたびに呼ばれる奴
-		SetBounds(canvasWidth:number, canvasHeight:number){
-			this.canvasWidth = canvasWidth;
-			this.canvasHeight = canvasHeight;
-		}
 	}
 	class ParticleBackGround extends HTMLElement{
 		private canvas:HTMLCanvasElement|null = null;
@@ -104,7 +96,7 @@ import { Debug } from "astro:components";
 			if(this.canvas === null){console.log('canvas要素が見つかりませんでした'); return};
 			this.ctx = this.canvas.getContext('2d');
 			//##メインの動きの順序指定
-			requestAnimationFrame(this.Start);
+			requestAnimationFrame(this.GenerateParticle);
 			requestAnimationFrame(this.Update);
 			//##リサイズを検知するための初期化
 			const observer = new ResizeObserver(() => {
@@ -118,33 +110,34 @@ import { Debug } from "astro:components";
 		private OnResize=()=>{
 			if(!this.canvas) return;
 			//console.log('リサイズを検知しました');
-			this.canvas.width = this.clientWidth;
-			this.canvas.height = this.clientHeight;
-			for(const particle of this.particles){
-				particle.SetBounds(this.clientWidth,this.clientHeight);
-				particle.SetTransform();
-			}
+			//#参照をクリアする事でgcを走らせインスタンスを破棄する
+			this.particles = [];
+			this.GenerateParticle();
 
 
 		}
-		private Start= ():void=>{
+		private GenerateParticle= ():void=>{
 			if(!this.canvas) return;
 			//##解像度を指定する処理
 			this.canvas.width = this.clientWidth;
 			this.canvas.height = this.clientHeight;
-			console.log((this.clientWidth,this.clientHeight))
-			console.log(this.canvas.width);
 			//##パーティクルを生成する処理
-			//###パーティクルの生成個数を取得
-			const particleCount:number = Number(this.dataset.particleCount) || 30;
+			//###パーティクルの生成密度を取得
+			const particleDensity:number = Number(this.dataset.particleDensity) || 30;
+			///###生成密度を基にパーティクルの生成個数を計算する。
+			const area:number = this.clientWidth * this.clientHeight;
+			const particleCount:number = (area / 1000) * particleDensity;
+			console.log(area)
+			console.log("生成個数:"+particleCount)
 			//###実際に生成する処理
 			for(let i = 0; i< particleCount; i++){
 				this.particles.push(new Particle(this.canvas.width,this.canvas.height));
 			}
 
 		}
+		private lastFrameTime:number = 0;
 		//#描画前に毎フレーム走る処理
-		private Update=():void=>{
+		private Update=(timestamp :number):void=>{
 			if(!this.ctx || !this.canvas) return;
 			//#前のフレームによる描画を消す
 			this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
@@ -153,7 +146,6 @@ import { Debug } from "astro:components";
 				particle.Update()
 				particle.Draw(this.ctx);
 			}
-
 			requestAnimationFrame(this.Update);
 		}
 	}

@@ -276,38 +276,39 @@ $cardHeight:280px;
 	class WorkCardOfCarousel extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
-			const showInfoButton:Element|null = this.querySelector('.show-info-button');
+			const showInfoButton:HTMLElement|null = this.querySelector('.show-info-button');
 			if(showInfoButton===null){console.error('show-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
-
-			const showOverviewButton:Element|null = this.querySelector('.show-overview-button');
+			const showOverviewButton:HTMLElement|null = this.querySelector('.show-overview-button');
 			if(showOverviewButton===null){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-
-			const cardOverview :Element|null = this.querySelector('.card-overview');
+			const cardOverview :HTMLElement|null = this.querySelector('.card-overview');
 			if(cardOverview===null){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
 			const title:string|undefined = this.dataset.workTitle;
 			if(title===undefined){console.error('data-work-titleが指定されていません。')
 				return;}
+			const carouselAsElement:HTMLElement|null = this.closest('my-carousel');
+			if(carouselAsElement===null){console.error('カルーセル用のカードなのに、祖先要素の中においてカルーセルが見つかりません')
+				return;}
 
 			//#メインとなる処理
 			//##関数の購読
 			showInfoButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('sync-card-state',{
+				this.dispatchEvent(new CustomEvent('click-info-button',{
 					bubbles:true,
 					detail:{title:title,isShow:false}
 				}));
 			});
 			showOverviewButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('sync-card-state',{
+				this.dispatchEvent(new CustomEvent('click-info-button',{
 					bubbles:true,
 					detail:{title:title,isShow:true}
 				}));
 
 			})
 
-			window.addEventListener('update-card-ui',(e:any) =>{
+			carouselAsElement.addEventListener('update-card-ui',(e:any) =>{
 				if(e.detail.title !== title){return};
 				
 				if(e.detail.isShow){

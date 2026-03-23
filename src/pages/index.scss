@@ -4,11 +4,16 @@
 @layer Layout{
     header{
         position:relative;
+        &::before{
+            z-index: 0;
+            position: absolute;
+        }
         .page-title-container{
-            display:flex;
             position:absolute;
+            display:flex;
             bottom:8px;
             left:50%;
+            z-index:2;
             transform:translate(-50%);
           /*h1{
 
@@ -16,13 +21,20 @@
         }
     }
     main{
+        flex: 1;
         position:relative;
         display:flex;
         flex-direction: column;
         align-items: center;
         gap:20px;
+        &::before{
+            position: absolute;
+            z-index: 0;
+        }
         .about-me-section{
+            position:relative;
             margin-top:8px;
+            z-index: 2;
             h2{
                 position:relative;
                 //各セクションの見出しで左側をこんもりさせるための疑似要素
@@ -56,7 +68,9 @@
             }
         }
         .main-works{
+            position:relative;
             margin-bottom: 30px;
+            z-index: 2;
            /*h2{
 
             }
@@ -70,14 +84,16 @@
 }
 //#見た目や内部の配置に関するスタイル
 @layer Appearance{
-    body{
-        background-color: ghostwhite;
-    }
 
     header{
         min-height:100px;
+        &::before{
+            width:100%;
+            height:100%;
+            background-color: $yellow;
+            content:'';
+        }
         border-bottom:1px solid black;
-        background-color: $yellow;
         .page-title-container{
             h1{
                 line-height: 40px;  
@@ -93,6 +109,7 @@
         }
     }
     main{
+        background-color: white;
         .about-me-section{
             max-width: 790px;
             h2{

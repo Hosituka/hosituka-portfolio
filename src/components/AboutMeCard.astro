@@ -313,7 +313,7 @@ import { Debug } from "astro:components";
 
 			card.addEventListener('click',()=>{
 				card.classList.toggle('is-flipped');
-				console.log("クリックされました")
+				//console.log("クリックされました")
 			});
 			//#マウス操作可能な時に登録するイベントに対するコールバック関数；
 			const isTouchDevice:boolean=window.matchMedia('(pointer:coarse)').matches; 
@@ -323,7 +323,7 @@ import { Debug } from "astro:components";
 				});
 				this.addEventListener('mouseleave',()=>{
 					card.classList.remove('is-flipped');
-					console.log("マウスポインターが離れました");
+					//console.log("マウスポインターが離れました");
 				});
 			}
 		}

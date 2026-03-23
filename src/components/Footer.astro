@@ -1,23 +1,29 @@
 ---
 //#フッターに関するuiコンポーネント
-
+interface Props{
+	zIndex?:string;
+}
+const {zIndex:zIndex="auto"}:Props = Astro.props;
 ---
-<footer>
-	<p id="Copyright">© 2026　Hositukaのホームページ</p>
+<footer style={`--z-index:${zIndex};`}>
+	<p id="Copyright">© 2026 Hositukaのホームページ</p>
 </footer>
 
 <style lang="scss">
 @use '../global-styles/_variables' as *;
 @layer Layout{
 	footer{
-		position:sticky;
-		top:100vh;
-		top:100dvh;
+		position:relative;
+		&::before{
+			position:absolute;
+			z-index:var(--z-index);
+		}
 		#Copyright{
-			position: relative;
+			position: absolute;
 			top: 50%;
 			left: 50%;
 			transform: translateY(-50%) translateX(-50%);
+			z-index:calc(var(--z-index) + 2);
 		}
 	}
 }
@@ -25,8 +31,13 @@
 	footer {
 		width:100%;
 		height:50px;
-		border-top:1px solid black;
-		background-color: $yellow;
+		&::before{
+			width:100%;
+			height:100%;
+			background-color: $yellow;
+			border-top:1px solid black;
+			content:'';
+		}
 		#Copyright{
 			color: black;
 			text-align:center;
