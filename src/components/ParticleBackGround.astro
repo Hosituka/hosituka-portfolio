@@ -21,7 +21,7 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		display:block;
 		z-index: var(--z-index);
 		canvas{
-			
+			display:block;
 		}
 	}
 
@@ -39,7 +39,6 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 
 </style>
 <script>
-import { Debug } from "astro:components";
 
 	//#ParticleBackGroundによって管理される粒の振る舞いと状態を司るクラス
 	class Particle{
