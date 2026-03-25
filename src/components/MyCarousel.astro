@@ -44,10 +44,10 @@ const {speed}:Props = Astro.props;
 }
 </style>
 <script>
-
+    import {MathUtility} from '../scripts/utility'
     class MyCarousel extends HTMLElement{
         //#このインスタンスのインスタンス関数メンバ全体で使われる識別子
-        cardsContainer:HTMLElement|null=null;
+        private cardsContainer:HTMLElement|null=null;
         //#この関数はインスタンスとして格納されるカスタム要素が生成された瞬間に走る処理、つまり他の要素に安全にアクセスできるとは限らない
 		connectedCallback(){
             //#他の要素に安全にアクセスするため、次の描画前に走るコールバックとして登録する。
@@ -57,11 +57,11 @@ const {speed}:Props = Astro.props;
             requestAnimationFrame(this.Update);              
         }
         //#Start内で購読する用の関数内で使われる識別子
-        hovering:boolean = false;
-        dragging:boolean = false;
+        private hovering:boolean = false;
+        private dragging:boolean = false;
 
         //##スマホ用の識別子
-        timerId:number= 0;
+        private timerId:number= 0;
 
         private Start=()=>{
             const CarouselInitialize=()=>{
@@ -143,47 +143,38 @@ const {speed}:Props = Astro.props;
             CardInitialize();
         }
         //#autoScroll用の識別子
-        prevDragX:number = 0;
-        currentDragX:number = 0;
-        dragDeltaX:number = 0;
+        private prevDragX:number = 0;
+        private currentDragX:number = 0;
+        private dragDeltaX:number = 0;
 
-        scrollHalfWidth:number=0;
-        currentX:number = 0;
+        private scrollHalfWidth:number=0;
+        private currentX:number = 0;
 
-        speed:number = 1;
+        private speed:number = 1;
 
         //#恒常的(毎フレーム)に走る処理
         private Update=()=>{
             //#現状自動でスクロールする処理が書かれている。
             if(!this.cardsContainer)return;
 
-
             this.dragDeltaX = this.currentDragX - this.prevDragX
             if (!this.hovering && !this.dragging) {
-                this.currentX += this.speed;
+                this.currentX += this.speed * MathUtility.DeltaTime;
             }
             else if (this.hovering && this.dragging) {
                 this.currentX += this.dragDeltaX;
             }
-            this.currentX = MyCarousel.Repeat(this.currentX, -this.scrollHalfWidth)
+            this.currentX = MathUtility.Repeat(this.currentX, -this.scrollHalfWidth)
             this.cardsContainer.style.transform = `translateX(${this.currentX}px) translateZ(0)`;
             this.prevDragX = this.currentDragX;
             requestAnimationFrame(this.Update);
         }
-        StartAutoScroll=()=> {
+        private StartAutoScroll=()=> {
             this.dragging = false;
             this.hovering = false;
         }
 
-        //任意のタイミングで呼び出される関数
-        static Repeat(t:number, length:number) {
-            return t - Math.floor(t / length) * length;
-        }
 
     }
     customElements.define('my-carousel',MyCarousel);
-            function Test():void{
-
-        }
-
 </script>
