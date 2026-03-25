@@ -2,10 +2,11 @@
 //#フッターに関するuiコンポーネント
 interface Props{
 	zIndex?:string;
+	blendMode?:string;
 }
-const {zIndex:zIndex="auto"}:Props = Astro.props;
+const {zIndex:zIndex="auto",blendMode:blendMode="normal"}:Props = Astro.props;
 ---
-<footer style={`--z-index:${zIndex};`}>
+<footer style={`--z-index:${zIndex};--blend-mode:${blendMode};`}>
 	<p id="Copyright">© 2026 Hositukaのホームページ</p>
 </footer>
 
@@ -23,7 +24,7 @@ const {zIndex:zIndex="auto"}:Props = Astro.props;
 			top: 50%;
 			left: 50%;
 			transform: translateY(-50%) translateX(-50%);
-			z-index:calc(var(--z-index) + 2);
+			z-index:calc(var(--z-index) + 1);
 		}
 	}
 }
@@ -36,6 +37,7 @@ const {zIndex:zIndex="auto"}:Props = Astro.props;
 			height:100%;
 			background-color: $yellow;
 			border-top:1px solid black;
+			mix-blend-mode: var(--blend-mode);
 			content:'';
 		}
 		#Copyright{
