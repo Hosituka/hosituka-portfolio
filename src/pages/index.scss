@@ -1,6 +1,4 @@
-@use '../global-styles/_variables' as *;
-
-//#配置に関するスタイル
+@use '../global-styles/_utility' as *;
 
 @layer Layout{
     header{
@@ -113,6 +111,7 @@
         background-color: white;
         .about-me-section{
             max-width: 790px;
+            backdrop-filter: blur(10px);
             h2{
                 background-color: $dark-gray;
                 color:white;

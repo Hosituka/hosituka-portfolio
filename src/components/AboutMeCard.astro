@@ -54,11 +54,11 @@
 </about-me-card>	
  
 <style lang="scss">
-@use '../global-styles/_variables' as *;
-@function getStripeValue($step:5px,$count:5){
+@use '../global-styles/_utility' as *;
+@function GetStripeValue($step:5px,$count:5){
 	$offset:$step;
 	$result:();
-	@for $countUp from 0 through $count{
+	@for $countUp from 0 to $count{
 		//#白部分(step分の幅)
 		$startOfWhiteLine:$countUp * $step * 3 + $offset;
 		$result:append($result,$light-yellow $startOfWhiteLine,comma);
@@ -190,14 +190,14 @@
 						border-radius: 40px 10px 10px 10px;
 					}
 					.main-color{
-						box-shadow: 4px 4px 8px darkgoldenrod; 
+						box-shadow: GetSmoothShadowValue(darkgoldenrod,2px,4,1px);
 						background-color: $yellow;
 						outline:1px solid transparent;
 						border:1px solid gainsboro;
 					}
 					.stripes{
-						background: linear-gradient(45deg, getStripeValue()),
-									linear-gradient(225deg, getStripeValue());
+						background: linear-gradient(45deg, GetStripeValue($count:6)),
+									linear-gradient(225deg, GetStripeValue($count:6));
 					}
 					.simple-noise{
 						background-image: url('/texture/simpleNoise.webp');
@@ -246,13 +246,13 @@
 						border-radius: 10px 40px 10px 10px;
 					}
 					.main-color{
-						box-shadow: 4px 4px 8px darkgoldenrod; 
+						box-shadow:GetSmoothShadowValue(darkgoldenrod,2px,4,1px);
 						background-color: $yellow;
 						border:1px solid gainsboro;
 					}
 					.stripes{
-						background: linear-gradient(135deg, getStripeValue()),
-									linear-gradient(315deg,getStripeValue());
+						background: linear-gradient(135deg, GetStripeValue($count:6)),
+									linear-gradient(315deg,GetStripeValue($count:6));
 
 					}
 					.simple-noise{

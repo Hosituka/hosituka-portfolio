@@ -34,7 +34,7 @@ const {workImageURL,workTitle}:Props = Astro.props;
 </card-of-carousel>	
  
 <style lang="scss" define:vars={{workImageURL:`url("${workImageURL}")`}}>
-@use '../global-styles/_variables' as *;
+@use '../global-styles/_utility' as *;
 $cardWidth:300px;
 $cardHeight:245px;
 @layer Layout{

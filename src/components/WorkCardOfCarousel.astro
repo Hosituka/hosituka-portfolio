@@ -54,7 +54,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 </work-card-of-carousel>	
  
 <style lang="scss">
-@use '../global-styles/_variables' as *;
+@use '../global-styles/_utility' as *;
 $cardWidth:355px;
 $cardHeight:280px;
 @layer Layout{
@@ -145,7 +145,7 @@ $cardHeight:280px;
 				}
 			}
 			.card-info{
-				box-shadow: 4px 4px 8px darkgoldenrod; 
+				box-shadow: GetSmoothShadowValue(darkgoldenrod,2px,4,1px); 
 				border:2px solid $yellow;
 				background-color: $light-yellow;
 				h3{
@@ -209,7 +209,7 @@ $cardHeight:280px;
 			.card-overview{
 				transition:transform 0.5s;
 				will-change: transform;
-				box-shadow: 4px 4px 8px darkblue; 
+				box-shadow: GetSmoothShadowValue($dark-blue,2px,4,1px); 
 				background-color: $light-blue;
 				border:2px solid $blue;;
 				h3{
