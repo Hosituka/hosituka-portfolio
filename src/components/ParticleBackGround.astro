@@ -47,6 +47,7 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 
 		private canvasWidth:number = 0;
 		private canvasHeight:number = 0;
+		private minSpeed:number= Math.random() * 40;
 		//#perlinLike関数用の識別子
 		private randomSeed:number = Math.random() * 40;
 		constructor(canvasWidth:number, canvasHeight:number){
@@ -59,8 +60,8 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		}
 		//#描画前の処理
 		Update=(time:number)=>{
-			this.x -= (MathUtility.PerlinLike(time,this.randomSeed,3) * 2 - 1) * 60 * MathUtility.DeltaTime;
-			this.y -= (MathUtility.PerlinLike(time,this.randomSeed,3) * 40 + 40) * MathUtility.DeltaTime;
+			this.x -= (MathUtility.PerlinLike(time,this.randomSeed,3) * 2 - 1) * 40 * MathUtility.DeltaTime;
+			this.y -= (MathUtility.PerlinLike(time,this.randomSeed,3) * 40 + this.minSpeed) * MathUtility.DeltaTime;
 			this.x = MathUtility.Repeat(this.x,this.canvasWidth);
 			this.y = MathUtility.Repeat(this.y,this.canvasHeight);
 			//#画面最上部の外側に出た時
