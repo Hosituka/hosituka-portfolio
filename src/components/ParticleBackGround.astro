@@ -56,7 +56,6 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 			this.x = Math.random() * this.canvasWidth;
 			this.y = Math.random() * this.canvasHeight;
 			this.size = Math.random() * 4 + 3;
-			console.log(this.randomSeed);
 		}
 		//#描画前の処理
 		Update=(time:number)=>{
@@ -127,7 +126,7 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 			const particleDensity:number = Number(this.dataset.particleDensity) || 30;
 			///###生成密度を基にパーティクルの生成個数を計算する。
 			const area:number = this.clientWidth * this.clientHeight;
-			const particleCount:number = (area / 1000) * particleDensity;
+			const particleCount:number = (area / 10000) * particleDensity;
 			console.log(area)
 			console.log("生成個数:"+particleCount)
 			//###実際に生成する処理
