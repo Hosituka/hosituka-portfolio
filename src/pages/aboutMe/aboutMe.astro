@@ -8,11 +8,11 @@ import Footer from '../../components/Footer.astro';
 ---
 <Layout title='uiコンポーネントのテスト用'>
 
-    <ParticleBackGround zIndex={1} particleDensity={0.1}/>
-	<GlobalNav topURL ="/index.html" aboutMe="/aboutMe/aboutMe.html" worksURL="/works/works.html"devLogURL="/devLog/devLog.html"/>
+    <ParticleBackGround zIndex={1} particleDensity={0.5}/>
+	<GlobalNav/>
     <header></header>	
     <main>開発中です。自己紹介や出来ることを載せる予定の場所です。</main>
-	<Footer zIndex='0'/>
+	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
 <style lang="scss">
     header{

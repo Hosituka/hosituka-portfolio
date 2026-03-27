@@ -1,12 +1,5 @@
 ---
 //#グローバルナビゲーションに関するアストロファイル
-export interface Props {
-    topURL:string;
-    worksURL:string;
-    devLogURL:string;
-    aboutMe:string;
-}
-
 function isActive(path:string):boolean{
 	const pathname = Astro.url.pathname;
 	switch(pathname){
@@ -19,7 +12,10 @@ function isActive(path:string):boolean{
 	}
 }
 
-const { topURL, worksURL, devLogURL, aboutMe: aboutMeURL }:Props = Astro.props;
+const topURL:string = "/";
+const aboutMeURL:string = "/aboutMe/aboutMe"
+const worksURL:string =  "/works/works";
+const devLogURL:string = "/devLog/devLog";
 ---
 <!-- ##グローバルナビゲーションの要素ノード-->
 <nav>
