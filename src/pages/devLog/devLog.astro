@@ -1,0 +1,27 @@
+---
+//このファイルはuiコンポーネントのテスト用に使うページコンポーネントです。
+import Layout from '../../layouts/Layout.astro';
+import ParticleBackGround from '../../components/ParticleBackGround.astro';
+import GlobalNav from '../../components/GlobalNav.astro';
+import Footer from '../../components/Footer.astro';
+
+---
+<Layout title='uiコンポーネントのテスト用'>
+
+    <ParticleBackGround zIndex={1} particleDensity={0.1}/>
+	<GlobalNav topURL ="/index.html" aboutMe="/aboutMe/aboutMe.html" worksURL="/works/works.html"devLogURL="/devLog/devLog.html"  />
+    <header></header>	
+    <main>開発中です。開発記録を載せる場所です。</main>
+	<Footer zIndex='0'/>
+</Layout>
+<style lang="scss">
+    header{
+        width:100%;
+        height:100px;
+        background-color: yellow;
+    }
+    main{
+        width:100%;
+        flex:1;
+    }
+</style>
