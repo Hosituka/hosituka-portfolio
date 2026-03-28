@@ -311,7 +311,7 @@ import { Debug } from "astro:components";
 			if(card===null){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 
-			card.addEventListener('click',()=>{
+			this.addEventListener('click',()=>{
 				card.classList.toggle('is-flipped');
 				//console.log("クリックされました")
 			});

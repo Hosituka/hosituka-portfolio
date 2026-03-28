@@ -1,6 +1,10 @@
 //#このファイルには私が独自に作った関数があります。正直車輪の再発明している可能性が高いかもしれません
 //##Mathというやつにない処理を書くところ
 export abstract class MathUtility{
+    static{
+        requestAnimationFrame(MathUtility.UpdateTimeDelta);
+    }
+    
     static Repeat(t:number, length:number) {
         return t - Math.floor(t / length) * length;
     }
@@ -28,4 +32,3 @@ export abstract class MathUtility{
     }
 
 }
-requestAnimationFrame(MathUtility.UpdateTimeDelta);

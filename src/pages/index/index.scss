@@ -46,23 +46,40 @@
                 display:grid;
                 column-gap: 20px;
                 grid-template-areas: 
-                    "card text"
-                    "card sns";
-                grid-template-columns: auto 1fr;
+                    "card sns text"
+                    "card sns link-about-me";
+                grid-template-columns: auto auto auto;
                 about-me-card{
                     grid-area:card;
+                }
+                .sns-container{
+                    grid-area:sns;
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    gap:5px;
                 }
                 .about-me-text{
                     grid-area:text;
                     align-self:end;
-                 }
-                .sns-container{
-                    grid-area:sns;
-                    display:flex;
-                    justify-content: center;
-                    gap:13px;
                 }
 
+                .link-about-me{
+                    grid-area:link-about-me;
+                    justify-self: end;
+                    align-self:end;
+
+                    position:relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &::after{
+                        position:absolute;
+                        bottom:11px;
+                        left:50%;
+                        transform:translateX(-50%);
+                    }
+                }
             }
         }
         .main-works{
@@ -73,9 +90,26 @@
 
             }
             .carousel-container{
-            }
-            .main-works-footer{
             }*/
+            .main-works-footer{
+                .link-works{
+                    grid-area:link-about-me;
+                    justify-self: end;
+                    align-self:end;
+
+                    position:relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    &::after{
+                        position:absolute;
+                        bottom:9px;
+                        left:50%;
+                        transform:translateX(-50%);
+                    }
+                }
+
+            }
 
         }
     }
@@ -110,8 +144,6 @@
     main{
         background-color: white;
         .about-me-section{
-            max-width: 790px;
-            backdrop-filter: blur(10px);
             h2{
                 background-color: $dark-gray;
                 color:white;
@@ -131,17 +163,11 @@
             }
             .about-me-main{
                 box-sizing: border-box;
-                padding:20px;
+                padding:10px;
                 border:1px solid #333;
                 background-color:  $light-yellow;
 
-                .about-me-text{
-                    width:250px;
-                    line-height: 1.6;
-
-                }
                 .sns-container{
-                    width:250px;
                     a{
                         background-color: white;
                         outline:3px solid gray;
@@ -160,6 +186,31 @@
                         }
                     }
                 }
+                .about-me-text{
+                    width:250px;
+                    line-height: 1.6;
+
+                }
+                .link-about-me{
+                    width: 250px;
+                    height: 50px;
+                    background: black;
+                    clip-path: polygon(0 15.8%, 89.4% 15.8%, 89.4% 0, 100% 50%, 89.4% 100%, 89.4% 84.2%, 0 84.2%);
+                    color:white;
+                    font-weight: 800;
+                    text-decoration: none;
+                    &::after{
+                        width:0%;
+                        height:3px;
+                        background-color: white;
+                        content:"";
+                        transition:width 0.3s ease-out;
+                    }
+                    &:hover::after{
+                        width:80%;
+                    }
+
+				}
             }
         }
         .main-works{
@@ -179,10 +230,31 @@
             }
             .main-works-footer{
                 background-color: $dark-gray;
-                height:38px;
+                height:40px;
                 width:100%;
                 border-bottom-left-radius:25px;
                 border-bottom-right-radius:25px;
+                .link-works{
+                    width: 250px;
+                    height: 40px;
+                    background: white;
+                    clip-path: polygon(0 15.8%, 89.4% 15.8%, 89.4% 0, 100% 50%, 89.4% 100%, 89.4% 84.2%, 0 84.2%);
+                    color:black;
+                    font-weight: 800;
+                    text-decoration: none;
+                    &::after{
+                        width:0%;
+                        height:2px;
+                        background-color: black;
+                        content:"";
+                        transition:width 0.3s ease-out;
+                    }
+                    &:hover::after{
+                        width:80%;
+                    }
+
+				}
+
             }
         }
     }
@@ -203,15 +275,21 @@
           /*h2{
             }*/
             .about-me-main{
+                
                 grid-template-areas: 
                     "card"
                     "sns"
-                    "text";
+                    "text"
+                    "link-about-me";
                 grid-template-columns: 1fr;
                 justify-items: center;
-                padding:10px;
+                padding:10px 10px 2px 10px;
                 .sns-container{
-                    margin:15px 0px 10px 0px;
+                    margin:10px 0px;
+                    flex-direction: row;
+                }
+                .link-about-me{
+                    width:100%;
                 }
             }
         }

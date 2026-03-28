@@ -13,7 +13,7 @@ const videoExtensions:Array<string> = ['.mp4','.webm']
 const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 ---
 
-<work-card-of-carousel data-work-title={workTitle}>
+<work-card data-work-title={workTitle}>
 	<div class="card">
 		<div class="card-info">				
 			<h3>{workTitle}</h3>
@@ -51,14 +51,14 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 
 		</div>
 	</div>
-</work-card-of-carousel>	
+</work-card>	
  
 <style lang="scss">
 @use '../global-styles/_utility' as *;
 $cardWidth:355px;
 $cardHeight:280px;
 @layer Layout{
-	work-card-of-carousel{
+	work-card{
 		perspective: 2000px;
 		.card{
 			transform-style:preserve-3d;
@@ -129,7 +129,7 @@ $cardHeight:280px;
 	}
 }
 @layer Appearance{
-	work-card-of-carousel{
+	work-card{
 		.card{
 			width: $cardWidth + 8px;
 			height:$cardHeight + 8px;
@@ -267,11 +267,9 @@ $cardHeight:280px;
 
 @media (max-width:700px) {
 }
-    
-
-</style>
+</style>  
 <script>
-	class WorkCardOfCarousel extends HTMLElement{
+	class WorkCard extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
 			const showInfoButton:HTMLElement|null = this.querySelector('.show-info-button');
@@ -286,38 +284,20 @@ $cardHeight:280px;
 			const title:string|undefined = this.dataset.workTitle;
 			if(title===undefined){console.error('data-work-titleが指定されていません。')
 				return;}
-			const carouselAsElement:HTMLElement|null = this.closest('my-carousel');
-			if(carouselAsElement===null){console.error('カルーセル用のカードなのに、祖先要素の中においてカルーセルが見つかりません')
-				return;}
-
 			//#メインとなる処理
+			console.log("関数の購読を開始します。");
 			//##関数の購読
 			showInfoButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('click-info-button',{
-					bubbles:true,
-					detail:{title:title,isShow:false}
-				}));
+				cardOverview.classList.remove('is-show')
 			});
 			showOverviewButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('click-info-button',{
-					bubbles:true,
-					detail:{title:title,isShow:true}
-				}));
-
-			})
-
-			carouselAsElement.addEventListener('update-card-ui',(e:any) =>{
-				if(e.detail.title !== title){return};
-				
-				if(e.detail.isShow){
-					cardOverview.classList.add('is-show')
-				}
-				else{
-					cardOverview.classList.remove('is-show')
-				}
+				console.log("showOverviewButtonが押されました");
+				cardOverview.classList.add('is-show')
 			})
 		}
 	}
-	customElements.define('work-card-of-carousel',WorkCardOfCarousel);
+	customElements.define('work-card',WorkCard);
 
 </script>
+
+
