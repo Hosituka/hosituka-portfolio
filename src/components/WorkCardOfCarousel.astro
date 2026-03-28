@@ -15,7 +15,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 
 <work-card-of-carousel data-work-title={workTitle}>
 	<div class="card">
-		<div class="card-info">				
+		<div class="card-first-view">				
 			<h3>{workTitle}</h3>
 			<div class="media-container">
 				{isVideo ?(
@@ -41,7 +41,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 				<slot />
 			</p>
 			<div class="link-buttons">
-				<a class="show-info-button">戻る</a>
+				<a class="show-first-view-button">戻る</a>
 				{detailLink ?(
 					<a href={detailLink} target="_blank" rel="noopener noreferrer">詳細</a>
 				):(
@@ -63,10 +63,10 @@ $cardHeight:280px;
 		.card{
 			transform-style:preserve-3d;
 			position:relative;
-			.card-info,.card-overview{
+			.card-first-view,.card-overview{
 				position:absolute;
 			}
-			.card-info{
+			.card-first-view{
 				display: flex;
 				flex-direction: column;
 				align-items: center;
@@ -136,15 +136,11 @@ $cardHeight:280px;
 			overflow:hidden;
 			-webkit-tap-highlight-color: transparent;
 			user-select: none;
-			.card-info, .card-overview{
+			.card-first-view, .card-overview{
 				width:$cardWidth;
 				height:$cardHeight;
-				.back-ground, .content{
-					width:100%;
-					height:100%;
-				}
 			}
-			.card-info{
+			.card-first-view{
 				box-shadow: GetSmoothShadowValue(darkgoldenrod,2px,4,1px); 
 				border:2px solid $yellow;
 				background-color: $light-yellow;
@@ -274,8 +270,8 @@ $cardHeight:280px;
 	class WorkCardOfCarousel extends HTMLElement{
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
-			const showInfoButton:HTMLElement|null = this.querySelector('.show-info-button');
-			if(showInfoButton===null){console.error('show-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+			const showFirstViewButton:HTMLElement|null = this.querySelector('.show-first-view-button');
+			if(showFirstViewButton===null){console.error('show-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 			const showOverviewButton:HTMLElement|null = this.querySelector('.show-overview-button');
 			if(showOverviewButton===null){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
@@ -292,7 +288,7 @@ $cardHeight:280px;
 
 			//#メインとなる処理
 			//##関数の購読
-			showInfoButton.addEventListener('click',()=>{
+			showFirstViewButton.addEventListener('click',()=>{
 				this.dispatchEvent(new CustomEvent('click-info-button',{
 					bubbles:true,
 					detail:{title:title,isShow:false}

@@ -66,7 +66,7 @@
 
                 .link-about-me{
                     grid-area:link-about-me;
-                    justify-self: end;
+                    justify-self: center;
                     align-self:end;
 
                     position:relative;
@@ -260,15 +260,6 @@
     }
 }
 //レスポンシブ対応用のスタイルここではLayoutとappearanceの区別はしない
-@media (max-width:510px) {
-    header{
-        height:145px;
-        .page-title-container{
-            flex-direction: column;
-            bottom:10px;
-        }
-    }
-}
 @media (max-width:700px) {
     main{
         .about-me-section{
@@ -285,6 +276,7 @@
                 justify-items: center;
                 padding:10px 10px 4px 10px;
                 .sns-container{
+                    gap:10px;
                     margin:10px 0px;
                     flex-direction: row;
                 }
@@ -304,4 +296,35 @@
             }
         }
     }
+}
+@media (max-width:510px) {
+    header{
+        height:145px;
+        .page-title-container{
+            flex-direction: column;
+            bottom:10px;
+        }
+    }
+    main{
+        .about-me-section{
+          /*h2{
+            }*/
+            .about-me-main{
+                .link-about-me{
+                    width:250px;
+                }
+            }
+        }
+        .main-works-section{
+            .main-works-footer{
+                .link-works{
+                    left:50%;
+                    transform:translateX(-50%);
+
+                    width:250px;
+                }
+            }
+        }
+    }
+
 }
