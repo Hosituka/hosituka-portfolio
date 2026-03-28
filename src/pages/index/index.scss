@@ -82,7 +82,7 @@
                 }
             }
         }
-        .main-works{
+        .main-works-section{
             position:relative;
             margin-bottom: 30px;
             z-index: 2;
@@ -92,15 +92,15 @@
             .carousel-container{
             }*/
             .main-works-footer{
+                position:relative;
                 .link-works{
-                    grid-area:link-about-me;
-                    justify-self: end;
-                    align-self:end;
+                    position:absolute;
+                    right:100px;
 
-                    position:relative;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+
                     &::after{
                         position:absolute;
                         bottom:9px;
@@ -213,7 +213,7 @@
 				}
             }
         }
-        .main-works{
+        .main-works-section{
             width:100%;
             h2{
                 background-color: $dark-gray;
@@ -289,7 +289,17 @@
                     flex-direction: row;
                 }
                 .link-about-me{
-                    width:100%;
+                    width:320px;
+                }
+            }
+        }
+        .main-works-section{
+            .main-works-footer{
+                .link-works{
+                    left:50%;
+                    transform:translateX(-50%);
+
+                    width:320px;
                 }
             }
         }
