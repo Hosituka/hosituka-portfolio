@@ -59,12 +59,11 @@ $cardWidth:355px;
 $cardHeight:280px;
 @layer Layout{
 	work-card-of-carousel{
-		perspective: 2000px;
 		.card{
-			transform-style:preserve-3d;
-			position:relative;
+			display:grid;
+			grid-template-areas: "content";
 			.card-first-view,.card-overview{
-				position:absolute;
+				grid-area: content;
 			}
 			.card-first-view{
 				display: flex;
@@ -85,6 +84,7 @@ $cardHeight:280px;
 				}
 				.link-buttons{
 					margin-top: 8px;
+					margin-bottom:8px;
 					display: flex;
 					flex-direction: row;
 					justify-content:center;
@@ -101,15 +101,19 @@ $cardHeight:280px;
 				}
 			}
 			.card-overview{
-				transform:translateY(-$cardHeight - 10px);
+				transform:translateY(calc(-100% - 10px));
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				&.is-show{
 					transform:translateY(0px);
 				}
+				p{
+					flex-grow: 1;
+				}
 				.link-buttons{
 					margin-top: 4px;
+					margin-bottom: 8px;
 					display: flex;
 					flex-direction: row;
 					justify-content:center;
@@ -131,14 +135,12 @@ $cardHeight:280px;
 @layer Appearance{
 	work-card-of-carousel{
 		.card{
-			width: $cardWidth + 8px;
-			height:$cardHeight + 8px;
+			padding:0px 10px 10px 0px;
 			overflow:hidden;
 			-webkit-tap-highlight-color: transparent;
 			user-select: none;
 			.card-first-view, .card-overview{
 				width:$cardWidth;
-				height:$cardHeight;
 			}
 			.card-first-view{
 				box-shadow: GetSmoothShadowValue(darkgoldenrod,2px,4,1px); 
@@ -174,7 +176,6 @@ $cardHeight:280px;
 					}
 				}
 				.link-buttons{
-					width:calc(100% - 15px);
 					a{
 						width:100px;
 						user-select: none;
@@ -219,7 +220,7 @@ $cardHeight:280px;
 				}
 				p{
 					width:100%;
-					height:$cardHeight - 83px;
+					height:100%;
 					line-height:1.5;
 					padding:2px 5px;
 					font-size:16px;
@@ -228,7 +229,6 @@ $cardHeight:280px;
 					
 				}
 				.link-buttons{
-					width:calc(100% - 15px);
 					a{
 						background-color: $blue;
 						box-shadow: 0 5px 0 $dark-blue;
