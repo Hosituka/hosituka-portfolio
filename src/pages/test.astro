@@ -14,6 +14,14 @@ import WorkCard from '../components/WorkCard.astro';
     <header></header>	
     <main>
         <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+           <Fragment slot="card-specs">
+                hegehegehegehegehege
+           </Fragment>
+            <Fragment slot="overview">
+                hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+
+           </Fragment>
+        </WorkCard>
     </main>
 	<Footer zIndex='0'/>
 </Layout>
@@ -25,7 +33,7 @@ import WorkCard from '../components/WorkCard.astro';
 
     main{
         width:100%;
-        flex:1;
+        flex-grow:1;
         background-color: green;
     }
 </style>

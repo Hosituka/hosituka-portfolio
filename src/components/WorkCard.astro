@@ -26,11 +26,11 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 					<img src={workMediaURL}>
 				)}
 			</div>
-			<div class="card-specs">
-
-			</div>
-			<div class="link-buttons">
-				<a class="show-overview-button">制作秘話</a>
+			<p class="card-specs-wrapper">
+				<slot name="card-specs"></slot>
+			</p>
+			<div class="link-button-wrapper">
+				<a class="show-overview-button">制作談</a>
 				{playLink ?(
 					<a href={playLink} target="_blank" rel="noopener noreferrer">遊ぶ</a>
 				):(
@@ -40,10 +40,10 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 		</div>
 		<div class="card-overview">
 			<h3>{workTitle}</h3>
-			<p>
-				<slot />
-			</p>
-			<div class="link-buttons">
+			<section class="overview-wrapper">
+				<slot name="overview"/>
+			</section>
+			<div class="link-button-wrapper">
 				<a class="show-first-view-button">戻る</a>
 				{detailLink ?(
 					<a href={detailLink} target="_blank" rel="noopener noreferrer">詳細</a>
@@ -72,6 +72,11 @@ $cardHeight:280px;
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+				h3{
+					display:flex;
+					align-items: center;
+					justify-content: center;
+				}
 				.media-container{
 					position:relative;
 					margin-top:8px;
@@ -85,14 +90,18 @@ $cardHeight:280px;
 						position:absolute;
 					}
 				}
-				.link-buttons{
-					margin-top: 8px;
-					margin-bottom:8px;
+				.card-specs-wrapper{
+					margin-top:12px;
+				}
+				.link-button-wrapper{
 					display: flex;
 					flex-direction: row;
 					justify-content:center;
 					gap:20px;
 					a{
+						display:flex;
+						align-items: center;
+						justify-content: center;
 						&:not(.is-deactive){
 							&:active{
 								transform:translateY(5px);
@@ -111,17 +120,34 @@ $cardHeight:280px;
 				&.is-show{
 					transform:translateY(0px);
 				}
-				p{
-					flex-grow:1;
+				h3{
+					flex-shrink: 0;
+					display:flex;
+					align-items: center;
+					justify-content: center;
 				}
-				.link-buttons{
-					margin-top: 4px;
-					margin-bottom:8px;
+				.overview-wrapper{
+					flex-grow:1;
+					flex-basis:0;
+				}
+				.link-button-wrapper{
 					display: flex;
 					flex-direction: row;
 					justify-content:center;
 					gap:20px;
+
+					position:relative;
+					//#右の青色のバーに当たる部分
+					&::before{
+						position:absolute;
+						right:0px;
+					}
 					a{
+						margin:10px 0px;
+						display:flex;
+						align-items: center;
+						justify-content: center;
+
 						&:not(.is-deactive){
 							&:active{
 								transform:translateY(5px);
@@ -151,9 +177,8 @@ $cardHeight:280px;
 				background-color: $light-yellow;
 				h3{
 					width:100%;
-					line-height: 35px;
+					height: 35px;
 					background-color: $yellow;
-					text-align: center;
 					font-size:20px;
 					font-family: sans-serif;
 				}
@@ -163,7 +188,8 @@ $cardHeight:280px;
 					&,& > *{
 						width:$cardWidth - 25px;
 						aspect-ratio: 16 / 9;	
-						border-radius: 20px;				
+						border-top-left-radius: 20px;	
+						border-top-right-radius: 20px;			
 					}
 					.image-background{
 						object-fit: cover;
@@ -178,21 +204,30 @@ $cardHeight:280px;
 
 					}
 				}
-				.card-specs{				
+				.card-specs-wrapper{
+					width:$cardWidth - 25px;
+					height:100px;
+					padding:2px 5px;
+
+					outline:3px solid $yellow;
+					border-bottom-left-radius: 20px;	
+					border-bottom-right-radius: 20px;			
+					background-color: white;			
 				}
 
-				.link-buttons{
+				.link-button-wrapper{
+					width:100%;
+					padding:10px 0px;
 					a{
 						width:100px;
+						height:30px;
 						user-select: none;
 						border-radius: 30px;
 						background-color: $yellow;
 						box-shadow: 0 5px 0 $dark-yellow;
 						user-select: none;
 						&:not(.is-deactive){
-							text-align: center;
 							font-family: sans-serif;
-							line-height:30px;
 							&:active{
 								box-shadow: 0 0 0 $dark-yellow;
 							}
@@ -213,40 +248,54 @@ $cardHeight:280px;
 				will-change: transform;
 				box-shadow: GetSmoothShadowValue($dark-blue,2px,4,1px); 
 				background-color: $light-blue;
-				border:2px solid $blue;;
 				h3{
 					width:100%;
-					line-height: 35px;
+					height:35px;
 					color:whitesmoke;
 					background-color: $blue;
-					text-align: center;
 					font-size:20px;
 					font-family: sans-serif;
 				}
-				p{
+				.overview-wrapper{
 					width:100%;
-					height:100%;
+					border-left :2px solid $blue;
+					background-color: white;
+					scrollbar-color: $light-blue $blue;
+					scrollbar-width: 3dvh;
+					overflow-y: scroll;
+					overflow-x: hidden;
+
 					line-height:1.5;
 					padding:2px 5px;
 					font-size:16px;
 					font-family: serif;
-					overflow-wrap: anywhere;
-					
+					line-break: anywhere;
 				}
-				.link-buttons{
+				.link-button-wrapper{
+					width:100%;
+					border-top:3px solid $blue;
+					border-bottom:2px solid $blue;
+					border-left :2px solid $blue;
+					//#右の青色のバーに当たる部分
+					&::before{
+						width:2.5dvh;
+						height:100%;
+						background-color: $blue;
+						content: "";
+					}
+
 					a{
+						width:100px;
+						height:30px;
 						background-color: $blue;
 						box-shadow: 0 5px 0 $dark-blue;
-						width:100px;
 						border-radius: 30px;
 						user-select: none;
 						color:whitesmoke;
 						user-select: none;
 						isolation: isolate;
 						&:not(.is-deactive){
-							text-align: center;
 							font-family: sans-serif;
-							line-height:30px;
 							&:active{
 								box-shadow: 0 0 0 $dark-yellow;
 							}
