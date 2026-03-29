@@ -67,11 +67,11 @@ $cardHeight:280px;
 			grid-template-areas: "content";
 			.card-first-view,.card-overview{
 				grid-area: content;
-			}
-			.card-first-view{
 				display: flex;
 				flex-direction: column;
 				align-items: center;
+			}
+			.card-first-view{
 				h3{
 					display:flex;
 					align-items: center;
@@ -114,9 +114,6 @@ $cardHeight:280px;
 			}
 			.card-overview{
 				transform:translateY(calc(-100% - 10px));
-				display: flex;
-				flex-direction: column;
-				align-items: center;
 				&.is-show{
 					transform:translateY(0px);
 				}
@@ -143,7 +140,7 @@ $cardHeight:280px;
 						right:0px;
 					}
 					a{
-						margin:10px 0px;
+						margin:7px 0px 10px 0px;
 						display:flex;
 						align-items: center;
 						justify-content: center;
@@ -258,10 +255,20 @@ $cardHeight:280px;
 				}
 				.overview-wrapper{
 					width:100%;
-					border-left :2px solid $blue;
+					border-left :15px solid $blue;
 					background-color: white;
-					scrollbar-color: $light-blue $blue;
-					scrollbar-width: 3dvh;
+					&::-webkit-scrollbar{
+						width:15px;
+					}
+					&::-webkit-scrollbar-track{
+						background-color: $blue;
+					}
+					&::-webkit-scrollbar-thumb{
+						background-color: $light-blue;
+						border-radius: 8px;
+						border-right:2px solid $blue;
+						border-left:2px solid $blue;
+					}
 					overflow-y: scroll;
 					overflow-x: hidden;
 
@@ -275,14 +282,8 @@ $cardHeight:280px;
 					width:100%;
 					border-top:3px solid $blue;
 					border-bottom:2px solid $blue;
-					border-left :2px solid $blue;
-					//#右の青色のバーに当たる部分
-					&::before{
-						width:2.5dvh;
-						height:100%;
-						background-color: $blue;
-						content: "";
-					}
+					border-left :15px solid $blue;
+					border-right:15px solid $blue;
 
 					a{
 						width:100px;
