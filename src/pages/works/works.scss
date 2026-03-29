@@ -42,12 +42,15 @@
         }
     }
 }
-@mixin WorkPageTitleH1Style($font-size,$line-height){
+@mixin WorkPageTitleH1Style($font-size,$line-height,$stroke-width){
     line-height:$line-height;
     font-size:$font-size;
     letter-spacing: 6px;
     font-weight: 1000;
 
+    -webkit-text-stroke-width: $stroke-width;
+    -webkit-text-stroke-color: black;
+    paint-order: stroke fill;
     color:transparent;
     white-space: nowrap;
     font-family: sans-serif;
@@ -87,6 +90,7 @@
                 background-image:url("/texture/frequencyBar.png");
                 background-repeat: repeat-x;
                 background-position: bottom;
+                background-size:auto 100%;
             }
         }
         .works-page-title{
@@ -96,11 +100,11 @@
                     width:120px;
                 }
                 h1{
-                    @include WorkPageTitleH1Style(80px,72px);
+                    @include WorkPageTitleH1Style(80px,72px,2px);
                 }
             }
             h1{
-                    @include WorkPageTitleH1Style(80px,72px);
+                    @include WorkPageTitleH1Style(80px,72px,2px);
 
             }
 
@@ -150,12 +154,12 @@
                     width:70px;
                 }
                 h1{
-                    @include WorkPageTitleH1Style(50px,48px);
+                    @include WorkPageTitleH1Style(50px,48px,1px);
                 }
             }
             h1{
                 margin-bottom: 0px;
-                @include WorkPageTitleH1Style(50px,48px);
+                @include WorkPageTitleH1Style(50px,48px,1px);
             }
         }
     }
