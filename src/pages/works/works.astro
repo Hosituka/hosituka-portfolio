@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import ParticleBackGround from '../../components/ParticleBackGround.astro';
 import GlobalNav from '../../components/GlobalNav.astro';
 import Footer from '../../components/Footer.astro';
+import WorksOfHeader from './_component/WorksOfHeader.astro'
 
 import './works.scss';
 
@@ -12,19 +13,7 @@ import './works.scss';
 
     <ParticleBackGround zIndex={1} particleDensity={0.5}/>
 	<GlobalNav/>
-    <header>
-        <div class="back-ground-group">
-            <div class="back-ground">
-            <div class="frequency-bar"/>
-        </div>
-        <div class="works-page-title">
-            <h1>Works Of</h1>
-            <div class="my-name-wrapper">
-                <img class="my-icon-transparent"src="/icon/MyIconTransparent.png" alt="透過された私のアイコン">
-                <h1>situka</h1>
-            </div>
-        </div>
-    </header>	
+    <WorksOfHeader/>
     <main>開発中です。自分が作った作品を載せる場所です。。</main>
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>

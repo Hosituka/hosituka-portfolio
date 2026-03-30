@@ -1,0 +1,228 @@
+---
+//worksというサブページ専用のヘッダーが定義されているuiコンポーネントです。
+---
+<header>
+    <div class="back-ground-group">
+        <div class="back-ground">
+        <div class="frequency-bar"/>
+    </div>
+    <div class="works-page-title">
+        <div class="works-of-wrapper">
+            <h1 class="outline">Works Of</h1>
+            <h1 class="back-ground">Works Of</h1>
+        </div>
+        <div class="my-name-wrapper">
+            <img class="my-icon-transparent"src="/icon/MyIconTransparent.png" alt="透過された私のアイコン">
+            <div class="situka-wrapper">
+                <h1 class="outline">situka</h1>
+                <h1 class="back-ground">situka</h1>
+            </div>
+        </div>
+    </div>
+</header>
+<style lang="scss">
+@use '../../../global-styles/_utility' as *;
+@layer Layout{
+    header{
+        position:relative;
+        .back-ground-group{
+            z-index:2;
+            position:absolute;
+            bottom:0px;
+            .back-ground{
+                position:absolute;
+            }
+            .frequency-bar{
+                position:absolute;
+            }
+        }
+        .works-page-title{
+            z-index:3;
+            display:flex;
+            align-items:end;
+            position:absolute;
+            left:50%;
+            transform:translate(-50%);
+            bottom:5px;
+            .my-name-wrapper{
+                margin-left:25px;
+                display:flex;
+                align-items:end;
+                gap:7px;
+              /*.my-icon-transparent{
+                }*/
+                .situka-wrapper{
+                    display:grid;
+                    grid-template-areas: grid-item;
+                    .outline,.back-ground{
+                        grid-area:grid-item;
+                        display:flex;
+                    }
+                }
+            }
+            .works-of-wrapper{
+                display:grid;
+                grid-template-areas: grid-item;
+                .outline,.back-ground{
+                    grid-area:grid-item;
+                    display:flex;
+                }
+
+            }
+        }
+    }
+}
+
+@mixin WorkPageTitleOutline($font-size,$stroke-width){
+    line-height: 1;
+    font-size:$font-size;
+    letter-spacing: 6px;
+    font-weight: 1000;
+
+    color:transparent;
+    -webkit-text-stroke-width: $stroke-width;
+    -webkit-text-stroke-color: black;
+    text-emphasis-position: under;
+    paint-order: stroke fill;
+    white-space: nowrap;
+    font-family: "Noto Sans JP",sans-serif;
+
+}
+
+@mixin WorkPageTitleBackGround($font-size){
+    width:max-content;
+    height:max-content;
+    line-height: 1;
+    font-size:$font-size;
+    letter-spacing: 6px;
+    font-weight: 1000;
+
+    text-emphasis-position: under;
+
+    color:transparent;
+    white-space: nowrap;
+    font-family: "Noto Sans JP",sans-serif;
+    background-image:linear-gradient(135deg,
+        $light-black  7%, 
+        gray 10%,
+        $light-black  13%, $light-black  27%, 
+        gray 30%,
+        $light-black  33%, $light-black  47%, 
+        gray 50%,
+        $light-black  53%, $light-black  67%, 
+        gray 70%,
+        $light-black  73%, $light-black  87%, 
+        gray 90%,
+        $light-black  93%, 
+    );
+    background-clip: text;
+}
+
+@layer Appearance{
+
+    header{
+        width:100%;
+        height:140px;
+        border-bottom:1px solid black;
+        .back-ground-group{
+            width:100%;
+            height:100%;
+            .back-ground{
+                width:100%;
+                height: 100%;
+                background-color: $yellow;
+            }
+            .frequency-bar{
+                width:100%;
+                height: 100%;
+                background-image:url("/texture/frequencyBar.png");
+                background-repeat: repeat-x;
+                background-position: bottom;
+                background-size:auto 100%;
+            }
+        }
+        .works-page-title{
+            mix-blend-mode: normal;
+            .my-name-wrapper{
+                .my-icon-transparent{
+                    width:120px;
+                }
+                .situka-wrapper{
+                    .outline{
+                        @include WorkPageTitleOutline(80px,4px);
+                    }
+                    .back-ground{
+                        @include WorkPageTitleBackGround(80px);
+                    }
+                }
+            }
+            .works-of-wrapper{
+                .outline{
+                    @include WorkPageTitleOutline(80px,4px);
+                }
+                .back-ground{
+                    @include WorkPageTitleBackGround(80px);
+                }
+            }
+
+
+        }
+
+
+    }
+}
+//#レスポンシブ対応用のやつここでは上二つのレイヤーみたいな区別は行わない
+@media (max-width:860px) {
+    header{
+        height:210px;
+       /*.back-ground-group{
+            .back-ground{
+            }
+            .frequency-bar{
+            }
+        }*/
+        .works-page-title{
+            flex-direction: column;
+            .my-name-wrapper{
+                margin-left:0px;
+            }
+        }
+    }
+}
+@media (max-width:480px) {
+    header{
+        height:160px;
+      /*.back-ground-group{
+            .back-ground{
+            }
+            .frequency-bar{
+            }
+        }*/
+        .works-page-title{
+            flex-direction: column;
+            .my-name-wrapper{
+                gap:5px;
+                .my-icon-transparent{
+                    width:70px;
+                }
+                .situka-wrapper{
+                    .outline{
+                        @include WorkPageTitleOutline(50px,3px);
+                    }
+                    .back-ground{
+                        @include WorkPageTitleBackGround(50px);
+                    }
+                }
+            }
+            .works-of-wrapper{
+                .outline{
+                    @include WorkPageTitleOutline(50px,3px);
+                }
+                .back-ground{
+                    @include WorkPageTitleBackGround(50px);
+                }
+            }
+        }
+    }
+}
+</style>
