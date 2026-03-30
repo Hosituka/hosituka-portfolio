@@ -54,7 +54,7 @@
                     "card sns text"
                     "card sns link-about-me";
                 grid-template-columns: auto auto auto;
-                about-me-card{
+                :global(about-me-card){
                     grid-area:card;
                 }
                 .sns-container{

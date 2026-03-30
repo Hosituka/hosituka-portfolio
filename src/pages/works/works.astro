@@ -4,9 +4,9 @@ import Layout from '../../layouts/Layout.astro';
 import ParticleBackGround from '../../components/ParticleBackGround.astro';
 import GlobalNav from '../../components/GlobalNav.astro';
 import Footer from '../../components/Footer.astro';
-import WorksOfHeader from './_component/WorksOfHeader.astro'
+import WorksOfHeader from './_components/WorksOfHeader.astro';
+import WorkCard from './_components/WorkCard.astro';
 
-import './works.scss';
 
 ---
 <Layout title='uiコンポーネントのテスト用'>
@@ -14,6 +14,80 @@ import './works.scss';
     <ParticleBackGround zIndex={1} particleDensity={0.5}/>
 	<GlobalNav/>
     <WorksOfHeader/>
-    <main>開発中です。自分が作った作品を載せる場所です。。</main>
+    <main>
+        <section class="cards-section">
+            <h2>ゲーム作品</h2>
+            <div>
+                <WorkCard  workTitle='GunSwapShooter' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+                <WorkCard  workTitle='PIRATE SHIP' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+                <WorkCard  workTitle='戦車のゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+                <WorkCard  workTitle='チュートリアル見て作った奴2' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+                <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+                <WorkCard  workTitle='チュートリアル見て作った奴1' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+
+            </div>
+        </section>
+        <section class="cards-section">
+            <h2>その他</h2>
+            <div>
+                <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                    <Fragment slot="card-specs">
+                        hegehegehegehegehege
+                    </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    </Fragment>
+                </WorkCard>
+
+            </div>
+
+        </section>
+
+    </main>
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
+<style>
+    @import url(works.scss);
+</style>

@@ -57,9 +57,19 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 </work-card>	
  
 <style lang="scss">
-@use '../global-styles/_utility' as *;
+@use '../../../global-styles/_utility' as *;
+@function GetSmoothShadowValue($color,$step:5px,$count:5,$offset:2px){
+	$result:();
+	@for $countUp from 0 to $count{
+		$BottomPos:$countUp * $step + $offset;
+        $blur:$countUp * $step;
+		$alpha:1 - ($countUp / $count);
+		$result:append($result,0 $BottomPos $blur rgba($color,$alpha),comma);
+	}
+	@return $result;
+}
+
 $cardWidth:355px;
-$cardHeight:280px;
 @layer Layout{
 	work-card{
 		.card{
@@ -160,8 +170,12 @@ $cardHeight:280px;
 }
 @layer Appearance{
 	work-card{
+		display:block;
+		width:fit-content;
 		.card{
-			padding:0px 10px 10px 0px;
+			box-sizing: content-box;
+			width:$cardWidth;
+			padding:0px 0px 10px 0px;
 			overflow:hidden;
 			-webkit-tap-highlight-color: transparent;
 			user-select: none;
