@@ -25,7 +25,11 @@ import WorkCard from './_components/WorkCard.astro';
                     <strong>・開発人数</strong>：一人           
                 </Fragment>
                 <Fragment slot="overview">
-                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    <strong>#このゲームについて</strong><br>
+                    的の色に合わせて赤い銃と青い銃を打ち分けるARシューティングゲームです。大学生活が落ち着いてきたため、一年半ぶりに作りました。現状プログラミングの成長的にも、ゲームの面白さ的にも一番だと感じています。良かったら遊んでみてね。
+                    <br><strong>#使用技術について</strong><br>
+                    この開発では初めてAIエージェントの一種であるGeminiCLIとgit/githubを導入しました
+                    <hr>AIを使っていると言うとコードを書いていないように感じるかと思いますが、自分の場合は、バイブコーディングとしてではなく、コードを書く上での指導役として使っていました。その結果、ジェネリックプログラミングといった新たなプログラミングの考え方と、メモリによる負荷を均一にするためのオブジェクトプール、CRTP、テンプレートメソッドパターン等のデザインパターンを沢山学べました。だから、冒頭の「プログラマーとして一番成長できた作品」という意見に繋がります。具体的なコードに関しては詳細というボタンを押してもらうとgithubに飛べますのでよかったら見て行ってください。
                 </Fragment>
             </WorkCard>
             <WorkCard  workTitle='音ゲー※中止' workMediaURL='/video/musicGame.mp4'>
@@ -36,7 +40,12 @@ import WorkCard from './_components/WorkCard.astro';
                     <strong>・開発人数</strong>：一人           
                 </Fragment>
                 <Fragment slot="overview">
-                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    <strong>#このゲームについて</strong><br>
+                    マウスをフリックする動作はIIDX(ゲーム)のターンテーブルを回す動作に近い感覚が得られるのでは？という発想から、作ろうとしていた幻のゲームです。音楽ゲームは大好きなジャンルのため、絶対に完成させたかったのですが色々な理由から完遂できなかったです。
+                    <br><strong>#完成しなかった理由</strong><br>
+                    bpm？ 拍？っていうレベルで音楽の知識がない上、このころは継承やインターフェースといったc#の機能も十分に理解していなかったため、見た目はともかく、操作性や譜面生成の仕組み等、目に見えない部分がボロボロでした。そんな中でリアルが忙しくなったのとパーテーションを間違えて消してしまうというやらかしまでしてしまったため、完璧にやる気が消えて、未完成となりました
+                    <br><strong>#得たものについて</strong><br>
+                    このゲームから得たものとしては、gimpとshaderGraphの組み合わせ方を学べました。このゲームのビジュアルが良いのはそれに起因します。長々と綴りましたが、流石に自分の好きなジャンルが完成しなかったのは悔しいので、いつかリベンジします。
                 </Fragment>
             </WorkCard>
 
@@ -81,7 +90,7 @@ import WorkCard from './_components/WorkCard.astro';
                 </Fragment>
             </WorkCard>
 
-            <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+            <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/portfolioSite.mp4' playLink='https://unityroom.com/games/hositukage-mu2'>
                 <Fragment slot="card-specs">
                     <strong>・使用技術</strong>：unity,c#,Edge(ドット絵制作ツール)<br>
                     <strong>・制作期間</strong>：2020/12月～2021/3月。<br> 
