@@ -5,6 +5,7 @@ import ParticleBackGround from '../../components/ParticleBackGround.astro';
 import GlobalNav from '../../components/GlobalNav.astro';
 import Footer from '../../components/Footer.astro';
 import WorksOfHeader from './_components/WorksOfHeader.astro';
+import WorkCardsSection from './_components/WorkCardsSection.astro'
 import WorkCard from './_components/WorkCard.astro';
 
 
@@ -15,76 +16,94 @@ import WorkCard from './_components/WorkCard.astro';
 	<GlobalNav/>
     <WorksOfHeader/>
     <main>
-        <section class="cards-section">
-            <h2>ゲーム作品</h2>
-            <div>
-                <WorkCard  workTitle='GunSwapShooter' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
-                <WorkCard  workTitle='PIRATE SHIP' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
-                <WorkCard  workTitle='戦車のゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
-                <WorkCard  workTitle='チュートリアル見て作った奴2' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
-                <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
-                <WorkCard  workTitle='チュートリアル見て作った奴1' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        このページは製作中です。
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
+        <WorkCardsSection sectionTitle='ゲーム作品' zIndex='2'>
+            <WorkCard  workTitle='GunSwapShooter※スマホのみ' workMediaURL='/video/gunSwapShooter.mp4' playLink='https://unityroom.com/games/gun_swap_shooter' detailLink='https://github.com/Hosituka/GunSwapShooter'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#,blender,gimp<br>
+                    shadergraph,git/github,GeminiCLI<br>
+                    <strong>・制作期間</strong>：2025/11月～2026/3月。<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+            <WorkCard  workTitle='音ゲー※中止' workMediaURL='/video/musicGame.mp4'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#,blender,gimp<br>
+                    shadergraph<br>
+                    <strong>・制作期間</strong>：2023/7月～2024/5月中止<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
 
-            </div>
-        </section>
-        <section class="cards-section">
-            <h2>その他</h2>
-            <div>
-                <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                    <Fragment slot="card-specs">
-                        hegehegehegehegehege
-                    </Fragment>
-                    <Fragment slot="overview">
-                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-                    </Fragment>
-                </WorkCard>
+            <WorkCard  workTitle='PIRATE SHIP' workMediaURL='/video/pirateShip.mp4' playLink='https://unityroom.com/games/hositukage-mu6'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#,blender,shadergraph<br> 
+                    <strong>・制作期間</strong>：2021/4月～2023/7月。<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+            <WorkCard  workTitle='戦車のゲーム' workMediaURL='/normalImage/work/gameOfTank.webp' playLink='https://unityroom.com/games/hositukage-mu5'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#,blender<br>
+                    <strong>・制作期間</strong>：2021/2月～2021/4月。<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+            <WorkCard  workTitle='チュートリアル見て作った奴2' workMediaURL='/normalImage/work/4thWork.webp' playLink='https://unityroom.com/games/hositukage-mu4'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#<br>
+                    <strong>・制作期間</strong>：2021/2月/14日完成<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+            <WorkCard  workTitle='チュートリアル見て作った奴1' workMediaURL='/normalImage/work/3thWork.webp' playLink='https://unityroom.com/games/hositukage-mu3' >
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#<br>
+                    <strong>・制作期間</strong>：2021/2月/7日完成<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
 
-            </div>
+            <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：unity,c#,Edge(ドット絵制作ツール)<br>
+                    <strong>・制作期間</strong>：2020/12月～2021/3月。<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                </Fragment>
+            </WorkCard>
+        </WorkCardsSection>
 
-        </section>
-
+        <WorkCardsSection sectionTitle='その他' zIndex='2'>
+            <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                <Fragment slot="card-specs">
+                    <strong>・使用技術</strong>：Astro,scss,html,ts,GeminiCLI<br>
+                    <strong>・制作期間</strong>：2026/3月～現在まで。<br> 
+                    <strong>・開発人数</strong>：一人           
+                </Fragment>
+                <Fragment slot="overview">
+                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+        </WorkCardsSection>
     </main>
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>

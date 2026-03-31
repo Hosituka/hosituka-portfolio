@@ -6,39 +6,33 @@ interface Props {
 const {speed}:Props = Astro.props;
 ---
 <my-carousel data-speed={speed}>
-    <div class="carousel-viewport">
-        <div class="cards-container">
-            <slot/>
-        </div>
+    <div class="cards-container">
+        <slot/>
     </div>
 </my-carousel>
 
 <style lang='scss'>
 @layer Layout{
+    //#cards-containerを表示する窓の役割
     my-carousel{
-        //#cards-containerを表示する窓の役割
-        .carousel-viewport{
-            //#カードたちを入れる箱こいつをx軸方向で動かす。
-            .cards-container{
-                display:flex;
-                gap:10px;
-                will-change: transform;
-            }
+        //#カードたちを入れる箱こいつをx軸方向で動かす。
+        .cards-container{
+            display:flex;
+            gap:10px;
+            will-change: transform;
         }
     }
 }
 @layer Appearance{
     my-carousel{
-        .carousel-viewport{
-            width:100%;
-            overflow:hidden;
-            padding:5px 0px 5px 0px;
-            cursor:grab;
-            &:active{
+        width:100%;
+        overflow:hidden;
+        padding:5px 0px 5px 0px;
+        cursor:grab;
+        &:active{
             cursor:grabbing;
-            }
-            .cards-container{
-            }
+        }
+        .cards-container{
         }
     }
 }
@@ -70,7 +64,7 @@ const {speed}:Props = Astro.props;
                 this.cardsContainer = this.querySelector('.cards-container');
                 if (!this.cardsContainer) {console.error(".cards-containerが見つかりませんでした。");
                     return;}
-                const carouselViewport:HTMLElement|null = this.querySelector('.carousel-viewport');
+                const carouselViewport:HTMLElement|null = this;
                 if(!carouselViewport){console.error(".carousel-viewportが見つかりませんでした。");
                     return;}
 

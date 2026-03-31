@@ -19,7 +19,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			<h3>{workTitle}</h3>
 			<div class="media-container">
 				{isVideo ?(
-					<img class="image-background" src='icon/MyIcon.webp'></img>
+					<img class="image-background" src='/icon/MyIcon.webp'></img>
 					<video src={workMediaURL} autoplay loop muted playsinline></video>
 				):(
 					<img class="image-background" src={workMediaURL}></img>

@@ -6,6 +6,7 @@ import GlobalNav from '../components/GlobalNav.astro';
 import Footer from '../components/Footer.astro';
 
 import WorkCard from './works/_components/WorkCard.astro';
+import WorkCardsSection from './works/_components/WorkCardsSection.astro'
 
 ---
 <Layout title='uiコンポーネントのテスト用'>
@@ -13,14 +14,16 @@ import WorkCard from './works/_components/WorkCard.astro';
 	<GlobalNav topURL ="/" aboutMe="/aboutMe.astro" worksURL="/works.astro"devLogURL="/devLog.astro"  />
     <header></header>	
     <main>
-        <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-           <Fragment slot="card-specs">
-                このページは製作中です。
-           </Fragment>
-            <Fragment slot="overview">
-                hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
-           </Fragment>
-        </WorkCard>
+        <WorkCardsSection sectionTitle='hoge' zIndex=' 3'>
+            <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
+                <Fragment slot="card-specs">
+                        このページは製作中です。
+                </Fragment>
+                    <Fragment slot="overview">
+                        hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                </Fragment>
+            </WorkCard>
+        </WorkCardsSection>
     </main>
 	<Footer zIndex='0'/>
 </Layout>
