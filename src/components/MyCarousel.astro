@@ -15,6 +15,7 @@ const {speed}:Props = Astro.props;
 @layer Layout{
     //#cards-containerを表示する窓の役割
     my-carousel{
+        display:block;
         //#カードたちを入れる箱こいつをx軸方向で動かす。
         .cards-container{
             display:flex;
@@ -26,7 +27,7 @@ const {speed}:Props = Astro.props;
 @layer Appearance{
     my-carousel{
         width:100%;
-        overflow:hidden;
+        overflow-x:hidden;
         padding:5px 0px 5px 0px;
         cursor:grab;
         &:active{
