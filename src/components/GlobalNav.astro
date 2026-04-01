@@ -57,7 +57,7 @@ const devLogURL:string = "/devLog/devLog";
 @layer Appearance{
     global-nav {
 		width: 100%;
-		height: 50px;
+		height: 3rem;
 		.link-buttons{
 			width: 100%;
 			height: 100%;
@@ -71,7 +71,7 @@ const devLogURL:string = "/devLog/devLog";
 				border-bottom: 1px solid gray;
 				border-right: 0.5px solid gray;
 
-				font-size: 20px;
+				font-size: 1.5rem;
 				font-family: sans-serif;
 				color: white;
 				text-decoration: none;
@@ -99,7 +99,14 @@ const devLogURL:string = "/devLog/devLog";
 		}
 	}
 }
-@media (max-width:790px) {
-}
+@media (max-width:400px) {
+	global-nav {
+		.link-buttons{
+			a{
 
+				font-size: 1.4rem;
+			}
+		}
+	}
+}
 </style>

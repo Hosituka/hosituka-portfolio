@@ -13,12 +13,14 @@
         .page-title-container{
             position:absolute;
             display:flex;
-            bottom:8px;
+            bottom:1rem;
             left:50%;
             transform:translate(-50%);
-          /*h1{
-
-            }*/
+            h1{
+                display:flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
     }
     main{
@@ -61,18 +63,19 @@
                     grid-area:sns;
                     display:flex;
                     flex-direction: column;
-                    justify-content: center;
+                    justify-content: start;
+                    align-self: center;
                     gap:5px;
                 }
                 .about-me-text{
                     grid-area:text;
-                    align-self:end;
+                    align-self:center;
                 }
 
                 .link-about-me{
                     grid-area:link-about-me;
                     justify-self: center;
-                    align-self:end;
+                    align-self:start;
 
                     position:relative;
                     display: flex;
@@ -122,7 +125,7 @@
 @layer Appearance{
 
     header{
-        min-height:100px;
+        height:8rem;
         &::before{
             width:100%;
             height:100%;
@@ -134,7 +137,7 @@
         .page-title-container{
             h1{
                 line-height: 1;  
-                font-size: 40px;
+                font-size: 3.5rem;
                 font-weight: 900;
                 color: white;
                 -webkit-text-stroke-width: 1px;
@@ -167,7 +170,7 @@
             }
             .about-me-main{
                 box-sizing: border-box;
-                padding:10px;
+                padding:10px 20px; 
                 border:1px solid #333;
                 background-color:  $light-yellow;
 
@@ -191,12 +194,12 @@
                     }
                 }
                 .about-me-text{
-                    width:250px;
+                    width:350px;
                     line-height: 1.6;
 
                 }
                 .link-about-me{
-                    width: 250px;
+                    width: 100%;
                     height: 40px;
                     background: $dark-gray;
                     clip-path: polygon(0 15.8%, 89.4% 15.8%, 89.4% 0, 100% 50%, 89.4% 100%, 89.4% 84.2%, 0 84.2%);
@@ -264,7 +267,15 @@
     }
 }
 //レスポンシブ対応用のスタイルここではLayoutとappearanceの区別はしない
-@media (max-width:700px) {
+@media (max-width:870px) {
+    header{
+        height:11.5rem;
+        .page-title-container{
+            flex-direction: column;
+            bottom:0.9rem;
+        }
+    }
+
     main{
         .about-me-section{
           /*h2{
@@ -279,12 +290,16 @@
                 grid-template-columns: 1fr;
                 justify-items: center;
                 padding:10px 10px 4px 10px;
+                .about-me-text{
+                    width:250px;
+                }
                 .sns-container{
                     gap:10px;
                     margin:10px 0px;
                     flex-direction: row;
                 }
                 .link-about-me{
+                    margin:10px 0px;
                     width:320px;
                 }
             }
@@ -302,13 +317,6 @@
     }
 }
 @media (max-width:510px) {
-    header{
-        height:145px;
-        .page-title-container{
-            flex-direction: column;
-            bottom:10px;
-        }
-    }
     main{
         .about-me-section{
           /*h2{
