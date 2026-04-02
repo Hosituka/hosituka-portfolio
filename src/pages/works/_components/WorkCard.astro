@@ -293,7 +293,6 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 					border-left:3px solid $blue;
 				}
 				overflow-y: scroll;
-				overscroll-behavior-y:none;
 				overflow-x: hidden;
 
 				line-height:1.5;
@@ -302,6 +301,9 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 				font-family: serif;
 				word-break: normal;
 				overflow-wrap: break-word;
+				&.no-scroll-chain{
+					overscroll-behavior-y: none;
+				}
 			}
 			.link-button-wrapper{
 				width:100%;
@@ -355,6 +357,9 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			const cardOverview :HTMLElement|null = this.querySelector('.card-overview');
 			if(cardOverview===null){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
+			const overviewWrapper:HTMLElement|null = this.querySelector('.overview-wrapper');
+			if(overviewWrapper===null){console.error('overview-wrapperクラス属性が付与されたhtml要素が見つかりませんでした');
+				return;}
 			//#メインとなる処理
 			console.log("関数の購読を開始します。");
 			//##関数の購読
@@ -365,6 +370,10 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 				console.log("showOverviewButtonが押されました");
 				cardOverview.classList.add('is-show')
 			})
+			//##overviewWrapperのスクロール周りの挙動の状態分岐
+			if(overviewWrapper.clientHeight >= overviewWrapper.scrollHeight){
+				overviewWrapper.classList.add('no-scroll-chain')
+			}
 		}
 	}
 	customElements.define('work-card',WorkCard);
