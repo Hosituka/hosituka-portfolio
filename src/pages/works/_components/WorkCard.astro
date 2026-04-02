@@ -55,16 +55,6 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
  
 <style lang="scss">
 @use '../../../global-styles/_utility' as *;
-@function GetSmoothShadowValue($color,$step:5px,$count:5,$offset:2px){
-	$result:();
-	@for $countUp from 0 to $count{
-		$BottomPos:$countUp * $step + $offset;
-        $blur:$countUp * $step;
-		$alpha:1 - ($countUp / $count);
-		$result:append($result,0 $BottomPos $blur rgba($color,$alpha),comma);
-	}
-	@return $result;
-}
 @layer Layout{
 	work-card{
 		display:grid;
@@ -118,7 +108,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			}
 		}
 		.card-overview{
-			transform:translateY(calc(-100% - 5px));
+			transform:translateY(calc(-100% - 10px));
 			&.is-show{
 				transform:translateY(0px);
 			}
@@ -164,7 +154,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 	//#work-cardのサイズはWorkCardsSectionによって指定されています。
 	work-card{
 		aspect-ratio: 9/10;
-		padding:0px 0px 5px 0px;
+		padding:0px 8px 8px 0px;
 		border-top-left-radius: 20px;	
 		border-top-right-radius: 20px;
 

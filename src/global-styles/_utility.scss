@@ -10,3 +10,13 @@ $dark-gray: #333;
 
 $light-black:rgb(30, 30, 30);
 
+@function GetSmoothShadowValue($color,$step:5px,$count:5,$offset:2px){
+	$result:();
+	@for $countUp from 0 to $count{
+		$rightBottomPos:$countUp * $step + $offset;
+        $blur:$countUp * $step;
+		$alpha:1 - ($countUp / $count);
+		$result:append($result,$rightBottomPos $rightBottomPos $blur rgba($color,$alpha),comma);
+	}
+	@return $result;
+}
