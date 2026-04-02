@@ -287,8 +287,8 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 				font-family: serif;
 				word-break: normal;
 				overflow-wrap: break-word;
+				overscroll-behavior-y: auto;
 				&:not(.is-scroll){
-					overscroll-behavior-y: auto;
 				}
 				&.is-scroll{
 					overflow-y: scroll;
@@ -304,7 +304,6 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 						border-right:0.7cqw solid $blue;
 						border-left:0.7cqw solid $blue;
 					}
-					overscroll-behavior-y: none;
 				}
 			}
 			.link-button-wrapper{
