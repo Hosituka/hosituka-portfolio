@@ -293,6 +293,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 					border-left:3px solid $blue;
 				}
 				overflow-y: scroll;
+				overscroll-behavior-y: none;
 				overflow-x: hidden;
 
 				line-height:1.5;
@@ -302,7 +303,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 				word-break: normal;
 				overflow-wrap: break-word;
 				&.no-scroll-chain{
-					overscroll-behavior-y: none;
+					overscroll-behavior-y: auto;
 				}
 			}
 			.link-button-wrapper{
