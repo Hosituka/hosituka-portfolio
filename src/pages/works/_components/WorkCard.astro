@@ -120,7 +120,7 @@ $cardsGap:20px;
 			}
 		}
 		.card-overview{
-			transform:translateY(calc(-100% - 10px));
+			transform:translateY(calc(-100%  - 2  * $cardsGap));
 			&.is-show{
 				transform:translateY(0px);
 			}
@@ -165,14 +165,13 @@ $cardsGap:20px;
 @layer Appearance{
 	work-card{
 		//#この10pxはフレックスコンテナとなるWorkCardSectionのgapに由来する
-		width:calc(33% - $cardsGap);
-		padding:0px 0px 5px 0px;
+		width:calc(33%);
+		padding:$cardsGap;
 		aspect-ratio: 9/10;
 		border-top-left-radius: 20px;	
 		border-top-right-radius: 20px;
 
 		overflow:hidden;
-		overscroll-behavior-y:none;
 		-webkit-tap-highlight-color: transparent;
 		container-type: size;
 		.card-first-view, .card-overview{
@@ -228,7 +227,7 @@ $cardsGap:20px;
 			}
 			.card-specs-wrapper{
 				width:calc(100% - 14px);
-				height:20%;
+				height:23%;
 				padding:2px 5px;
 
 				border:3px solid $yellow;
@@ -289,7 +288,7 @@ $cardsGap:20px;
 			}
 			.overview-wrapper{
 				width:100%;
-				height:71cqh;
+				height:74cqh;
 				background-color: whitesmoke;
 
 				border-bottom:3px solid $blue;
@@ -306,11 +305,12 @@ $cardsGap:20px;
 					border-left:3px solid $blue;
 				}
 				overflow-y: scroll;
+				overscroll-behavior-y:none;
 				overflow-x: hidden;
 
 				line-height:1.5;
 				padding:2px 5px;
-				font-size:16px;
+				font-size:4cqw;
 				font-family: serif;
 				word-break: normal;
 				overflow-wrap: break-word;
@@ -354,12 +354,12 @@ $cardsGap:20px;
 
 @media (max-width:950px) {
 	work-card{
-		width:calc(50% - $cardsGap);
+		width:calc(50%);
 	}
 }
 @media (max-width:750px) {
 	work-card{
-		width:calc(100% - $cardsGap);
+		width:calc(100%);
 	}
 }
 </style>  
