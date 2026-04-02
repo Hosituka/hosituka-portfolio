@@ -13,6 +13,7 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
 </work-cards-section>
 <style lang="scss">
 @use '../../../global-styles/_utility' as *;
+$gap:20px;
 @layer Layout{
     work-cards-section{
         z-index:var(--z-index);
@@ -30,9 +31,11 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
             }
         }
         div{
-            gap:20px;
-            display:grid;
-            grid-template-columns: 1fr 1fr 1fr;
+            gap:$gap;
+            display:flex;
+            justify-content: center;
+            flex-wrap:wrap;
+
         }
     }
 }
@@ -62,20 +65,28 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
             padding:20px 20px;
             background-color: white;
             border:1px solid black;
+            :global(work-card){
+                flex: 0 0 calc((100% - (2*$gap)) / 3);
+            }
+
         }
     }
 }
 @media (max-width:1100px) {
 	work-cards-section{
         div{
-            grid-template-columns: 1fr 1fr;
+            :global(work-card){
+                flex: 0 0 calc((100% - gap) / 2);
+            }
         }
 	}
 }
 @media (max-width:750px) {
 	work-cards-section{
         div{
-            grid-template-columns: 1fr;
+            :global(work-card){
+                flex: 0 0 100%;
+            }
         }
 	}
 }
