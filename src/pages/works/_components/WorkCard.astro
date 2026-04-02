@@ -65,8 +65,8 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 	}
 	@return $result;
 }
-
-$cardsGap:20px;
+//#この10pxはフレックスコンテナとなるWorkCardSectionのgapに由来する
+$cardsGap:10px;
 @layer Layout{
 	work-card{
 		display:grid;
@@ -164,9 +164,8 @@ $cardsGap:20px;
 }
 @layer Appearance{
 	work-card{
-		//#この10pxはフレックスコンテナとなるWorkCardSectionのgapに由来する
-		width:calc(33%);
-		padding:$cardsGap;
+		width:calc(33% - $cardsGap);
+		padding:0px 0px 5px 0px;
 		aspect-ratio: 9/10;
 		border-top-left-radius: 20px;	
 		border-top-right-radius: 20px;
@@ -354,12 +353,12 @@ $cardsGap:20px;
 
 @media (max-width:950px) {
 	work-card{
-		width:calc(50%);
+		width:calc(50% - $cardsGap);
 	}
 }
 @media (max-width:750px) {
 	work-card{
-		width:calc(100%);
+		width:calc(100% - $cardsGap);
 	}
 }
 </style>  
