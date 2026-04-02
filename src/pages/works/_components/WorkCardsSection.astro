@@ -30,10 +30,9 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
             }
         }
         div{
-            gap:10px;
-            display:flex;
-            flex-wrap:wrap;
-            justify-content: center;
+            gap:20px;
+            display:grid;
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
 }
@@ -60,12 +59,27 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
 
         }
         div{
-            padding:10px 10px;
+            padding:20px 20px;
             background-color: white;
             border:1px solid black;
         }
     }
 }
+@media (max-width:1100px) {
+	work-cards-section{
+        div{
+            grid-template-columns: 1fr 1fr;
+        }
+	}
+}
+@media (max-width:750px) {
+	work-cards-section{
+        div{
+            grid-template-columns: 1fr;
+        }
+	}
+}
+
 @media (max-width:550px) {
     work-cards-section{
         
@@ -76,7 +90,7 @@ const {sectionTitle,zIndex="auto"}:Props = Astro.props;
             }
         }
         div{
-            padding: 10px 0px;
+            padding: 10px 10px;
         }
         
     }
