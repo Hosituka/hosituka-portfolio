@@ -26,11 +26,17 @@ import WorkCard from './_components/WorkCard.astro';
                 </Fragment>
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/3/31<br>
-                    <strong>#このゲームについて</strong><br>
-                    的の色に合わせて赤い銃と青い銃を打ち分けるARシューティングゲームです。大学生活が落ち着いてきたため、一年半ぶりに作りました。現状プログラミングの成長的にも、ゲームの面白さ的にも一番だと感じています。良かったら遊んでみてね。
-                    <br><strong>#使用技術について</strong><br>
-                    この開発では初めてAIエージェントの一種であるGeminiCLIとgit/githubを導入しました
-                    <hr>AIを使っていると言うとコードを書いていないように感じるかと思いますが、自分の場合は、バイブコーディングとしてではなく、コードを書く上での指導役として使っていました。その結果、ジェネリックプログラミングといった新たなプログラミングの考え方と、メモリによる負荷を均一にするためのオブジェクトプール、CRTP、テンプレートメソッドパターン等のデザインパターンを沢山学べました。だから、冒頭の「プログラマーとして一番成長できた作品」という意見に繋がります。具体的なコードに関しては詳細というボタンを押してもらうとgithubに飛べますのでよかったら見て行ってください。
+                    <strong>#このゲームについて</strong>
+                    <br>6作目です。的の色に合わせて赤い銃と青い銃を打ち分けるARシューティングゲームです。大学生活が落ち着いてきたため、一年半ぶりに作りました。
+                    <br>現状プログラミングの成長的にも、ゲームの面白さ的にも一番だと感じています。良かったら遊んでみてね。
+                    <br><strong>#学んだ事について</strong>
+                    <br>この開発では初めてAIエージェントの一種であるGeminiCLIとgit/githubを導入しました。
+                    <br>AIを使っていると言うとコードを書いていないように感じますが、自分の場合は、バイブコーディングとして用いるのではなく、コードを書く上での指導役として使っていました。
+                    <br>その結果、ジェネリックプログラミングといった新たなプログラミングの考え方と、メモリによる負荷を均一にするためのオブジェクトプール、CRTP、テンプレートメソッドパターン等のデザインパターンを沢山学べました。
+                    <br>だから、冒頭の「プログラマーとして一番成長できた作品」という意見に繋がります。具体的なコードに関しては詳細というボタンを押してもらうと、githubに飛べますのでよかったら見て行ってください。
+                    <br><strong>##git/githubについて</strong>
+                    <br>git/githubについては、上書きセーブが出来ないプロジェクトのセーブデータを提供するサービス程度の理解しかありません、ですが、
+                    <br>かなり便利であるという知見を得られました。具体的には、開発をしていく中で、全体的な変更をしなければならないことがあったのですが、いつでも過去のセーブ(コミット)に戻れる安心感は頼もしかったです。
                 </Fragment>
             </WorkCard>
             <WorkCard  workTitle='音ゲー※中止' workMediaURL='/video/musicGame.mp4'>
@@ -41,13 +47,17 @@ import WorkCard from './_components/WorkCard.astro';
                     <strong>・開発人数</strong>：一人           
                 </Fragment>
                 <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/3/31<br>
-                    <strong>#このゲームについて</strong><br>
-                    マウスをフリックする動作はIIDX(ゲーム)のターンテーブルを回す動作に近い感覚が得られるのでは？という発想から、作ろうとしていた幻のゲームです。音楽ゲームは大好きなジャンルのため、絶対に完成させたかったのですが色々な理由から完遂できなかったです。
-                    <br><strong>#完成しなかった理由</strong><br>
-                    bpm？ 拍？っていうレベルで音楽の知識がない上、このころは継承やインターフェースといったc#の機能も十分に理解していなかったため、見た目はともかく、操作性や譜面生成の仕組み等、目に見えない部分がボロボロでした。そんな中でリアルが忙しくなったのとパーテーションを間違えて消してしまうというやらかしまでしてしまったため、完璧にやる気が消えて、未完成となりました
-                    <br><strong>#得たものについて</strong><br>
-                    このゲームから得たものとしては、gimpとshaderGraphの組み合わせ方を学べました。このゲームのビジュアルが良いのはそれに起因します。長々と綴りましたが、流石に自分の好きなジャンルが完成しなかったのは悔しいので、いつかリベンジします。
+                    <strong>・執筆日</strong>：2026/3/31
+                    <br><strong>#このゲームについて</strong>
+                    <br>マウスをフリックする動作はIIDX(ゲーム)のターンテーブルを回すのに近い感覚が得られるのでは？という発想から、作ろうとしていた幻のゲームです。
+                    <br>音楽ゲームは大好きなジャンルのため、絶対に完成させたかったのですが色々な理由から完遂できなかったです。
+                    <br><strong>#完成しなかった理由</strong>
+                    <br>bpm？ 拍？っていうレベルで音楽の知識がない上、このころは継承やインターフェースといったc#の機能も十分に理解していなかったため、見た目はともかく、操作性や譜面生成の仕組み等、目に見えない部分がボロボロでした。
+                    <br>そんな中でリアルが忙しくなったのとパーテーションを間違えて消してしまうというやらかしまでしてしまったため、完璧にやる気が消えて、未完成となりました
+                    <br><strong>#学んだことについて</strong>
+                    <br>このゲームから得たものとしては、gimpとshaderGraphの組み合わせ方を学べました。このゲームのビジュアルが良いのはそれに起因します。
+                    <br>また、操作性が悪いと言っても、スライダーとターンテーブルの行ったり来たりが壊滅的なだけで、メインとなるターンテーブル自体の操作性はけっこう良いという収穫が得られました。
+                    <br>長々と綴りましたが、流石に自分の好きなジャンルが完成しなかったのは悔しいので、いつかリベンジします。
                 </Fragment>
             </WorkCard>
 
@@ -78,7 +88,10 @@ import WorkCard from './_components/WorkCard.astro';
                     <strong>・開発人数</strong>：一人           
                 </Fragment>
                 <Fragment slot="overview">
-                    hegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehegeegehegehegehegehegehegehegehegehegehegehege
+                    <strong>・執筆日</strong>：2026/4/03
+                    <br><strong>#このゲームについて</strong>
+                    3作目です。一番開発期間が短いと思います。チュートリアルみながら作ったシンプルなシューティングゲームです。<br>
+                    制作動機は5年程前なのでおぼろげですが、二作ぐらい作った上でunityの基礎が足りていないと感じたため、復習として作ったような記憶があります。
                 </Fragment>
             </WorkCard>
             <WorkCard  workTitle='チュートリアル見て作った奴1' workMediaURL='/normalImage/work/3thWork.webp' playLink='https://unityroom.com/games/hositukage-mu3' >
@@ -90,11 +103,11 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/4/03
                     <br><strong>#このゲームについて、</strong>
-                    <br>unityを学ぶ動機である「3dゲームを作りたい」を達成するため、手始めに作ったゲームです。
-                    <br>ゲーム性としてはUnityちゃんと呼ばれるキャラが様々な障害物を乗り越えながらゴールを目指すというシンプルな構成です。
-                    <br><strong>#学んだ事</strong><br>
-                    
-
+                    <br>二作目です。unityを学ぶ動機である「3dゲームを作りたい」を達成するため、手始めにチュートリアル動画を見ながら作ったゲームです。
+                    <br>ゲーム性としては女の子のキャラ(※アセット)が様々な障害物を乗り越えながらゴールを目指すというシンプルな構成です。
+                    <br><strong>#学んだ事について</strong>
+                    <br>前作のシューティングゲームが2dのため、3dにおける回転や座標の捉え方が全く身についていませんでした。今作を通して、そんな3d空間の回転や座標を知るきっかけになりました。
+                    <br>また、前作がtransformコンポーネント、つまり座標を直接指定して移動を実現していましたが、今作ではrigidbody、つまりunityの物理エンジンを介して座標を操作する方法も少しだけ学べました。 
                 </Fragment>
             </WorkCard>
 
@@ -107,9 +120,9 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/4/01
                     <br><strong>#このゲームについて</strong>
-                    <br>unityで作った最初となるオリジナル、シューティングゲームです。時間の経過とともに敵が出現するシンプルな構成ですが、ドット絵を自作するなど、プログラミング以外の事も挑戦しています。数年ぶりにプレイしてみると難易度がかなり高く、当時の幼さが残っていると思います。
+                    <br>unityで作った1作目となるオリジナル、シューティングゲームです。時間の経過とともに敵が出現するシンプルな構成ですが、ドット絵を自作するなど、プログラミング以外の事も挑戦しています。数年ぶりにプレイしてみると難易度がかなり高く、当時の幼さが残っていると思います。
                     <br>実はこれよりも前に作ったゲームとしてブロック崩しがありましたが、手元にデータが無いのでこのサイトには載せていません、おそらくチュートリアルで作った物なので消したのだ思います。
-                    <br><strong>#学んだ事</strong>
+                    <br><strong>#学んだ事について</strong>
                     <br>執筆日から5年ほど前なのでうろ覚えですが、敵が出現するタイミングの制御はコールチンを使用していました。これが非同期処理に触れるきっかけになったと思います。
                     <br>現在はよりメモリ効率や自由度の高いUniTaskをメインに使っていますが、この時の試行錯誤が現在に繋がっていると思います。
                 </Fragment>
