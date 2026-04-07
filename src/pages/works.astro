@@ -1,12 +1,12 @@
 ---
 //このファイルは各作品の紹介に特化したページコンポーネントです。
-import Layout from '../../layouts/Layout.astro';
-import ParticleBackGround from '../../components/ParticleBackGround.astro';
-import GlobalNav from '../../components/GlobalNav.astro';
-import Footer from '../../components/Footer.astro';
-import WorksOfHeader from './_components/WorksOfHeader.astro';
-import WorkCardsSection from './_components/WorkCardsSection.astro'
-import WorkCard from './_components/WorkCard.astro';
+import Layout from '../layouts/Layout.astro';
+import ParticleBackGround from '../components/ParticleBackGround.astro';
+import GlobalNav from '../components/GlobalNav.astro';
+import Footer from '../components/Footer.astro';
+import WorksOfHeader from '../components/works/WorksOfHeader.astro';
+import WorkCardsSection from '../components/works/WorkCardsSection.astro'
+import WorkCard from '../components/works/WorkCard.astro';
 
 
 ---
@@ -68,12 +68,12 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/4/03
                     <br><strong>#このゲームについて</strong>
-                    <br>・5作目です。戦車の次は船という浅はかな考えと、無謀にもオープンワールドにしようとした結果、工数が爆発的に増えたスカスカゲームです。自分でもゴールが分かっておらず、投げ出しました。
+                    <br>・戦車の次は船という浅はかな考えと、無謀にもオープンワールドにしようとした結果、工数が爆発的に増えたスカスカゲームです。自分でもゴールが分かっておらず、投げ出しました。
                     <br>・一応楽しみ方としては、マップを開くと、町やら敵がいる要塞などが記されており、そこを旅することでゲーム性を見出せるかもしれません。問題は敵の生成間隔が早すぎるせいですぐに絡まれることですかね...
                     <br><strong>#学んだことについて</strong>
-                    <br>・前作の戦車のゲームでは出来なかった障害物を避けながら向かってくるという仕組みの実装方法を学びました。
+                    <br>・前作の戦車のゲームでは出来なかった障害物を避けながら向かってくるという仕組みを実装しました。
                           具体的にはNavMeshを用いて実装しています。
-                    <br>・また、Terrainによるマップの作り方を学びました。これがなければ、よりゲームがスカスカになっていたでしょう。
+                    <br>・また、Terrainによるマップの作り方を学びました。これにより、広大なマップを効率的に作る方法を学びました。
                     <br>・最後に大きな収穫となったshaderGraphも学びました。これによりビジュアルの向上に大きく貢献したと思います。
                         具体的に作った物としては、skyboxにある動く雲と昼夜の表現、頂点アニメーションによる帆が揺れる表現、海などが挙げられます。
                         一方で、GUI(shaderGraph)で作っているからかzバッファやPassといった概念が曖昧という課題があります。
@@ -89,7 +89,7 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>執筆日</strong>：2026/4/03
                     <br><strong>#このゲームについて</strong>
-                    <br>・4作目です。オリジナルの中では初めて作った3dゲームです。ゲーム性としては、自機(戦車)を操作して、全ての敵を倒したらクリアするという感じです。
+                    <br>・オリジナルの中では初めて作った3dゲームです。ゲーム性としては、自機(戦車)を操作して、全ての敵を倒したらクリアするという感じです。
                     <br>・3ステージあります。今やってみると、特攻して自爆する敵の耐久が高すぎて避けるのがほぼ不可能みたいな感じで理不尽さが凄いです。
                     <br><strong>#学んだこと</strong>
                     <br><strong>##blenderについて</strong>
@@ -110,7 +110,7 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/4/03
                     <br><strong>#このゲームについて</strong>
-                    <br>・3作目です。一番開発期間が短いと思います。チュートリアルみながら作ったシンプルなシューティングゲームです。
+                    <br>・一番開発期間が短いと思います。チュートリアルみながら作ったシンプルなシューティングゲームです。
                     <br>・制作動機は5年程前なのでおぼろげですが、二作ぐらい作った上でunityの基礎が足りていないと感じたため、復習として作ったような記憶があります。
                 </Fragment>
             </WorkCard>
@@ -123,7 +123,7 @@ import WorkCard from './_components/WorkCard.astro';
                 <Fragment slot="overview">
                     <strong>・執筆日</strong>：2026/4/03
                     <br><strong>#このゲームについて、</strong>
-                    <br>・2作目です。unityを学ぶ動機である「3dゲームを作りたい」を達成するため、手始めにチュートリアル動画を見ながら作ったゲームです。
+                    <br>・unityを学ぶ動機である「3dゲームを作りたい」を達成するため、手始めにチュートリアル動画を見ながら作ったゲームです。
                     <br>・ゲーム性としては女の子のキャラ(※アセット)が様々な障害物を乗り越えながらゴールを目指すというシンプルな構成です。
                     <br><strong>#学んだ事について</strong>
                     <br>・前作のシューティングゲームが2dのため、3dにおける回転や座標の捉え方が全く身についていませんでした。今作を通して、そんな3d空間の回転や座標を知るきっかけになりました。
@@ -161,15 +161,15 @@ import WorkCard from './_components/WorkCard.astro';
                     <strong>・執筆日</strong>：2026/4/03
                     <br><strong>#このwebサイトについて、</strong>
                     <br>・制作物の振り返りと自己分析を目的としたポートフォリオサイトです。
-                    <br>・これまでの制作経験を整理し、技術的な成長を可視化するため作りました。
+                    <br>・これまでの制作経験を整理し、技術的な成長を可視化する為に作りました。
                     <br>・ゲームプログラミングがメインのため、学習コストはありましたが、webプログラミングへの理解が深まり有意義な時間となりました。
                     <br><strong>#学んだ事について</strong>
                     <br>・フレームワークを用いたwebサイト制作の基礎を学びました。具体的にはAstroというフレームワークを用いました。またコンピュータ言語ではSCSS,TSを新たに学びました。
                     <br><strong>#技術の選考理由</strong>
                     <br>・実をいうとwebサイトを作るのは初めてではなく、大学で部活のホームページを作ったことがあります。この時の技術構成が(HTML,CSS,JS,フレームワーク無し)という純粋な物であり、その時の不満が現在の技術構成に繋がっております。
                     <br><strong>##Astroの選考理由</strong>
-                    <br>・大学のweb制作ではファイル分割の基準が言語基準であり、一つのUI修正に複数ファイルの編集が必要で保守性に欠けていました。
-                    <br>・この問題はNext.jsなどのReact系のフレームワークでも解決可能ですが、AstroではHTMLベースで書けるため、従来のweb制作の延長として学習コストを抑えつつ同様の課題を解決できる点を評価し、選びました。
+                    <br>・大学のweb制作ではファイル分割の基準がUI単位ではなく言語基準であり、一つのUI修正に複数ファイルの編集が必要で保守性に欠けていました。
+                    <br>・この問題はNext.jsなどのReact系フレームワークでも解決可能ですが、AstroではHTMLベースで書けるため、従来のweb制作の延長として学習コストを抑えつつ同様の課題を解決できる点を評価し、選びました。
                     <br><strong>##TSの選考理由</strong>
                     <br>・JSでコードを書いている時、存在しないメンバにアクセスする際、実行前エラーとして出してくれない等、かなり不満がありました。
                     <br>・それについてAIに聞いたらTSを採用すると解決できると言われたため採用しました。
@@ -183,5 +183,5 @@ import WorkCard from './_components/WorkCard.astro';
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
 <style>
-    @import url(works.scss);
+    @import url("../styles/pages/works.scss");
 </style>

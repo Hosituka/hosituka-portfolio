@@ -24,5 +24,4 @@ pnpm-debug.log*
 .idea/
 PROJECT.md
 PROJECT_MEMORY.md
-settings.json
-.gemini/settings.json
+.gemini/

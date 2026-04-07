@@ -13,9 +13,9 @@ function isActive(path:string):boolean{
 }
 
 const topURL:string = "/";
-const aboutMeURL:string = "/aboutMe/aboutMe"
-const worksURL:string =  "/works/works";
-const devLogURL:string = "/devLog/devLog";
+const aboutMeURL:string = "/aboutMe"
+const worksURL:string =  "/works";
+const devLogURL:string = "/devLog";
 ---
 <!-- ##グローバルナビゲーションの要素ノード-->
 <global-nav role="nav">
@@ -28,7 +28,7 @@ const devLogURL:string = "/devLog/devLog";
 </global-nav>
 <!-- ##グローバルナビゲーションのスタイル-->
 <style lang="scss">
-@use '../global-styles/_utility' as *;
+@use '../styles/_utility' as *;
 @layer Layout{
 	global-nav {
 		position: fixed;

@@ -22,13 +22,13 @@ const {title}:Props = Astro.props;
 	</body>
 </html>
 
-<style lang="scss">
+<style is:global lang="scss">
 //#ここで全てのコンポーネントで共通するcssレイヤーの順序と読み込みを行っている
 @charset "UTF-8";
 /*##ユーザーエージェントスタイルシートを統一するスタイルシートをlayerとして読み込んでいる、*/
-@import url("../global-styles/Normalize.css") layer(Normalize);
+@import url("../styles/Normalize.css") layer(Normalize);
 /*##webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/
-@import url("../global-styles/CssReset.css") layer(CssReset);
+@import url("../styles/CssReset.css") layer(CssReset);
 @layer Normalize, CssReset, Layout, Appearance;
 
 @layer Layout{
@@ -50,6 +50,9 @@ const {title}:Props = Astro.props;
 		 overscroll-behavior: none;
 		body{
 			overscroll-behavior: none;
+		}
+		:global(main){
+			flex-grow:1;
 		}
 	}
 	*, *::before, *::after {

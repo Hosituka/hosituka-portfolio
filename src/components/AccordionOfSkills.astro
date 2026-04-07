@@ -1,0 +1,51 @@
+---
+//#自分のスキルを表示する用のアコーディオン
+interface Props {
+    skillName: string;
+}
+const {skillName} = Astro.props;
+---
+
+<accordion-of-skills>
+    <button class="show-content-button" aria-expanded="false">
+        <h3 class="accordion-title">{skillName}</h3>
+    </button>
+    <div class="accordion-content" >
+        <div class="content-inner">
+            <slot />
+        </div>
+    </div>
+</accordion-of-skills>
+
+<style lang="scss">
+    @use '../global-styles/_utility' as *;
+@layer Layout{
+    accordion-of-skills{
+        display:block;
+        .show-content-button{
+            position:relative;
+        }
+    }
+}
+@layer Appearance{
+    accordion-of-skills{
+        width:800px;
+        height:auto;
+        background-color: $light-yellow;
+        .show-content-button{
+            width:100%;
+            height:100px;
+        }
+
+    }
+
+}
+</style>
+<script>
+class AccordionOfSkills extends HTMLElement{
+    connectedCallback(){
+    }
+   
+}
+customElements.define('accordion-of-skills',AccordionOfSkills);
+</script>

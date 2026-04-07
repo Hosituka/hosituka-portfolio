@@ -1,0 +1,151 @@
+---
+interface Props {
+    title: string;
+}
+const { title } = Astro.props;
+---
+
+<my-accordion>
+    <div class="accordion-item">
+        <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-title">{title}</span>
+            <span class="accordion-icon"></span>
+        </button>
+        <div class="accordion-content" style="height: 0px;">
+            <div class="content-inner">
+                <slot />
+            </div>
+        </div>
+    </div>
+</my-accordion>
+
+<style lang="scss">
+    @use '../styles/_utility' as *;
+
+    my-accordion {
+        display: block;
+        width: 100%;
+        margin-bottom: 1rem;
+        border: 2px solid $dark-gray;
+        border-radius: 12px;
+        overflow: hidden;
+        background-color: white;
+        box-shadow: 0 4px 0 $dark-gray;
+        transition: transform 0.1s;
+
+        &:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 $dark-gray;
+        }
+    }
+
+    .accordion-header {
+        width: 100%;
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: $light-yellow; // Existing color from your palette
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: bold;
+        font-family: sans-serif;
+        color: $dark-gray;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: $yellow;
+        }
+
+        &[aria-expanded="true"] {
+            background-color: $yellow;
+            .accordion-icon {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    .accordion-icon {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        transition: transform 0.3s ease;
+
+        &::before, &::after {
+            content: '';
+            position: absolute;
+            background-color: $dark-gray;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        &::before {
+            width: 12px;
+            height: 2px;
+        }
+
+        &::after {
+            width: 2px;
+            height: 12px;
+            transition: opacity 0.3s;
+        }
+    }
+
+    .accordion-header[aria-expanded="true"] .accordion-icon::after {
+        opacity: 0;
+    }
+
+    .accordion-content {
+        overflow: hidden;
+        transition: height 0.3s ease-out;
+        background-color: whitesmoke;
+    }
+
+    .content-inner {
+        padding: 1.5rem;
+        line-height: 1.6;
+        font-family: serif;
+        color: #333;
+    }
+</style>
+
+<script>
+    class MyAccordion extends HTMLElement {
+        private header: HTMLButtonElement | null = null;
+        private content: HTMLDivElement | null = null;
+        private inner: HTMLDivElement | null = null;
+
+        connectedCallback() {
+            this.header = this.querySelector('.accordion-header');
+            this.content = this.querySelector('.accordion-content');
+            this.inner = this.querySelector('.content-inner');
+
+            if (!this.header || !this.content || !this.inner) return;
+
+            this.header.addEventListener('click', () => this.toggle());
+        }
+
+        private toggle() {
+            if (!this.header || !this.content || !this.inner) return;
+
+            const isExpanded = this.header.getAttribute('aria-expanded') === 'true';
+            const newExpanded = !isExpanded;
+
+            this.header.setAttribute('aria-expanded', newExpanded.toString());
+
+            if (newExpanded) {
+                // Open: set height to scrollHeight
+                const height = this.inner.offsetHeight;
+                this.content.style.height = `${height}px`;
+            } else {
+                // Close: set height to 0
+                this.content.style.height = '0px';
+            }
+        }
+    }
+
+    customElements.define('my-accordion', MyAccordion);
+</script>
