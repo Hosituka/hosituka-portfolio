@@ -1,13 +1,48 @@
 ---
 ---
 <header-of-about-me role="header">
+    <div class="myIcon">
+        <img src="" alt="HositukaのHOの内のH">
+        <img src="" alt="HositukaのHOの内のO">
+    </div>
 </header-of-about-me>
 <style lang="scss">
-@use '../../../styles/_utility' as *;
+@use '../../styles/_utility' as *;
 @layer Layout{
-
+    header-of-about-me{
+        display:block;
+        position:relative;
+        &:before{
+            position:absolute
+        }
+        .myIcon{
+            position:absolute;
+            right:20%;
+            top:56.5%;
+            transform:translate(50%,-50%);
+        }
+    }
 }
 @layer Appearance{
+    header-of-about-me{
+        width:100%;
+        height:350px;
 
+        background-image:url('/texture/codeBackGround.webp');
+        background-size: cover;
+        &:before{
+            width:100%;
+            height:100%;
+            background-color: rgba(yellow,0.7);
+            content:"";
+        }
+        .myIcon{
+            width:290px;
+            aspect-ratio: 1/1;
+            background-color: yellow;
+
+            border-radius: 50%;
+        }
+    }
 }
 </style>

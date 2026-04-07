@@ -4,12 +4,13 @@ import Layout from '../layouts/Layout.astro';
 import ParticleBackGround from '../components/ParticleBackGround.astro';
 import GlobalNav from '../components/GlobalNav.astro';
 import Footer from '../components/Footer.astro';
+import HeaderOfAboutMe from '../components/aboutMe/HeaderOfAboutMe.astro';
 
 ---
 <Layout title='私について'>
 
-    <ParticleBackGround zIndex={1} particleDensity={0.5}/>
 	<GlobalNav/>
+    <HeaderOfAboutMe/>
     <main></main>
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
