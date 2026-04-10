@@ -4,93 +4,110 @@ import FrequencyBar from "../FrequencyBar.astro"
 ---
 <header-of-about-me role="header">
     <div class="back-ground">
-        <FrequencyBar zIndex="0"  yOffset={20} maxHeight={1.8}/>
-        <div class="back-ground-overlay"/>
-        <div class="myIcon-back-ground"/>
+        <FrequencyBar zIndex="1"  yOffset={20} maxHeight={1.8}/>
+        <div class="my-icon">
+            <img class="h-of-hosituka"src="texture/hOfHosituka.webp" alt="ほしつかのHOのH">
+            <img class="o-of-hosituka"src="texture/oOfHosituka.webp" alt="ほしつかのHOのO">
+        </div>
+        <div class="back-ground-overlay">
     </div>
     <div class="content">
     </div>
 </header-of-about-me>
 <style lang="scss">
 @use '../../styles/_utility' as *;
-$MyIconWidth:290px;
+//#変数たち
+//##弄っても良いプロパティ
+$MyIconWidth:390px;
+$MyIconXOffset:200px;
+$MyIconYOffset:60px;
+//##計算の都合上あった方が良い変数、つまり弄るな
+$HalfMyIconWidth:$MyIconWidth / 2;
 @layer Layout{
     header-of-about-me{
         display:block;
         position:relative;
         .back-ground{
-            position:absolute
+            position:absolute;
+            .my-icon{
+                position:absolute;
+                left:calc(50% - $HalfMyIconWidth + $MyIconXOffset);
+                top:$MyIconYOffset;
+                &::before{
+                    position:absolute;
+                }
+                .h-of-hosituka{
+                    z-index:2;
+                    position:absolute;
+                    top:50%;
+                    left:30%;
+                    transform:translate(-50%,-50%);
+                }
+                .o-of-hosituka{
+                    z-index:2;
+                    position:absolute;
+                    top:52%;
+                    right:25%;
+                    transform:translate(50%,-50%);
+                }
+            }
             .back-ground-overlay{
                 position:absolute;
+                z-index:2;
             }
+
         }
         .content{
 
-        }
-        .myIcon{
-            position:absolute;
-            left:calc(50% - $MyIconWidth / 2 + 150px);
-            top:60px;
-            &:before{
-                position:absolute;
-                z-index:1;
-            }
-            .h-of-hosituka{
-                position:absolute;
-                top:50%;
-                left:30%;
-                transform:translate(-50%,-50%);
-                z-index:3;
-            }
-            .o-of-hosituka{
-                position:absolute;
-                top:52%;
-                right:25%;
-                transform:translate(50%,-50%);
-                z-index:3;
-            }
         }
     }
 }
 @layer Appearance{
     header-of-about-me{
         width:100%;
-        height:370px;
+        height:470px;
 
-        background-image:url('/texture/codeBackGround.webp');
-        background-size: cover;
         .back-ground{
             width:100%;
             height: 100%;
+            background-image:url('/texture/codeBackGround.webp');
+            background-size: cover;
+
+            .my-icon{
+                width:$MyIconWidth;
+                aspect-ratio: 1/1;
+
+                &::before{
+                    width:100%;
+                    height:100%;
+                    background-color: $my-icon-main-color;
+                    border-radius: 50%;
+                    border:2px solid white;
+                    content:"";
+                }
+                .h-of-hosituka{
+                    width:150px;
+                }
+                .o-of-hosituka{
+                    width:165px;
+                    animation: RotateZ forwards 16s linear infinite normal;
+                }
+            }
+
             .back-ground-overlay{
                 width:100%;
                 height:100%;
                 background-color: rgba(yellow,0.7);
-            }
+                mask-image: radial-gradient(
+                    circle $HalfMyIconWidth at calc(50% + $MyIconXOffset) ($MyIconYOffset + $HalfMyIconWidth),
+                    transparent 0,transparent $HalfMyIconWidth - 2,
+                    black $HalfMyIconWidth + 1
+                );           
+             }
 
         }
         .content{
 
-        }
-        .myIcon{
-            width:$MyIconWidth;
-            aspect-ratio: 1/1;
-
-            &:before{
-                width:100%;
-                height:100%;
-                background-color: $my-icon-main-color;
-                border-radius: 50%;
-                border:2px solid white;
-                content:"";
-            }
-            .h-of-hosituka{
-                width:110px;
-            }
-            .o-of-hosituka{
-                width:125px;
-                animation: RotateZ forwards 16s linear infinite normal;
-           }
         }
     }
 }

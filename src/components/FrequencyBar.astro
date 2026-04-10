@@ -36,9 +36,8 @@ const {zIndex='auto',yOffset = 0,maxHeight}:Props = Astro.props;
 </style>
 
 <script>
-import type { number } from 'astro:schema';
 import {type Vector2,MathUtility,Time} from '../scripts/utility'
-import { Value } from 'sass';
+
 
     //#音声波形の縦棒一つ一つに対応するクラス
     class VerticalBar{
@@ -64,7 +63,7 @@ import { Value } from 'sass';
             ctx2D.fillStyle = "white";
             this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,8) *
                           maxHeight *
-                          restrain(this.pos.x - 100,this.targetFrequencBar.clientWidth,0.2);
+                          restrain(this.pos.x - 125,this.targetFrequencBar.clientWidth,0.2);
             const halfSizeY = this.size.y / 2;
             ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
         }
@@ -84,6 +83,16 @@ import { Value } from 'sass';
 
             requestAnimationFrame(this.GenerateVerticalBar);
             requestAnimationFrame(this.Update);
+            //#リサイズを検知するための初期化
+			const observer = new ResizeObserver(() => {
+				this.OnResize();
+			});
+			observer.observe(this);
+
+        }
+        private OnResize=():void=>{
+            this.verticalBars = [];
+            this.GenerateVerticalBar();
         }
         private GenerateVerticalBar=():void=>{
             if(!this.canvas){return};
