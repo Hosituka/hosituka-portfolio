@@ -1,0 +1,108 @@
+---
+//これは音声波形のアニメーションを表示するuiコンポーネントです。
+interface Props{
+    maxHeight:number;
+    zIndex?:string;
+    yOffset?:number;
+}
+const {zIndex='auto',yOffset = 0,maxHeight}:Props = Astro.props;
+---
+<frequency-bar style={`--z-index:${zIndex}`} data-y-offset={yOffset} data-max-height={maxHeight}>
+    <canvas>
+    </canvas>
+</frequency-bar>
+
+<style lang="scss">
+@layer Layout{
+    frequency-bar{
+        position:absolute;
+        display:block;
+        z-index:2;
+        canvas{
+            
+        }
+    }
+}
+@layer Appearance{
+    frequency-bar{
+        width:100%;
+        height:100%;
+        canvas{
+            width:100%;
+            height:100%;
+        }
+    }
+}
+</style>
+
+<script>
+import {type Vector2,MathUtility,Time} from '../scripts/utility'
+
+    //#音声波形の縦棒一つ一つに対応するクラス
+    class VerticalBar{
+        static AllBarWidth:number = 5;
+        static AllBarMaxHeight:number = 5; 
+        private pos:Vector2 = {x:0,y:0};
+        private size:Vector2 = {x:VerticalBar.AllBarWidth,y:100}
+        constructor(xPos:number,yPos:number){
+            this.pos.x = xPos;
+            this.pos.y = yPos;
+        }
+        Draw=(ctx2D:CanvasRenderingContext2D):void=>{
+            ctx2D.fillStyle = "white";
+            this.size.y = MathUtility.Fbm(this.pos.x * 0.001 + Time.TimeInSeconds * 0.2,this.pos.y,4) * VerticalBar.AllBarMaxHeight;
+            const halfSizeY = this.size.y / 2;
+            ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
+        }
+    }
+    //#VerticalBarを制御するクラス
+    class FrequencyBar extends HTMLElement{
+        private canvas:null|HTMLCanvasElement=null;
+        private ctx2D:null|CanvasRenderingContext2D=null;
+        private verticalBars:VerticalBar[] = [];
+        private barSpacing:number = 10;
+		connectedCallback(){
+            this.canvas = this.querySelector('canvas');
+            if(!this.canvas){console.error('canvas要素がみつかりません');return}
+            this.ctx2D = this.canvas.getContext('2d');
+
+            requestAnimationFrame(this.GenerateVerticalBar);
+            requestAnimationFrame(this.Update);
+        }
+        private GenerateVerticalBar=():void=>{
+            if(!this.canvas){return};
+            //#解像度を指定するコード
+            this.canvas.width = this.clientWidth;
+            this.canvas.height = this.clientHeight;
+            //#バーの挙動に必要な情報を流し込む処理
+            if(!this.dataset.maxHeight){console.error('maxHeightというカスタム属性が存在しません');return;}
+            VerticalBar.AllBarMaxHeight = parseFloat(this.dataset.maxHeight) * this.clientHeight;
+
+            //#縦のバーを等間隔で生成するコード
+            const targetBarCount = this.clientWidth / this.barSpacing;
+            const halfClientHeight:number = this.clientHeight / 2;
+            //console.log('生成目標となるバーの数：' + targetBarCount)
+            //##data属性から生成に用いる値を取得するコード
+            if(!this.dataset.yOffset){console.error('yOffsetというカスタム属性が存在しません');return;}
+            const yOffset:number = parseFloat(this.dataset.yOffset);
+            //##実際に縦のバーの位置を決めながら生成するコード
+            for(let barCount=0;barCount<targetBarCount;barCount++){
+                this.verticalBars.push(new VerticalBar(barCount * (this.barSpacing + VerticalBar.AllBarWidth),halfClientHeight + yOffset));
+            }
+        }
+        //#毎フレームの描画前に呼ばれる関数
+        private Update=():void=>{
+            if(!this.canvas||!this.ctx2D){return};
+            this.ctx2D.clearRect(0,0,this.clientWidth,this.clientHeight);
+            for(const verticalBar of this.verticalBars){
+                verticalBar.Draw(this.ctx2D);
+            }
+            requestAnimationFrame(this.Update);
+        }
+
+        private GetElement=(selectorName:string)=>{
+
+        }
+    }
+    customElements.define('frequency-bar',FrequencyBar);
+</script>
