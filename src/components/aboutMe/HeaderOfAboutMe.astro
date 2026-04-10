@@ -3,10 +3,12 @@ import FrequencyBar from "../FrequencyBar.astro"
 
 ---
 <header-of-about-me role="header">
-    <FrequencyBar zIndex="0" yOffset={20} maxHeight={1.8}/>
-    <div class="myIcon">
-        <img class="h-of-hosituka" src="/texture/hOfHosituka.webp" alt="HositukaのHOの内のH">
-        <img class="o-of-hosituka" src="/texture/oOfHosituka.webp" alt="HositukaのHOの内のO">
+    <div class="back-ground">
+        <FrequencyBar zIndex="0"  yOffset={20} maxHeight={1.8}/>
+        <div class="back-ground-overlay"/>
+        <div class="myIcon-back-ground"/>
+    </div>
+    <div class="content">
     </div>
 </header-of-about-me>
 <style lang="scss">
@@ -16,8 +18,14 @@ $MyIconWidth:290px;
     header-of-about-me{
         display:block;
         position:relative;
-        &:before{
+        .back-ground{
             position:absolute
+            .back-ground-overlay{
+                position:absolute;
+            }
+        }
+        .content{
+
         }
         .myIcon{
             position:absolute;
@@ -51,11 +59,18 @@ $MyIconWidth:290px;
 
         background-image:url('/texture/codeBackGround.webp');
         background-size: cover;
-        &:before{
+        .back-ground{
             width:100%;
-            height:100%;
-            background-color: rgba(yellow,0.7);
-            content:"";
+            height: 100%;
+            .back-ground-overlay{
+                width:100%;
+                height:100%;
+                background-color: rgba(yellow,0.7);
+            }
+
+        }
+        .content{
+
         }
         .myIcon{
             width:$MyIconWidth;

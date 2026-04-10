@@ -39,7 +39,7 @@ const {speed}:Props = Astro.props;
 }
 </style>
 <script>
-    import {MathUtility} from '../scripts/utility'
+    import {MathUtility, Time} from '../scripts/utility'
     class MyCarousel extends HTMLElement{
         //#このインスタンスのインスタンス関数メンバ全体で使われる識別子
         private cardsContainer:HTMLElement|null=null;
@@ -154,7 +154,7 @@ const {speed}:Props = Astro.props;
 
             this.dragDeltaX = this.currentDragX - this.prevDragX
             if (!this.hovering && !this.dragging) {
-                this.currentX += this.speed * MathUtility.DeltaTime;
+                this.currentX += this.speed * Time.DeltaTime;
             }
             else if (this.hovering && this.dragging) {
                 this.currentX += this.dragDeltaX;
