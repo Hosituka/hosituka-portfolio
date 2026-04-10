@@ -7,7 +7,7 @@ export abstract class MathUtility{
         return value - Math.floor(value / length) * length;
     }
     static Clamp(value:number,min:number,max:number){
-        return Math.max(Math.min(value,min),max);
+        return Math.min(Math.max(value,min),max);
     }
 
     static PerlinLike=(seed:number,offset:number,size:number):number=>{

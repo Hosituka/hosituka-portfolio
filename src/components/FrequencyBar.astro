@@ -36,27 +36,43 @@ const {zIndex='auto',yOffset = 0,maxHeight}:Props = Astro.props;
 </style>
 
 <script>
+import type { number } from 'astro:schema';
 import {type Vector2,MathUtility,Time} from '../scripts/utility'
+import { Value } from 'sass';
 
     //#音声波形の縦棒一つ一つに対応するクラス
     class VerticalBar{
-        static AllBarWidth:number = 5;
-        static AllBarMaxHeight:number = 5; 
         private pos:Vector2 = {x:0,y:0};
-        private size:Vector2 = {x:VerticalBar.AllBarWidth,y:100}
-        constructor(xPos:number,yPos:number){
+        private size:Vector2 = {x:5,y:100}
+        private targetFrequencBar:FrequencyBar|null = null;
+        constructor(xPos:number,yPos:number,frequencBar:FrequencyBar){
             this.pos.x = xPos;
             this.pos.y = yPos;
+            this.targetFrequencBar = frequencBar;
         }
-        Draw=(ctx2D:CanvasRenderingContext2D):void=>{
+        Draw=(ctx2D:CanvasRenderingContext2D,maxHeight:number):void=>{
+            if(!this.targetFrequencBar)return;
+            const restrain:Function = (x:number,width:number,min:number):number=>{
+                let value = x  / width;
+                value = value * 2 - 1;
+                value = Math.abs(value * 8);
+                value = 1 - value;
+                value = MathUtility.Clamp(value,min,1 - min);
+
+                return value;
+            }
             ctx2D.fillStyle = "white";
-            this.size.y = MathUtility.Fbm(this.pos.x * 0.001 + Time.TimeInSeconds * 0.2,this.pos.y,4) * VerticalBar.AllBarMaxHeight;
+            this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,8) *
+                          maxHeight *
+                          restrain(this.pos.x - 100,this.targetFrequencBar.clientWidth,0.2);
             const halfSizeY = this.size.y / 2;
             ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
         }
     }
     //#VerticalBarを制御するクラス
     class FrequencyBar extends HTMLElement{
+        AllBarMaxHeight:number = 0;
+        private AllBarWidth:number = 5;
         private canvas:null|HTMLCanvasElement=null;
         private ctx2D:null|CanvasRenderingContext2D=null;
         private verticalBars:VerticalBar[] = [];
@@ -76,7 +92,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             this.canvas.height = this.clientHeight;
             //#バーの挙動に必要な情報を流し込む処理
             if(!this.dataset.maxHeight){console.error('maxHeightというカスタム属性が存在しません');return;}
-            VerticalBar.AllBarMaxHeight = parseFloat(this.dataset.maxHeight) * this.clientHeight;
+            this.AllBarMaxHeight = parseFloat(this.dataset.maxHeight) * this.clientHeight;
 
             //#縦のバーを等間隔で生成するコード
             const targetBarCount = this.clientWidth / this.barSpacing;
@@ -87,7 +103,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             const yOffset:number = parseFloat(this.dataset.yOffset);
             //##実際に縦のバーの位置を決めながら生成するコード
             for(let barCount=0;barCount<targetBarCount;barCount++){
-                this.verticalBars.push(new VerticalBar(barCount * (this.barSpacing + VerticalBar.AllBarWidth),halfClientHeight + yOffset));
+                this.verticalBars.push(new VerticalBar(barCount * (this.barSpacing + this.AllBarWidth),halfClientHeight + yOffset,this));
             }
         }
         //#毎フレームの描画前に呼ばれる関数
@@ -95,13 +111,9 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             if(!this.canvas||!this.ctx2D){return};
             this.ctx2D.clearRect(0,0,this.clientWidth,this.clientHeight);
             for(const verticalBar of this.verticalBars){
-                verticalBar.Draw(this.ctx2D);
+                verticalBar.Draw(this.ctx2D,this.AllBarMaxHeight);
             }
             requestAnimationFrame(this.Update);
-        }
-
-        private GetElement=(selectorName:string)=>{
-
         }
     }
     customElements.define('frequency-bar',FrequencyBar);
