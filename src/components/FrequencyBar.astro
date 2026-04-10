@@ -61,7 +61,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
                 return value;
             }
             ctx2D.fillStyle = "white";
-            this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,8) *
+            this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,4) *
                           maxHeight *
                           restrain(this.pos.x - 125,this.targetFrequencBar.clientWidth,0.2);
             const halfSizeY = this.size.y / 2;
