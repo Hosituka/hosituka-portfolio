@@ -8,14 +8,14 @@
 
 <style lang="scss">
 @property --offset-x{
-    syntax:"<number>";
+    syntax:"<length>";
     inherits: false;
-    initial-value: 0;
+    initial-value: 0px;
 }
 @property --offset-y{
-    syntax:"<number>";
+    syntax:"<length>";
     inherits: false;
-    initial-value: 0;
+    initial-value: 0px;
 }
 @property --max-bar-height-rate{
     syntax:"<number>";
@@ -78,7 +78,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             ctx2D.fillStyle = "white";
             this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,4) *
                           this.frequencyBar.MaxBarHeight *
-                          restrain(this.pos.x,this.frequencyBar.OffsetX,this.frequencyBar.clientWidth,0.25,100);
+                          restrain(this.pos.x,this.frequencyBar.OffsetX,this.frequencyBar.clientWidth,0.15,100);
             const halfSizeY = this.size.y / 2;
             ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
         }
