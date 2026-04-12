@@ -51,19 +51,31 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
         }
         Draw=(ctx2D:CanvasRenderingContext2D,maxHeight:number):void=>{
             if(!this.targetFrequencBar)return;
-            const restrain:Function = (x:number,width:number,min:number):number=>{
-                let value = x  / width;
+            const restrain:Function = (x:number,offset:number,canvasWidth:number,ridgeMinHeightRate:number,ridgeWidth:number):number=>{
+                //#グラフにおいて_Λ_みたいな形を作るための処理※この見出しの中にある##はoffsetが0であると仮定している。
+                let value = x - offset;
+                //##value∈[0,1]
+                value = value / canvasWidth
+                //##value∈[-1,1]
                 value = value * 2 - 1;
-                value = Math.abs(value * 8);
+                //##value∈[0,1],グラフにおいてv字にする
+                value = Math.abs(value);
+                //##グラフにおいてΛ字にする。
                 value = 1 - value;
-                value = MathUtility.Clamp(value,min,1 - min);
+                console.log(value);
+                //#offsetが正の数だとvalueが負の数になる。つまりpow関数において不正な値となるためそれを防ぐ処理
+                value = Math.max(value,0);
+                //#隆起の幅がcanvasWidthに比例していたが、それを固定&決める処理
+                value = Math.pow(value,canvasWidth/ridgeWidth);
+                //#隆起の最低の高さを設ける処理
+                value = MathUtility.Clamp(value,ridgeMinHeightRate,1 - ridgeMinHeightRate);
 
                 return value;
             }
             ctx2D.fillStyle = "white";
-            this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,4) *
+                          this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,4) *
                           maxHeight *
-                          restrain(this.pos.x - 125,this.targetFrequencBar.clientWidth,0.2);
+                          restrain(this.pos.x,125,this.targetFrequencBar.clientWidth,0.2,75);
             const halfSizeY = this.size.y / 2;
             ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
         }
@@ -71,7 +83,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
     //#VerticalBarを制御するクラス
     class FrequencyBar extends HTMLElement{
         AllBarMaxHeight:number = 0;
-        private AllBarWidth:number = 5;
+        private BarWidth:number = 5;
         private canvas:null|HTMLCanvasElement=null;
         private ctx2D:null|CanvasRenderingContext2D=null;
         private verticalBars:VerticalBar[] = [];
@@ -104,15 +116,17 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             this.AllBarMaxHeight = parseFloat(this.dataset.maxHeight) * this.clientHeight;
 
             //#縦のバーを等間隔で生成するコード
-            const targetBarCount = this.clientWidth / this.barSpacing;
+            const barX_Step = this.barSpacing + this.BarWidth;
+            const targetBarCount = Math.ceil(this.clientWidth / barX_Step);
             const halfClientHeight:number = this.clientHeight / 2;
+            console.log(targetBarCount);
             //console.log('生成目標となるバーの数：' + targetBarCount)
             //##data属性から生成に用いる値を取得するコード
             if(!this.dataset.yOffset){console.error('yOffsetというカスタム属性が存在しません');return;}
             const yOffset:number = parseFloat(this.dataset.yOffset);
             //##実際に縦のバーの位置を決めながら生成するコード
             for(let barCount=0;barCount<targetBarCount;barCount++){
-                this.verticalBars.push(new VerticalBar(barCount * (this.barSpacing + this.AllBarWidth),halfClientHeight + yOffset,this));
+                this.verticalBars.push(new VerticalBar(barCount * barX_Step,halfClientHeight + yOffset,this));
             }
         }
         //#毎フレームの描画前に呼ばれる関数
