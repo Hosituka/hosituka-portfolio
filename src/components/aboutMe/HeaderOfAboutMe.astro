@@ -3,23 +3,31 @@ import FrequencyBar from "../FrequencyBar.astro"
 
 ---
 <header-of-about-me role="header">
-    <div class="back-ground">
-        <FrequencyBar zIndex="1"  yOffset={20} maxHeight={1.8}/>
-        <div class="my-icon">
-            <img class="h-of-hosituka"src="/texture/hOfHosituka.webp" alt="ほしつかのHOのH">
-            <img class="o-of-hosituka"src="/texture/oOfHosituka.webp" alt="ほしつかのHOのO">
-        </div>
-        <div class="back-ground-overlay">
+    <FrequencyBar maxBarHeightRate={2}/>
+    <div class="my-icon">
+        <img class="h-of-hosituka"src="/texture/hOfHosituka.webp" alt="ほしつかのHOのH">
+        <img class="o-of-hosituka"src="/texture/oOfHosituka.webp" alt="ほしつかのHOのO">
     </div>
-    <div class="content">
+    <div class="back-ground-overlay"/>
+    <div class="about-me-wrapper">
+        <h1>Hosituka</h1>
+        <p>
+            scratchというプログラミング学習ツールをきっかけに、unityで3dゲームを作っている人です。
+            <br>その名残から、ほとんどの作品はブラウザ上で遊べます。
+            <br>最近はwebサイト(フロントエンド)の勉強も始めました。
+            <br>分からないことだらけで、苦戦していますが、楽しめてます。
+            <br>いつか、webサイトの知識とunityの知識が繋がった物を作りたいです。
+        </p>
     </div>
+
 </header-of-about-me>
 <style lang="scss">
 @use '../../styles/_utility' as *;
 //#変数たち
 //##弄っても良いプロパティ
+
 $MyIconWidth:376px;
-$MyIconXOffset:200px;
+$MyIconXOffset:245px;
 $MyIconYOffset:65px;
 //##計算の都合上あった方が良い変数、つまり弄るな
 $HalfMyIconWidth:$MyIconWidth / 2;
@@ -27,39 +35,52 @@ $HalfMyIconWidth:$MyIconWidth / 2;
     header-of-about-me{
         display:block;
         position:relative;
-        .back-ground{
+        :global(frequency-bar){
+            display:block;
             position:absolute;
-            .my-icon{
+            top:50px;
+            z-index: 1;
+            //#FrequencyBarというuiコンポーネント用のcss変数
+        }
+        .my-icon{
+            position:absolute;
+            left:calc(50% - $HalfMyIconWidth + $MyIconXOffset);
+            top:$MyIconYOffset;
+            &::before{
                 position:absolute;
-                left:calc(50% - $HalfMyIconWidth + $MyIconXOffset);
-                top:$MyIconYOffset;
-                &::before{
-                    position:absolute;
-                }
-                .h-of-hosituka{
-                    z-index:2;
-                    position:absolute;
-                    top:50%;
-                    left:30%;
-                    transform:translate(-50%,-50%);
-                }
-                .o-of-hosituka{
-                    z-index:2;
-                    position:absolute;
-                    top:52%;
-                    right:25%;
-                    transform:translate(50%,-50%);
-                }
             }
-            .back-ground-overlay{
-                position:absolute;
+            .h-of-hosituka{
                 z-index:2;
+                position:absolute;
+                top:50%;
+                left:30%;
+                transform:translate(-50%,-50%);
             }
-
+            .o-of-hosituka{
+                z-index:2;
+                position:absolute;
+                top:52%;
+                right:25%;
+                transform:translate(50%,-50%);
+            }
         }
-        .content{
-
+        .back-ground-overlay{
+            position:absolute;
+            z-index:2;
         }
+        .about-me-wrapper{
+            position:absolute;
+            z-index:3;
+            left:calc(50% - 225px);
+            top:90px;
+            transform: translateX(-50%);
+
+            display:flex;
+            gap:20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        
     }
 }
 @layer Appearance{
@@ -67,47 +88,64 @@ $HalfMyIconWidth:$MyIconWidth / 2;
         width:100%;
         height:470px;
 
-        .back-ground{
+        background-image:url('/texture/codeBackGround.webp');
+        background-size: cover;
+        :global(frequency-bar){
             width:100%;
-            height: 100%;
-            background-image:url('/texture/codeBackGround.webp');
-            background-size: cover;
+            height:420px;
+            --offset-x:145;
+            --max-bar-height-rate:2;
+        }
+        .my-icon{
+            width:$MyIconWidth;
+            aspect-ratio: 1/1;
 
-            .my-icon{
-                width:$MyIconWidth;
-                aspect-ratio: 1/1;
-
-                &::before{
-                    width:100%;
-                    height:100%;
-                    background-color: $my-icon-main-color;
-                    border-radius: 50%;
-                    border:2px solid white;
-                    content:"";
-                }
-                .h-of-hosituka{
-                    width:150px;
-                }
-                .o-of-hosituka{
-                    width:165px;
-                    animation: RotateZ forwards 16s linear infinite normal;
-                }
-            }
-
-            .back-ground-overlay{
+            &::before{
                 width:100%;
                 height:100%;
-                background-color: rgba(yellow,0.7);
-                mask-image: radial-gradient(
-                    circle $HalfMyIconWidth at calc(50% + $MyIconXOffset) ($MyIconYOffset + $HalfMyIconWidth),
-                    transparent 0,transparent $HalfMyIconWidth - 2,
-                    black $HalfMyIconWidth + 1
-                );           
-             }
-
+                background-color: $my-icon-main-color;
+                border-radius: 50%;
+                border:2px solid white;
+                content:"";
+            }
+            .h-of-hosituka{
+                width:40%;
+            }
+            .o-of-hosituka{
+                width:45%;
+                animation: RotateZ forwards 16s linear infinite normal;
+            }
         }
-        .content{
 
+        .back-ground-overlay{
+            width:100%;
+            height:100%;
+            background-color: rgba(yellow,0.7);
+            mask-image: radial-gradient(
+                circle $HalfMyIconWidth at calc(50% + $MyIconXOffset) ($MyIconYOffset + $HalfMyIconWidth),
+                transparent 0,transparent $HalfMyIconWidth - 2,
+                black $HalfMyIconWidth + 1
+            );           
+        }
+        .about-me-wrapper{
+            width:500px;
+            h1{
+                font-size:60px;
+                height:60px;
+                color:white;
+
+                -webkit-text-stroke: 1px black;
+            }
+            p{
+                width:100%;
+                height:250px;
+                background-color: rgba(black,0.5);
+                border-radius: 40px;
+
+                padding:10px;
+                line-height: 1.6;
+                color:white;
+            }
         }
     }
 }
@@ -118,5 +156,66 @@ $HalfMyIconWidth:$MyIconWidth / 2;
         transform:translate(50%,-50%) rotateZ(360deg);
     }
 }
+@media (max-width:1000px) {
+    header-of-about-me{
+        height:800px;
+        $MyIconXOffset:0px;
+        :global(frequency-bar){
+            --offset-x:-70;
+        }
+        .back-ground-overlay{
+            mask-image: radial-gradient(
+                circle $HalfMyIconWidth at calc(50% + $MyIconXOffset) ($MyIconYOffset + $HalfMyIconWidth),
+                transparent 0,transparent $HalfMyIconWidth - 2,
+                black $HalfMyIconWidth + 1
+            );           
+        }
+        .my-icon{
+            left:calc(50% - $HalfMyIconWidth + $MyIconXOffset);
+        }
+        .about-me-wrapper{
+            left:50%;
+            top:440px;
+            transform:translateX(-50%);
+        }
+    }
+}
+@media (max-width:600px) {
+    header-of-about-me{
+        height:1000px;
+        $MyIconXOffset:0px;
+        $MyIconWidth:300px;
+        $HalfMyIconWidth:$MyIconWidth / 2;
+
+        :global(frequency-bar){
+            --offset-x:-50;
+            --offset-y:-50;
+            --max-bar-height-rate:1.4;
+        }
+        .back-ground-overlay{
+            mask-image: radial-gradient(
+                circle $HalfMyIconWidth at calc(50% + $MyIconXOffset) ($MyIconYOffset + $HalfMyIconWidth),
+                transparent 0,transparent $HalfMyIconWidth - 2,
+                black $HalfMyIconWidth + 1
+            );           
+        }
+        .my-icon{
+            left:calc(50% - $HalfMyIconWidth + $MyIconXOffset);
+
+            width:$MyIconWidth;
+        }
+        .about-me-wrapper{
+            top:380px;
+
+            width:340px;
+            p{
+                height:300px;
+            }
+        }
+    }
+}
+    
+
+    
 
 </style>
