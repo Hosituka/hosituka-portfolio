@@ -48,9 +48,10 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
         private pos:Vector2 = {x:0,y:0};
         private size:Vector2 = {x:5,y:100}
         private frequencyBar:FrequencyBar|null = null;
-        constructor(xPos:number,yPos:number,frequencBar:FrequencyBar){
+        constructor(xPos:number,yPos:number,width:number,frequencBar:FrequencyBar){
             this.pos.x = xPos;
             this.pos.y = yPos;
+            this.size.x = width;
             this.frequencyBar = frequencBar;
         }
         Draw=(ctx2D:CanvasRenderingContext2D,):void=>{
@@ -89,11 +90,11 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
         MaxBarHeight:number = 0;
 
         private offsetY:number = 0;
-        private barWidth:number = 5;
+        private barWidth:number = 2.5;
         private canvas:null|HTMLCanvasElement=null;
         private ctx2D:null|CanvasRenderingContext2D=null;
         private verticalBars:VerticalBar[] = [];
-        private barSpacing:number = 10;
+        private barSpacing:number = 7;
 		connectedCallback(){
             this.canvas = this.querySelector('canvas');
             if(!this.canvas){console.error('canvas要素がみつかりません');return}
@@ -128,7 +129,7 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             //console.log('生成目標となるバーの数：' + targetBarCount)
             //##実際に縦のバーの位置を決めながら生成するコード
             for(let barCount=0;barCount<targetBarCount;barCount++){
-                this.verticalBars.push(new VerticalBar(barCount * barX_Step,halfClientHeight+this.offsetY,this));
+                this.verticalBars.push(new VerticalBar(barCount * barX_Step,halfClientHeight + this.offsetY,this.barWidth,this));
             }
         }
         //#毎フレームの描画前に呼ばれる関数

@@ -12,8 +12,8 @@ import FrequencyBar from "../FrequencyBar.astro"
     <div class="about-me-wrapper">
         <h1>Hosituka</h1>
         <p>
-            scratchというプログラミング学習ツールをきっかけに、unityで3dゲームを作っている人です。
-            <br>その名残から、ほとんどの作品はブラウザ上で遊べます。
+            scratchという学習ツールからプログラミングにはまり、今ではunityで3dゲームを作っている人です。
+            <br>その名残から、ブラウザ上で遊べる作品が多いです。
             <br>最近はwebサイト(フロントエンド)の勉強も始めました。
             <br>分からないことだらけで、苦戦していますが、楽しめてます。
             <br>いつか、webサイトの知識とunityの知識が繋がった物を作りたいです。
@@ -59,7 +59,7 @@ $HalfMyIconWidth:$MyIconWidth / 2;
             .o-of-hosituka{
                 z-index:2;
                 position:absolute;
-                top:52%;
+                top:55%;
                 right:25%;
                 transform:translate(50%,-50%);
             }
@@ -72,11 +72,11 @@ $HalfMyIconWidth:$MyIconWidth / 2;
             position:absolute;
             z-index:3;
             left:calc(50% - 225px);
-            top:90px;
+            top:100px;
             transform: translateX(-50%);
 
             display:flex;
-            gap:20px;
+            gap:10px;
             flex-direction: column;
             align-items: center;
         }
@@ -93,7 +93,7 @@ $HalfMyIconWidth:$MyIconWidth / 2;
         :global(frequency-bar){
             width:100%;
             height:420px;
-            --offset-x:145;
+            --offset-x:165;
             --max-bar-height-rate:2;
         }
         .my-icon{
@@ -112,7 +112,7 @@ $HalfMyIconWidth:$MyIconWidth / 2;
                 width:40%;
             }
             .o-of-hosituka{
-                width:45%;
+                width:41%;
                 animation: RotateZ forwards 16s linear infinite normal;
             }
         }
@@ -130,19 +130,17 @@ $HalfMyIconWidth:$MyIconWidth / 2;
         .about-me-wrapper{
             width:500px;
             h1{
-                font-size:60px;
-                height:60px;
+                font-size:80px;
                 color:white;
 
                 -webkit-text-stroke: 1px black;
             }
             p{
                 width:100%;
-                height:250px;
                 background-color: rgba(black,0.5);
                 border-radius: 40px;
 
-                padding:10px;
+                padding:15px;
                 line-height: 1.6;
                 color:white;
             }
@@ -161,7 +159,7 @@ $HalfMyIconWidth:$MyIconWidth / 2;
         height:800px;
         $MyIconXOffset:0px;
         :global(frequency-bar){
-            --offset-x:-70;
+            --offset-x:-75;
         }
         .back-ground-overlay{
             mask-image: radial-gradient(
@@ -182,13 +180,13 @@ $HalfMyIconWidth:$MyIconWidth / 2;
 }
 @media (max-width:600px) {
     header-of-about-me{
-        height:1000px;
+        height:800px;
         $MyIconXOffset:0px;
         $MyIconWidth:300px;
         $HalfMyIconWidth:$MyIconWidth / 2;
 
         :global(frequency-bar){
-            --offset-x:-50;
+            --offset-x:-60;
             --offset-y:-50;
             --max-bar-height-rate:1.4;
         }
@@ -205,12 +203,9 @@ $HalfMyIconWidth:$MyIconWidth / 2;
             width:$MyIconWidth;
         }
         .about-me-wrapper{
-            top:380px;
+            top:370px;
 
             width:340px;
-            p{
-                height:300px;
-            }
         }
     }
 }
