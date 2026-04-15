@@ -5,7 +5,7 @@ interface Props {
 }
 const {sectionTitle,zIndex="auto"}:Props = Astro.props;
 ---
-<work-cards-section role="section" style={`--z-index:${zIndex};`}>
+<work-cards-section role="region" style={`--z-index:${zIndex};`}>
     <h2>{sectionTitle}</h2>
     <div>
         <slot></slot>

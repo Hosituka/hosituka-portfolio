@@ -2,18 +2,23 @@
 //#自分のスキルを表示する用のアコーディオン
 interface Props {
     skillName: string;
+    skillIconURL:string;
+    a:string;
 }
-const {skillName} = Astro.props;
+const {skillName,skillIconURL,a: proficiency} = Astro.props;
 ---
 
 <accordion-of-skills>
-    <button class="show-content-button" aria-expanded="false">
-        <h3 class="accordion-title">{skillName}</h3>
-    </button>
-    <div class="accordion-content" >
-        <div class="content-inner">
-            <slot />
+    <div class="header" aria-expanded="false">
+        <h3 class="title">{skillName}</h3>
+        <img src={skillIconURL} alt="テスト">
+        <div class="skill-bar">
+            <div class="skill-bar-fill" style=`--proficiency:${proficiency}`></div>
+            <h3>{proficiency}</h3>
         </div>
+    </div>
+    <div class="body">
+        <slot />
     </div>
 </accordion-of-skills>
 
@@ -22,19 +27,171 @@ const {skillName} = Astro.props;
 @layer Layout{
     accordion-of-skills{
         display:block;
-        .show-content-button{
+        .header{
+            position:relative;
+            display:grid;
+            grid-template-areas:"img title"
+                                "img skill-bar";
+            grid-template-columns: auto 1fr;    
+            
+            column-gap: 10px;
+            .title{
+                grid-area:title;
+
+                display:flex;
+                align-items:center ;
+            }
+            img{
+                grid-area:img;
+                align-self: center;
+                margin-left:5px;
+            }
+            .skill-bar{
+                grid-area:skill-bar;
+                position:relative;
+                h3{
+                    position:absolute;
+                    top:50%;
+                    transform:translateY(-50%);
+                    left:10px;
+                }
+                .skill-bar-fill{
+                    position:absolute;
+                }
+            }
+
+        }
+        .body{
             position:relative;
         }
+
     }
 }
 @layer Appearance{
     accordion-of-skills{
-        width:800px;
+        width:90%;
         height:auto;
-        background-color: $light-yellow;
-        .show-content-button{
+
+        border:2px solid black;
+        box-shadow:3px 3px 0 black;
+        border-radius:10px;
+
+        overflow:hidden;
+        .header{
             width:100%;
-            height:100px;
+            height:80px;
+            .title{
+                font-size: 30px;
+            }
+            img{
+                width:70px;
+            }
+            .skill-bar{
+                width:calc(100% - 10px);
+                height:25px;
+                border-radius: 30px;
+                h3{
+                    
+                }
+                .skill-bar-fill{
+                    width:var(--proficiency);
+                    height:100%;
+                    border-radius: 10px;
+                    background-color: $yellow;
+                }
+            }
+        }
+        .body{
+            transition: height 0.3s;
+
+            border-top:1px solid black;
+        }
+    }
+    accordion-of-skills:not(.is-open){
+        .header{
+        }
+        .body{
+            height:0px;
+        }
+    }
+
+    accordion-of-skills.is-open{
+        .header{
+        }
+        .body{
+            width:100%;
+            height:var(--height);
+
+            background-color: white;
+        }
+    }
+    accordion-of-skills:not(.is-header-hover){
+        .header{
+            background-color: $light-yellow;
+            .skill-bar{
+                border:3px solid $yellow;
+                .skill-bar-fill{
+                    background-color: $yellow;
+                }
+            }
+        }
+        .body{
+            &:not(.is-scroll){
+            }
+            &.is-scroll{
+                overflow-y:scroll;
+                &::-webkit-scrollbar{
+                    width:15px;
+                }
+                &::-webkit-scrollbar-track{
+                    background-color: $light-yellow;
+                }
+                &::-webkit-scrollbar-thumb{
+                    background-color:gray;
+                    border-radius: 6px;
+                    border-right:4px solid $light-yellow;
+                    border-left:4px solid $light-yellow;
+                
+                }
+            }
+        }
+    }
+    accordion-of-skills.is-header-hover{
+        .header{
+            background-color: $light-blue;
+            .title{
+                color:white;
+            }
+            .skill-bar{
+                border:3px solid $blue;
+                .skill-bar-fill{
+                    background-color: $blue;
+                }
+                h3{
+                    color:white;
+                }
+            }
+        }
+        .body{
+            &:not(.is-scroll){
+            }
+            &.is-scroll{
+                overflow-y:scroll;
+                &::-webkit-scrollbar{
+                    width:15px;
+                }
+                &::-webkit-scrollbar-track{
+                    background-color: $light-blue;
+                }
+                &::-webkit-scrollbar-thumb{
+                    background-color:gray;
+                    border-radius: 6px;
+                    border-right:4px solid $light-blue;
+                    border-left:4px solid $light-blue;
+                
+                }
+            }
+
         }
 
     }
@@ -42,10 +199,54 @@ const {skillName} = Astro.props;
 }
 </style>
 <script>
+
 class AccordionOfSkills extends HTMLElement{
+    private targetHeightOfBody:number = 200;
+    private header:HTMLElement|null = null;
+    private body:HTMLElement|null = null;
     connectedCallback(){
+        requestAnimationFrame(this.Start);
     }
-   
+    private Start=()=>{
+        this.header =  this.querySelector('.header');
+        if(!this.header){console.error('headerが見つかりませんでした');return;}
+        this.body = this.querySelector('.body');
+        if(!this.body){console.error('bodyが見つかりませんでした');return;}
+        //#イベント関数の購読
+        //##headerがクリックされた時の処理
+        this.header.addEventListener('click',()=>{
+            this.classList.toggle('is-open');
+        })
+        //##headerに対するhover処理
+        this.header.addEventListener('mouseenter',()=>{
+            this.classList.add('is-header-hover')
+        })
+        this.header.addEventListener('mouseleave',()=>{
+            this.classList.remove('is-header-hover')
+        })
+        //##リサイズを検知するための初期化
+        const observer = new ResizeObserver(() => {
+            this.OnResize();
+        });
+        observer.observe(this);
+
+        //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
+        if(this.targetHeightOfBody < this.body.scrollHeight){
+            this.body.classList.add('is-scroll');
+        }
+        //#bodyのheightを確定する処理
+        this.body.style.setProperty('--height',`${Math.min(this.body.scrollHeight,this.targetHeightOfBody)}px`);
+    }
+    private OnResize=()=>{
+        if(!this.body||!this.header){return;}
+        //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
+        if(this.targetHeightOfBody < this.body.scrollHeight){
+            this.body.classList.add('is-scroll');
+        }
+        //#bodyのheightを確定する処理
+        this.body.style.setProperty('--height',`${Math.min(this.body.scrollHeight,this.targetHeightOfBody)}px`);
+
+    }
 }
 customElements.define('accordion-of-skills',AccordionOfSkills);
 </script>

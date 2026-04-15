@@ -57,28 +57,29 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
         Draw=(ctx2D:CanvasRenderingContext2D,):void=>{
             if(!this.frequencyBar)return;
             const restrain:Function = (x:number,offset:number,canvasWidth:number,ridgeMinHeightRate:number,ridgeWidth:number):number=>{
-                //#グラフにおいて_Λ_みたいな形を作るための処理※この見出しの中にある##はoffsetが0であると仮定している。
+                //#グラフにおいて山みたいな形を作るための処理
+                //##山の中でも台形ではない三角形な山を作る処理※個々の中の###はoffsetが０であるとした説明
                 let value = x - offset;
-                //##value∈[0,1]
+                //###value∈[0,1]
                 value = value / canvasWidth
-                //##value∈[-1,1]
+                //###value∈[-1,1]
                 value = value * 2 - 1;
-                //##value∈[0,1],グラフにおいてv字にする
+                //###value∈[0,1],グラフにおいてv字にする
                 value = Math.abs(value);
-                //##グラフにおいてΛ字にする。
+                //###グラフにおいてΛ字にする。
                 value = 1 - value;
-                //#offsetが正の数だとvalueが負の数になる。つまりpow関数において不正な値となるためそれを防ぐ処理
+                //##offsetが正の数だとvalueが負の数になる。つまりpow関数において不正な値となるためそれを防ぐ処理
                 value = Math.max(value,0);
-                //#隆起の幅がcanvasWidthに比例していたが、それを固定&決める処理
+                //##隆起の幅がcanvasWidthに比例していたが、それを固定&決める処理
                 value = Math.pow(value,canvasWidth/ridgeWidth);
-                //#隆起の最低の高さを設ける処理
-                value = MathUtility.Clamp(value,ridgeMinHeightRate,1 - ridgeMinHeightRate);
+                //##隆起の最低の高さを設ける処理
+                value = Math.max(value,ridgeMinHeightRate,0);
                 return value;
             }
             ctx2D.fillStyle = "white";
             this.size.y = MathUtility.Fbm(this.pos.x * 0.01 + Time.TimeInSeconds * 0.2,this.pos.y,4) *
                           this.frequencyBar.MaxBarHeight *
-                          restrain(this.pos.x,this.frequencyBar.OffsetX,this.frequencyBar.clientWidth,0.15,100);
+                          restrain(this.pos.x,this.frequencyBar.OffsetX,this.frequencyBar.clientWidth,0.1,100);
             const halfSizeY = this.size.y / 2;
             ctx2D.fillRect(this.pos.x,this.pos.y - halfSizeY,this.size.x,this.size.y);
         }
