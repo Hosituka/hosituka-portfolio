@@ -159,7 +159,7 @@ const {speed}:Props = Astro.props;
             else if (this.hovering && this.dragging) {
                 this.currentX += this.dragDeltaX;
             }
-            this.currentX = MathUtility.Repeat(this.currentX, -this.scrollHalfWidth)
+            this.currentX = MathUtility.Repeat(this.currentX,0, -this.scrollHalfWidth)
             this.cardsContainer.style.transform = `translateX(${this.currentX}px) translateZ(0)`;
             this.prevDragX = this.currentDragX;
             requestAnimationFrame(this.Update);
