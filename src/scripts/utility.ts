@@ -59,10 +59,12 @@ export class Time{
         requestAnimationFrame(Time.UpdateTimeDelta);
     }
 
-    static TimeInSeconds:number = 0;
+    static TimeInS:number = 0;
+    static TimeInMS:number = 0;
     static UpdateTimeInSeconds(time:number){
         //#Timeを更新するための処理
-        Time.TimeInSeconds = time / 1000;
+        Time.TimeInMS = time;
+        Time.TimeInS = time / 1000;
         requestAnimationFrame(Time.UpdateTimeInSeconds);
     }
 
