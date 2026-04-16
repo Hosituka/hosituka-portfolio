@@ -44,28 +44,36 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		private pos:Vector2={x:0,y:0}
 		private size:number = 1;
 
-		private canvasWidth:number = 0;
-		private canvasHeight:number = 0;
-		private minSpeed:number= Math.random() * 40;
+		private particleBackGround:ParticleBackGround|null = null;
+		private minSpeed:number= 40;
 		//#perlinLike関数用の識別子
 		private randomSeed:number = Math.random() * 40;
-		constructor(canvasWidth:number, canvasHeight:number){
-			this.canvasWidth = canvasWidth;
-			this.canvasHeight = canvasHeight;
-			this.pos.x = Math.random() * this.canvasWidth;
-			this.pos.y = Math.random() * this.canvasHeight;
+		constructor(particleBackGround:ParticleBackGround,isAdjust:boolean){
+			this.particleBackGround = particleBackGround;
+			this.pos.x = Math.random() * this.particleBackGround.canvasWidth;
 			this.size = Math.random() * 4 + 3;
+			this.minSpeed = Math.random() * 40;
+			if(isAdjust){
+				this.pos.y = this.particleBackGround.canvasHeight + 5;
+			}
+			else{
+				this.pos.y = Math.random() * this.particleBackGround.canvasHeight;
+			}
 		}
 		//#描画前の処理
 		Update=()=>{
+			if(!this.particleBackGround) return;
 			this.pos.x -= (MathUtility.PerlinLike(Time.TimeInMS,this.randomSeed,3) * 2 - 1) * 120 * Time.DeltaTime;
 			this.pos.y -= (MathUtility.PerlinLike(Time.TimeInMS,this.randomSeed,3) * 40 + this.minSpeed) * Time.DeltaTime;
-			this.pos.x = MathUtility.Repeat(this.pos.x,this.canvasWidth);
-			this.pos.y = MathUtility.Repeat(this.pos.y,this.canvasHeight);
+			this.pos.x = MathUtility.Repeat(this.pos.x,-5,this.particleBackGround.canvasWidth);
+			this.pos.y = MathUtility.Repeat(this.pos.y,-5,this.particleBackGround.canvasHeight + 5);
 			//#画面最上部の外側に出た時
-			if(this.pos.y < -10){
-				this.pos.x = Math.random() * this.canvasWidth;
+			if(this.pos.y < -4){
+				
+				this.pos.x = Math.random() * this.particleBackGround.canvasWidth;
 				this.size = Math.random() * 4 + 3;
+				this.minSpeed = Math.random() * 40;
+				this.particleBackGround.AdjustParticleCount(this);
 			}
 		}
 		//#あるcanvasに対して描画する処理
@@ -86,59 +94,73 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		}
 	}
 	class ParticleBackGround extends HTMLElement{
+		canvasWidth:number = 0;
+		canvasHeight:number = 0;
+		//#目標となるパーティクルの個数
+		targetParticleCount:number = 0;
+		//#現在のパーティクル数
+		particleCount:number = 0;
 		private canvas:HTMLCanvasElement|null = null;
 		private ctx2D:CanvasRenderingContext2D|null = null;
 		private particles:Particle[] = [];
-
+		private isResize:boolean = false;
 		connectedCallback(){
+			const GenerateParticle=()=>{
+				if(!this.canvas) return;
+				//##解像度を指定する処理
+				this.canvas.width = this.clientWidth;
+				this.canvas.height = this.clientHeight;
+				this.canvasWidth = this.canvas.width;
+				this.canvasHeight = this.canvas.height;
+				//##パーティクルを生成する処理
+				//###パーティクルの生成密度を取得
+				const particleDensity:number = Number(this.dataset.particleDensity) || 30;
+				///###生成密度を基にパーティクルの生成個数を計算する。
+				const area:number = this.clientWidth * this.clientHeight;
+				this.targetParticleCount = Math.floor((area / 10000) * particleDensity);
+				//console.log(area)
+				//console.log("生成個数:"+particleCount)
+				//###実際に生成する処理
+				for(let i = 0; i< this.targetParticleCount; i++){
+					this.particles.push(new Particle(this,false));
+				}
+				this.particleCount = this.targetParticleCount;
+			}
 			//#初期化
 			this.canvas = this.querySelector('canvas');
 			if(this.canvas === null){console.log('canvas要素が見つかりませんでした'); return};
 			this.ctx2D = this.canvas.getContext('2d');
 			//##メインの動きの順序指定
-			requestAnimationFrame(this.GenerateParticle);
+			requestAnimationFrame(GenerateParticle);
 			requestAnimationFrame(this.Update);
 			//##リサイズを検知するための初期化
 			const observer = new ResizeObserver(() => {
-				this.OnResize();
+				this.isResize = true;
 			});
 			observer.observe(this);
 
 		}
 
 		
-		private OnResize=()=>{
-			if(!this.canvas) return;
-			console.log('1');
-			//#参照をクリアする事でgcを走らせインスタンスを破棄する
-			this.particles = [];
-			this.GenerateParticle();
-
-
-		}
-		private GenerateParticle= ():void=>{
-			console.log('2');
-			if(!this.canvas) return;
-			//##解像度を指定する処理
-			this.canvas.width = this.clientWidth;
-			this.canvas.height = this.clientHeight;
-			//##パーティクルを生成する処理
-			//###パーティクルの生成密度を取得
-			const particleDensity:number = Number(this.dataset.particleDensity) || 30;
-			///###生成密度を基にパーティクルの生成個数を計算する。
-			const area:number = this.clientWidth * this.clientHeight;
-			const particleCount:number = (area / 10000) * particleDensity;
-			//console.log(area)
-			//console.log("生成個数:"+particleCount)
-			//###実際に生成する処理
-			for(let i = 0; i< particleCount; i++){
-				this.particles.push(new Particle(this.canvas.width,this.canvas.height));
-			}
-
-		}
 		//#描画前に毎フレーム走る処理
 		private Update=():void=>{
 			if(!this.ctx2D || !this.canvas) return;
+			if(this.isResize){
+				//#particleの挙動の基準となるcanvasの縦と横の解像度更新
+				this.canvas.width = this.clientWidth;
+				this.canvas.height = this.clientHeight;
+				this.canvasWidth = this.canvas.width;
+				this.canvasHeight = this.canvas.height;
+				//#パーティクルの個数を再計算する処理
+				//##パーティクルの生成密度を取得
+				const particleDensity:number = Number(this.dataset.particleDensity) || 30;
+				///##生成密度を基にパーティクルの生成個数を計算する。
+				const area:number = this.clientWidth * this.clientHeight;
+				this.targetParticleCount = Math.floor((area / 10000) * particleDensity);
+				this.isResize = false;
+			}
+			console.log("目標値:"+this.targetParticleCount);
+			console.log('現在値:'+this.particleCount);
 			//#前のフレームによる描画を消す
 			this.ctx2D.clearRect(0,0,this.canvas.width,this.canvas.height);
 			//#各パーティクルの状態や振る舞いを更新
@@ -147,6 +169,23 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 				particle.Draw(this.ctx2D);
 			}
 			requestAnimationFrame(this.Update);
+		}
+		//#パーティクルカウントが目標数になる用にパーティクルを増やしたり減らしたりする関数
+		AdjustParticleCount=(particle:Particle)=>{
+			if(this.particleCount === this.targetParticleCount){return};
+			//#急に増えて密になったり、連続で減らされた結果、一部が疎になるのを防ぐためランダムにreturnする。
+			if(Math.random() <= 0.5){return}
+			if(this.particleCount > this.targetParticleCount){
+				//#パーティクルの数を減らす処理
+				const particleIndex = this.particles.indexOf(particle);
+				this.particles.splice(particleIndex,1);
+				this.particleCount--;
+			} 
+			else{
+				//#パーティクルの数を増やす処理
+				this.particles.push(new Particle(this,true));
+				this.particleCount++;
+			}
 		}
 	}
 	customElements.define('particle-back-ground',ParticleBackGround);

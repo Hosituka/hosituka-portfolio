@@ -3,8 +3,9 @@
 import { createNoise2D, type NoiseFunction2D } from "simplex-noise";
 export abstract class MathUtility{
     
-    static Repeat(value:number, length:number) {
-        return value - Math.floor(value / length) * length;
+    static Repeat(value:number,min:number, max:number) {
+        const length = max - min;
+        return value - Math.floor((value - min) / length) * length;
     }
     static Clamp(value:number,min:number,max:number){
         return Math.min(Math.max(value,min),max);
