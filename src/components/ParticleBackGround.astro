@@ -43,34 +43,36 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 	class Particle{
 		private pos:Vector2={x:0,y:0}
 		private size:number = 1;
-
+		private canvasWidth:number = 0;
 		private particleBackGround:ParticleBackGround|null = null;
 		private minSpeed:number= 40;
 		//#perlinLike関数用の識別子
 		private randomSeed:number = Math.random() * 40;
 		constructor(particleBackGround:ParticleBackGround,isAdjust:boolean){
-			this.particleBackGround = particleBackGround;
-			this.pos.x = Math.random() * this.particleBackGround.canvasWidth;
+			this.pos.x = Math.random() * particleBackGround.CanvasWidth;
 			this.size = Math.random() * 4 + 3;
 			this.minSpeed = Math.random() * 40;
+			this.canvasWidth = particleBackGround.CanvasWidth;
 			if(isAdjust){
-				this.pos.y = this.particleBackGround.canvasHeight + 5;
+				this.pos.y = particleBackGround.CanvasHeight + 5;
 			}
 			else{
-				this.pos.y = Math.random() * this.particleBackGround.canvasHeight;
+				this.pos.y = Math.random() * particleBackGround.CanvasHeight;
 			}
+			this.particleBackGround = particleBackGround;
 		}
 		//#描画前の処理
 		Update=()=>{
 			if(!this.particleBackGround) return;
 			this.pos.x -= (MathUtility.PerlinLike(Time.TimeInMS,this.randomSeed,3) * 2 - 1) * 120 * Time.DeltaTime;
 			this.pos.y -= (MathUtility.PerlinLike(Time.TimeInMS,this.randomSeed,3) * 40 + this.minSpeed) * Time.DeltaTime;
-			this.pos.x = MathUtility.Repeat(this.pos.x,-5,this.particleBackGround.canvasWidth);
-			this.pos.y = MathUtility.Repeat(this.pos.y,-5,this.particleBackGround.canvasHeight + 5);
+			this.pos.x = MathUtility.Repeat(this.pos.x,-5,this.canvasWidth);
+			this.pos.y = MathUtility.Repeat(this.pos.y,-5,this.particleBackGround.CanvasHeight + 5);
+			
 			//#画面最上部の外側に出た時
 			if(this.pos.y < -4){
-				
-				this.pos.x = Math.random() * this.particleBackGround.canvasWidth;
+				this.canvasWidth = this.particleBackGround.CanvasWidth;
+				this.pos.x = Math.random() * this.canvasWidth;
 				this.size = Math.random() * 4 + 3;
 				this.minSpeed = Math.random() * 40;
 				this.particleBackGround.AdjustParticleCount(this);
@@ -94,12 +96,14 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		}
 	}
 	class ParticleBackGround extends HTMLElement{
-		canvasWidth:number = 0;
-		canvasHeight:number = 0;
+		private _canvasWidth:number = 0;
+		get CanvasWidth(){return this._canvasWidth;}
+		private _canvasHeight:number = 0;
+		get CanvasHeight(){return this._canvasHeight;}
 		//#目標となるパーティクルの個数
-		targetParticleCount:number = 0;
+		private targetParticleCount:number = 0;
 		//#現在のパーティクル数
-		particleCount:number = 0;
+		private particleCount:number = 0;
 		private canvas:HTMLCanvasElement|null = null;
 		private ctx2D:CanvasRenderingContext2D|null = null;
 		private particles:Particle[] = [];
@@ -110,8 +114,8 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 				//##解像度を指定する処理
 				this.canvas.width = this.clientWidth;
 				this.canvas.height = this.clientHeight;
-				this.canvasWidth = this.canvas.width;
-				this.canvasHeight = this.canvas.height;
+				this._canvasWidth = this.canvas.width;
+				this._canvasHeight = this.canvas.height;
 				//##パーティクルを生成する処理
 				//###パーティクルの生成密度を取得
 				const particleDensity:number = Number(this.dataset.particleDensity) || 30;
@@ -149,8 +153,8 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 				//#particleの挙動の基準となるcanvasの縦と横の解像度更新
 				this.canvas.width = this.clientWidth;
 				this.canvas.height = this.clientHeight;
-				this.canvasWidth = this.canvas.width;
-				this.canvasHeight = this.canvas.height;
+				this._canvasWidth = this.canvas.width;
+				this._canvasHeight = this.canvas.height;
 				//#パーティクルの個数を再計算する処理
 				//##パーティクルの生成密度を取得
 				const particleDensity:number = Number(this.dataset.particleDensity) || 30;
@@ -159,8 +163,6 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 				this.targetParticleCount = Math.floor((area / 10000) * particleDensity);
 				this.isResize = false;
 			}
-			console.log("目標値:"+this.targetParticleCount);
-			console.log('現在値:'+this.particleCount);
 			//#前のフレームによる描画を消す
 			this.ctx2D.clearRect(0,0,this.canvas.width,this.canvas.height);
 			//#各パーティクルの状態や振る舞いを更新
@@ -186,6 +188,8 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 				this.particles.push(new Particle(this,true));
 				this.particleCount++;
 			}
+			console.log("現在のパーティクル数：" + this.particleCount);
+			console.log("目標のパーティクル数：" + this.targetParticleCount);
 		}
 	}
 	customElements.define('particle-back-ground',ParticleBackGround);
