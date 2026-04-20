@@ -9,7 +9,7 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
 ---
 
 <accordion-of-skills>
-    <div class="header" aria-expanded="false">
+    <div class="header">
         <h3 class="title">{skillName}</h3>
         <img src={skillIconURL} alt="テスト">
         <div class="skill-bar">
@@ -260,7 +260,7 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
 <script>
 
 class AccordionOfSkills extends HTMLElement{
-    private targetHeightOfBody:number = 200;
+    private targetHeightOfBody:number = 300;
     private header:HTMLElement|null = null;
     private body:HTMLElement|null = null;
     private content:HTMLElement|null = null;

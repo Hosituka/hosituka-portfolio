@@ -26,7 +26,9 @@
                 display:flex;
                 justify-content: center;
                 gap:10px;
+                flex-wrap: wrap;
                 margin:15px 0px;
+                
                 button{
                     &:active{
                         transform:translateY(2px);
@@ -102,10 +104,22 @@
             .skills-content{
                 width:100%;
                 padding:0px 10px 10px 10px;
+                &.is-visible{
+                    animation:skillsContentFadeIn 0.4s ease-out forwards;
+                }
             }
         }
     }
-
+    @keyframes skillsContentFadeIn{
+        from{
+            opacity:0;
+            transform:translateY(10px);
+        }
+        to{
+            opacity:1;
+            transform:translateY(0px);
+        }
+    }
 }
 @media (max-width:1000px) {
     main{
