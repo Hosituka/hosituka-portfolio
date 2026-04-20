@@ -258,7 +258,7 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
 }
 </style>
 <script>
-
+import {WidthResizeObserver} from "../../scripts/utility";
 class AccordionOfSkills extends HTMLElement{
     private targetHeightOfBody:number = 300;
     private header:HTMLElement|null = null;
@@ -292,10 +292,10 @@ class AccordionOfSkills extends HTMLElement{
                 this.classList.remove('is-header-hover')
             })
         }
-        const observer = new ResizeObserver(() => {
+        const observer = new WidthResizeObserver(() => {
             this.OnResize();
         });
-        observer.observe(this);
+        observer.observe(document.documentElement);
 
         //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
         if(this.targetHeightOfBody < this.content.scrollHeight){

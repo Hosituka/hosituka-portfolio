@@ -74,4 +74,23 @@ export interface Vector2{
     x:number;
     y:number;
 }
-
+export class WidthResizeObserver{
+    private resizeObserver:ResizeObserver;
+    private currentWidth:number = 0;
+    private latestWidth:number = 0;
+    private target:Element|null=null;
+    constructor(resizedCallBack:()=>void){
+        this.resizeObserver = new ResizeObserver(()=>{
+            if(!this.target){return};
+            this.currentWidth = this.target.clientWidth
+            if(this.latestWidth === this.currentWidth){return};
+            resizedCallBack();
+            this.latestWidth = this.currentWidth;
+        })
+    }
+    observe(target:Element){
+        this.target = target;
+        this.latestWidth=target.clientWidth;
+        this.resizeObserver.observe(target);
+    }
+}
