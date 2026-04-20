@@ -113,9 +113,11 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
             if(!contentCategory){console.error('データ属性categoryがskillsContentクラスセレクタがある要素に紐づけられていません'); return;}
             if(buttonCategory !== contentCategory){continue};
             if(showingSkillsContent === skillsContent)return;
+            const nextShowSkillsAccordions:NodeListOf<HTMLElement> = skillsContent.querySelectorAll('accordion-of-skills');
             showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
             showingSkillsAccordions.forEach((e)=>{e.classList.remove('is-open')});
             skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
+            nextShowSkillsAccordions.forEach((e)=>{e.dispatchEvent(new CustomEvent('tab-shown'))})
 
             targetButton.classList.add('is-selected');
             skillsContent.classList.add('is-visible');

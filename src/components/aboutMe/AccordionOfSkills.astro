@@ -293,18 +293,15 @@ class AccordionOfSkills extends HTMLElement{
             })
         }
         const observer = new WidthResizeObserver(() => {
-            this.OnResize();
+            this.DefineHeight();
         });
         observer.observe(document.documentElement);
-
-        //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
-        if(this.targetHeightOfBody < this.content.scrollHeight){
-            this.content.classList.add('is-scroll');
-        }
-        //#bodyのheightを確定する処理
-        this.body.style.setProperty('--height',`${Math.min(this.content.scrollHeight,this.targetHeightOfBody)}px`);
+        this.addEventListener('tab-shown',()=>{
+            requestAnimationFrame(this.DefineHeight);
+        })
+        this.DefineHeight();
     }
-    private OnResize=()=>{
+    private DefineHeight=()=>{
         if(!this.body||!this.header||!this.content){return;}
         //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
         if(this.targetHeightOfBody < this.content.scrollHeight){
