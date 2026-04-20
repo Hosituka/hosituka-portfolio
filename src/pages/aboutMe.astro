@@ -16,24 +16,54 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
     <main>
         <section class="my-skills">
             <h2>私のスキル</h2>
-            <div class="content">
+            <div class="show-skill-buttons"> 
+                <button class="is-selected" data-category="language">言語</button>
+                <button data-category="framework">フレームワーク</button>
+                <button data-category="tools">ツール</button>
+            </div>
+            <div class="skills-content is-visible" data-category="language">
                 <AccordionOfSkills skillName='C#' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='C#' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                <AccordionOfSkills skillName='TS' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='C#' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                <AccordionOfSkills skillName='HTML' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='C#' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                <AccordionOfSkills skillName='SCSS' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='C#' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+            </div>
+            <div class="skills-content" data-category="framework">
+                <AccordionOfSkills skillName='Unity' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+                <AccordionOfSkills skillName='Astro' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
 
             </div>
+            <div class="skills-content" data-category="tools">
+                <AccordionOfSkills skillName='UniTask' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+                <AccordionOfSkills skillName='ShaderGraph' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+
+                <AccordionOfSkills skillName='Git' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+                <AccordionOfSkills skillName='Github' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+                <AccordionOfSkills skillName='GeminiCLI' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                    未完成です。
+                </AccordionOfSkills>
+
+            </div>
+
         </section>
     </main>
 	<Footer zIndex="2" blendMode='multiply'/>
@@ -41,3 +71,41 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
 <style lang="scss">
     @import url('../styles/pages/aboutMe.scss');
 </style>
+<script>
+    //#スキルをジャンル別に表示非表示を出来るようにするための処理
+    const showSkillsButtons:NodeListOf<HTMLElement>=document.querySelectorAll('.show-skill-buttons button');
+    const skillsContents:NodeListOf<HTMLElement>=document.querySelectorAll('.my-skills .skills-content');
+    let currentShowSkillsContent:HTMLElement|null = null;
+    for(const skillsContent of skillsContents){
+        if(!skillsContent.classList.contains('is-visible')) continue;
+        currentShowSkillsContent = skillsContent;
+    }
+
+    for(const showSkillsButton of showSkillsButtons){
+        showSkillsButton.addEventListener('click',TryShowSkillsContent)
+    }
+    function TryShowSkillsContent(event:MouseEvent){
+        if(!currentShowSkillsContent)return;
+
+        const skillsAccordions:NodeListOf<HTMLElement> = currentShowSkillsContent.querySelectorAll('accordion-of-skills')
+        const targetButton:HTMLElement = event.currentTarget as HTMLElement;
+        const buttonCategory:string|undefined = targetButton.dataset.category;
+        if(!buttonCategory){console.error('データ属性categoryがbutton要素に紐づけられていません'); return;}
+        showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
+        skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
+        skillsAccordions.forEach((e)=>{e.classList.remove('is-open')});
+
+        targetButton.classList.add('is-selected');
+        
+        for(const skillsContent of skillsContents){
+            const contentCategory:string|undefined = skillsContent.dataset.category;
+            if(!contentCategory){console.error('データ属性categoryがskillsContentクラスセレクタがある要素に紐づけられていません'); return;}
+            if(buttonCategory === contentCategory){
+                skillsContent.classList.add('is-visible');
+                currentShowSkillsContent = skillsContent;
+                return;
+            }
+        }
+        console.error('eventの発信者となったボタンが持つcategoryデータ属性に対応するskillsContentが存在しません');
+    }
+</script>
