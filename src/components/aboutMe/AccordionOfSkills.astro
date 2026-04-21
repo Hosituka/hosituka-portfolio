@@ -102,6 +102,13 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
         .body{
             position:relative;
             .content{
+                position:relative;
+                :global(video){
+                    position:relative;
+                    left:50%;
+                    transform:translateX(-50%);
+                    margin:10px 0px;
+                }
 
             }
         }
@@ -184,7 +191,10 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
                 border-top:1px solid black;
                 padding:5px 10px;
                 line-height: 1.6;
-                height:var(--height);
+                :global(video){
+                    width:100%;
+                    max-width:450px;
+                }
             }
 
         }
@@ -226,10 +236,12 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
         }
         .body{
             .content{
-                &:not(.is-scroll){
+                &:not(.show-scroll-bar){
+                    height:auto;
                 }
-                &.is-scroll{
+                &.show-scroll-bar{
                     overflow-y:scroll;
+                    height:var(--height);
                     &::-webkit-scrollbar{
                         width:15px;
                     }
@@ -260,9 +272,9 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
         }
         .body{
             .content{
-                &:not(.is-scroll){
+                &:not(.show-scroll-bar){
                 }
-                &.is-scroll{
+                &.show-scroll-bar{
                     overflow-y:scroll;
                     &::-webkit-scrollbar{
                         width:15px;
@@ -331,11 +343,12 @@ class AccordionOfSkills extends HTMLElement{
     private DefineHeight=()=>{
         if(!this.body||!this.header||!this.content){return;}
         //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
+        console.log(this.targetHeightOfBody < this.content.scrollHeight);
         if(this.targetHeightOfBody < this.content.scrollHeight){
-            this.content.classList.add('is-scroll');
+            this.content.classList.add('show-scroll-bar');
         }
         else{
-            this.content.classList.remove('is-scroll');
+            this.content.classList.remove('show-scroll-bar');
         }
         //#bodyのheightを確定する処理
         this.body.style.setProperty('--height',`${Math.min(this.content.scrollHeight,this.targetHeightOfBody)}px`);

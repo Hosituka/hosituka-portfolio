@@ -22,6 +22,7 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
                 <button data-category="tools">ツール</button>
                 <button data-category="library">ライブラリ</button>
             </div>
+            
             <div class="skills-content is-visible" data-category="language">
                 <AccordionOfSkills skillName='C#※Unity' skillIconURL='/icon/language/CSharpLogo.svg' proficiency='90%'>
                     未完成です。
@@ -36,11 +37,21 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
                     未完成です。
                 </AccordionOfSkills>
                 <AccordionOfSkills skillName='VBA※Excel' skillIconURL='/icon/language/VBA_Logo.webp' proficiency='15%'>
-                    未完成です。
+                    <strong>執筆日</strong>：2026/4/21
+                    <br><strong>初学習日</strong>：2023年らへん
+                    <br><strong>開発経験</strong>：1回
+                    <br>高校の授業で初めて触りました。操作対象はExcelです。本当に授業の中でしか触らなかったので、この言語に対する自信は低いです。ただ、VB.NETよりは触っています。
+                    <br>
+                    <br>Excelの自動化を理解できたかと言われると微妙です。なんなら、勝手に、穴掘り法と言うアルゴリズムを用いて迷路を自動生成して遊んでたため、主題である自動化の知識がついてません。
+                    <video src="/video/MazeGeneration.mp4" autoplay loop muted playsinline/>
+
+                    <br>このようにアルゴリズムを用いたこの言語における制作経験は一つだけありますが、言語そのものやその周辺に関する知識は低いため、15%という自己評価に落ち着いています。
+
                 </AccordionOfSkills>
                 <AccordionOfSkills skillName='VB.NET' skillIconURL='/icon/language/VB.NET_Logo.webp' proficiency='10%'>
                     <strong>執筆日</strong>：2026/4/20
                     <br><strong>初学習日</strong>：2025年らへん
+                    <br><strong>開発経験</strong>：0回
                     <br>大学の授業で初めて触りました。この言語に対する自信は低いです。理由としては、大学でしか触っていないため.NET FrameWorkなどのフレームワーク周りの知識がほぼなく、また、この言語を用いた個人開発経験もないからです。
                     正直、この言語で作れるものが何なのかすら分からないです。Javaと同じく業務アプリケーションになるのでしょうか？、UnityではC#、フロントエンド開発ではTSみたいに使い分けられる段階には至っておりません。
                 </AccordionOfSkills>
@@ -76,7 +87,7 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
                 </AccordionOfSkills>
 
 
-            </div>
+            </div>-->
             <div class="skills-content" data-category="library">
                 <AccordionOfSkills skillName='UniTask' proficiency='70%'>
                     未完成です。
