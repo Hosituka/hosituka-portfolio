@@ -2,139 +2,52 @@
 @use '../../styles/_utility' as *;
 @layer Layout{
     main{
-        position:relative;
-        display:flex;
-        flex-direction:column;
-        align-items: center;
-        &::before{
-            position:absolute;
-            z-index:1;
+        .my-skills-wrapper{
+            position:relative;
+            display:flex;
+            flex-direction:column;
+            align-items: center;
+
+            &::before{
+                position:absolute;
+                z-index:1;
+            }
         }
-        .my-skills{
-            z-index:3;
-            margin-top:35px;
-            margin-bottom:20px;
-            h2{
-                position:relative;
-                &::before{
-                    position:absolute;
-                    top:-15px;
-                    left:0px;
-                }
-            }
-            .show-skill-buttons{
-                display:flex;
-                justify-content: center;
-                gap:10px;
-                flex-wrap: wrap;
-                margin:15px 0px;
-                
-                button{
-                    &:active{
-                        transform:translateY(2px);
-                    }
-                }
-            }
-            .skills-content{
-                display: none;
-                &.is-visible{
-                    display:flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    gap:10px;
-                }
+        .about-me-timeline-wrapper{
+            position: relative;
+            &::before{
+                position:absolute;
+                z-index:1;
             }
         }
     }
 }
 @layer Appearance{
     main{
-        &::before{
-            width:100%;
-            height:100%;
-            background-color: $light-yellow;
-            mix-blend-mode: multiply;
-            content: "";
-        }
-        .my-skills{
-            width:900px;
-            background-color: white;
-            border-right:1px solid black;
-            border-bottom:1px solid black;
-            border-left:1px solid black;
-            border-top-right-radius: 30px;
-            h2{
-                padding-left:10px;
-                padding-bottom:10px;
-                background-color: black;
-                border-top-right-radius: 30px;
-
-                font-size:30px;
-                color:white;
-                &::before{
-                    width:170px;
-                    height:15px;
-                    background-color: black;
-                    border-top-left-radius: 30px;
-                    border-top-right-radius: 30px;
-                    content: "";
-                }
-            }
-            //#skill-buttons全体につける奴
-            .show-skill-buttons{
-                button{
-                    width:20%;
-                    max-width: 150px;
-                    min-width: 100px;
-                    height:50px;
-                    background-color: $light-yellow;
-                    border-radius: 20px;
-                    border:3px solid black;
-                    box-shadow: 2px 2px 0px black;
-                    &:active{
-                        box-shadow: 0px 0px 0px black;
-                    }
-                    &.is-selected{
-                        background-color: $yellow;
-                    }
-                }
-            }
-
-            .skills-content{
+        .my-skills-wrapper{
+            &::before{
                 width:100%;
-                padding:0px 10px 10px 10px;
-                &.is-visible{
-                    animation:skillsContentFadeIn 0.4s ease-out forwards;
-                }
+                height:100%;
+                background-color: $light-yellow;
+                mix-blend-mode: multiply;
+                content:"";
             }
         }
-    }
-    @keyframes skillsContentFadeIn{
-        from{
-            opacity:0;
-            transform:translateY(10px);
+        .about-me-timeline-wrapper{
+            &::before{
+                width:100%;
+                height:100%;
+                background-color: white;
+                border-top: 1px solid black;
+                mix-blend-mode: multiply;
+                content: "";
+            }
         }
-        to{
-            opacity:1;
-            transform:translateY(0px);
-        }
+
     }
 }
 @media (max-width:1000px) {
-    main{
-        .my-skills{
-            width:90%;
-        }
-    }
-
 }
 
 @media (max-width:510px) {
-    main{
-        .my-skills{
-            width:calc(100% - 16px);
-        }
-    }
-
 }

@@ -17,7 +17,6 @@ const {title}:Props = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		
 		<slot />
 	</body>
 </html>
@@ -37,6 +36,9 @@ const {title}:Props = Astro.props;
 		display:flex;
 		flex-direction: column;
 		min-height:100dvh;
+		main{
+			position:relative;
+		}
 	}
 	
 }

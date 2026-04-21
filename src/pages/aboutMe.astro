@@ -5,7 +5,7 @@ import ParticleBackGround from '../components/ParticleBackGround.astro';
 import GlobalNav from '../components/GlobalNav.astro';
 import Footer from '../components/Footer.astro';
 import HeaderOfAboutMe from '../components/aboutMe/HeaderOfAboutMe.astro';
-import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
+import MySkills from '../components/aboutMe/MySkills.astro'
 
 ---
 <Layout title='私について'>
@@ -14,179 +14,14 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
     <ParticleBackGround particleDensity={0.5}/>
     <HeaderOfAboutMe/>
     <main>
-        <section class="my-skills">
-            <h2>私のスキル</h2>
-            <div class="show-skill-buttons"> 
-                <button class="is-selected" data-category="language">言語</button>
-                <button data-category="framework">フレームワーク</button>
-                <button data-category="tools">ツール</button>
-                <button data-category="library">ライブラリ</button>
-            </div>
-            <div class="skills-content is-visible" data-category="language">
-                <AccordionOfSkills skillName='C#※Unity' skillIconURL='/icon/language/CSharpLogo.svg' proficiency='90%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2020年12月
-                    <br><strong>開発経験</strong>：7回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='HTML' skillIconURL='/icon/language/HTML5Logo.webp' proficiency='80%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2025年8月
-                    <br><strong>開発経験</strong>：2回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='Sass(SCSS)/CSS' skillIconURL='/icon/language/SassLogo.webp' proficiency='70%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>SCSSでの初学習日</strong>：2026年3月
-                    <br><strong>SCSSでの開発経験</strong>：1回
-                    <br><strong>CSSでの初学習日</strong>：2025年8月
-                    <br><strong>CSSでの開発経験</strong>：1回
-                    ※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='TS/JS' skillIconURL='/icon/language/TypeScriptLogo.webp' proficiency='50%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>TSでの初学習日</strong>：2026年3月
-                    <br><strong>TSでの開発経験</strong>：1回
-                    <br><strong>JSでの初学習日</strong>：2025年8月
-                    <br><strong>JSでの開発経験</strong>：1回
-                    <br><strong>#JSについて</strong>
-                    <br>大学のサークルで、ホームページを作れと言われたのがきっかけで学びました。c#とは異なり、「関数そのものを引数として渡す」というのが頻出したり、thisの意味が「あるクラスのインスタンス」を指すとは限らなかったりして、かなり苦戦しました。
-                    <br><strong>#TSについて</strong>
-                    <br>問題として、自分はc#出身、つまり静的解析が強い言語出身のため、JSの実行するまでコードが動くか否か分からないのが辛かったです。特に静的解析の弱さとデータ型の不透明さがwebプログラミングをする上で苦行でした。
-                    <br>その問題をAIに質問したら、TypeScriptを導入すると解決できると知ったため、Astroの導入と共に学習を始めました。
-                    <br><strong>#JS/TSを書く上で意識している事</strong>
-                    <br>・Astroなどの各フレームワークに則ったコードの書き方
-                    <br>・何がTSの仕様でどこがJSの仕様かの意識
-                    <br>・c#出身ではありますが、その出身となる言語に囚われず、TSならではの解決方法の模索を意識しています。例えば、c#だと言語仕様から、クラスを宣言してその中に処理とデータを宣言せざる負えないですが、ts/jsではグローバルスコープに直接、処理やデータを置けます。すなわち、オブジェクト指向をするか否かの判断の余地があるため、その可否をするようにしています。
-
-
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='VBA※Excel' skillIconURL='/icon/language/VBA_Logo.webp' proficiency='15%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2023年らへん
-                    <br><strong>開発経験</strong>：1回
-                    <br>高校の授業で初めて触りました。操作対象はExcelです。本当に授業の中でしか触らなかったので、この言語に対する自信は低いです。ただ、VB.NETよりは触っています。
-                    <br>
-                    <br>Excelの自動化を理解できたかと言われると微妙です。なんなら、勝手に、穴掘り法と言うアルゴリズムを用いて迷路を自動生成して遊んでたため、主題である自動化の知識がついてません。
-                    <video src="/video/MazeGeneration.mp4" autoplay loop muted playsinline/>
-                    <br>このようにアルゴリズムを用いたこの言語における制作経験は一つだけありますが、言語そのものやその周辺に関する知識は低いため、15%という自己評価に落ち着いています。
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='VB.NET' skillIconURL='/icon/language/VB.NET_Logo.webp' proficiency='10%'>
-                    <strong>執筆日</strong>：2026/4/20
-                    <br><strong>初学習日</strong>：2025年らへん
-                    <br><strong>開発経験</strong>：0回
-                    <br>大学の授業で初めて触りました。この言語に対する自信は低いです。理由としては、大学でしか触っていないため.NET FrameWorkなどのフレームワーク周りの知識がほぼなく、また、この言語を用いた個人開発経験もないからです。
-                    正直、この言語で作れるものが何なのかすら分からないです。Javaと同じく業務アプリケーションになるのでしょうか？、UnityではC#、フロントエンド開発ではTSみたいに使い分けられる段階には至っておりません。
-                </AccordionOfSkills>
-
-            </div>
-            <div class="skills-content" data-category="framework">
-                <AccordionOfSkills skillName='Unity' skillIconURL='/icon/frameWork/Unity6Logo.webp' proficiency='80%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2020年12月
-                    <br><strong>開発経験</strong>：7回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='Astro' skillIconURL='/icon/frameWork/AstroLogo.svg' proficiency='60%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2026年3月
-                    <br><strong>開発経験</strong>：1回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-
-            </div>
-            <div class="skills-content" data-category="tools">
-                <AccordionOfSkills skillName='ShaderGraph'  proficiency='70%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2021年6月
-                    <br><strong>開発経験</strong>：3回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='GeminiCLI' skillIconURL='/icon/teckTools/GeminiCLI_Logo.svg' proficiency='50%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2025年8月
-                    <br><strong>開発利用経験</strong>：3回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='Blender' skillIconURL='/icon/teckTools/BlenderLogo.webp' proficiency='50%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2025年8月
-                    <br><strong>開発利用経験</strong>：3回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='Git' skillIconURL='/icon/teckTools/GitLogo.svg' proficiency='40%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2026年1月
-                    <br><strong>開発利用経験</strong>：2回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='Github' skillIconURL='/icon/teckTools/GitHubLogo.svg' proficiency='40%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2025年9月
-                    <br><strong>開発利用経験</strong>：3回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-                <AccordionOfSkills skillName='GIMP' skillIconURL='/icon/teckTools/GIMP_Logo.svg' proficiency='20%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2023年7月
-                    <br><strong>開発利用経験</strong>：2回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-
-
-            </div>
-            <div class="skills-content" data-category="library">
-                <AccordionOfSkills skillName='UniTask' proficiency='70%'>
-                    <strong>執筆日</strong>：2026/4/21
-                    <br><strong>初学習日</strong>：2026年3月
-                    <br><strong>開発利用経験</strong>：2回
-                    <br>※現在記述中
-                </AccordionOfSkills>
-
-            </div>
-
-        </section>
+        <div class="my-skills-wrapper">
+            <MySkills/>
+        </div>
+        <div class="about-me-timeline-wrapper">
+        </div>
     </main>
 	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
 <style lang="scss">
     @import url('../styles/pages/aboutMe.scss');
 </style>
-<script>
-    //#スキルをジャンル別に表示非表示を出来るようにするための処理
-    const showSkillsButtons:NodeListOf<HTMLElement>=document.querySelectorAll('.show-skill-buttons button');
-    const skillsContents:NodeListOf<HTMLElement>=document.querySelectorAll('.my-skills .skills-content');
-    let showingSkillsContent:HTMLElement|null = document.querySelector('.my-skills .skills-content.is-visible');
-
-    showSkillsButtons.forEach((e)=>{e.addEventListener('click',TryShowSkillsContent)})
-
-    function TryShowSkillsContent(event:MouseEvent){
-        if(!showingSkillsContent)return;
-
-        const showingSkillsAccordions:NodeListOf<HTMLElement> = showingSkillsContent.querySelectorAll('accordion-of-skills')
-        const targetButton:HTMLElement = event.currentTarget as HTMLElement;
-        const buttonCategory:string|undefined = targetButton.dataset.category;
-        if(!buttonCategory){console.error('データ属性categoryがbutton要素に紐づけられていません'); return;}
-
-
-        for(const skillsContent of skillsContents){
-            const contentCategory:string|undefined = skillsContent.dataset.category;
-            if(!contentCategory){console.error('データ属性categoryがskillsContentクラスセレクタがある要素に紐づけられていません'); return;}
-            if(buttonCategory !== contentCategory){continue};
-            if(showingSkillsContent === skillsContent){return};
-            const nextShowSkillsAccordions:NodeListOf<HTMLElement> = skillsContent.querySelectorAll('accordion-of-skills');
-            showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
-            showingSkillsAccordions.forEach((e)=>{e.classList.remove('is-open')});
-            skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
-
-            skillsContent.classList.add('is-visible');
-            nextShowSkillsAccordions.forEach((e)=>{e.dispatchEvent(new CustomEvent('tab-shown'))})
-
-            targetButton.classList.add('is-selected');
-            showingSkillsContent = skillsContent;
-            return;
-            
-        }
-        console.error('eventの発信者となったボタンが持つcategoryデータ属性に対応するskillsContentが存在しません');
-    }
-</script>
