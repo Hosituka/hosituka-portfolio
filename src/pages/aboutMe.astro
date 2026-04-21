@@ -23,62 +23,62 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
                 <button data-category="library">ライブラリ</button>
             </div>
             <div class="skills-content is-visible" data-category="language">
-                <AccordionOfSkills skillName='C#※Unity' skillIconURL='/icon/CSharpLogo.svg' proficiency='90%'>
+                <AccordionOfSkills skillName='C#※Unity' skillIconURL='/icon/language/CSharpLogo.svg' proficiency='90%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='HTML' skillIconURL='/icon/CSharpLogo.svg' proficiency='80%'>
+                <AccordionOfSkills skillName='HTML' skillIconURL='/icon/language/HTML5Logo.webp' proficiency='80%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='SCSS/CSS' skillIconURL='/icon/CSharpLogo.svg' proficiency='70%'>
+                <AccordionOfSkills skillName='Sass(SCSS)/CSS' skillIconURL='/icon/language/SassLogo.webp' proficiency='70%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='TS/JS' skillIconURL='/icon/CSharpLogo.svg' proficiency='50%'>
+                <AccordionOfSkills skillName='TS/JS' skillIconURL='/icon/language/TypeScriptLogo.webp' proficiency='50%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='VBA' skillIconURL='/icon/CSharpLogo.svg' proficiency='15%'>
+                <AccordionOfSkills skillName='VBA※Excel' skillIconURL='/icon/language/VBA_Logo.webp' proficiency='15%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='VB.NET' skillIconURL='/icon/CSharpLogo.svg' proficiency='10%'>
+                <AccordionOfSkills skillName='VB.NET' skillIconURL='/icon/language/VB.NET_Logo.webp' proficiency='10%'>
                     <strong>執筆日</strong>：2026/4/20
                     <br><strong>初学習日</strong>：2025年らへん
-                    <br>大学の授業で初めて触りました。この言語に対する自信は一番低いです。理由としては、大学でしか触っていないため.NET FrameWorkなどのフレームワーク周りの知識がほぼなく、また、この言語を用いた個人開発経験もないからです。
+                    <br>大学の授業で初めて触りました。この言語に対する自信は低いです。理由としては、大学でしか触っていないため.NET FrameWorkなどのフレームワーク周りの知識がほぼなく、また、この言語を用いた個人開発経験もないからです。
                     正直、この言語で作れるものが何なのかすら分からないです。Javaと同じく業務アプリケーションになるのでしょうか？、UnityではC#、フロントエンド開発ではTSみたいに使い分けられる段階には至っておりません。
                 </AccordionOfSkills>
 
             </div>
             <div class="skills-content" data-category="framework">
-                <AccordionOfSkills skillName='Unity' skillIconURL='/icon/CSharpLogo.svg' proficiency='80%'>
+                <AccordionOfSkills skillName='Unity' skillIconURL='/icon/frameWork/Unity6Logo.webp' proficiency='80%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='Astro' skillIconURL='/icon/CSharpLogo.svg' proficiency='60%'>
+                <AccordionOfSkills skillName='Astro' skillIconURL='/icon/frameWork/AstroLogo.svg' proficiency='60%'>
                     未完成です。
                 </AccordionOfSkills>
 
             </div>
             <div class="skills-content" data-category="tools">
-                <AccordionOfSkills skillName='ShaderGraph' skillIconURL='/icon/CSharpLogo.svg' proficiency='70%'>
+                <AccordionOfSkills skillName='ShaderGraph'  proficiency='70%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='GeminiCLI' skillIconURL='/icon/CSharpLogo.svg' proficiency='50%'>
+                <AccordionOfSkills skillName='GeminiCLI' skillIconURL='/icon/teckTools/GeminiCLI_Logo.svg' proficiency='50%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='Blender' skillIconURL='/icon/CSharpLogo.svg' proficiency='50%'>
+                <AccordionOfSkills skillName='Blender' skillIconURL='/icon/teckTools/BlenderLogo.webp' proficiency='50%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='Git' skillIconURL='/icon/CSharpLogo.svg' proficiency='40%'>
+                <AccordionOfSkills skillName='Git' skillIconURL='/icon/teckTools/GitLogo.svg' proficiency='40%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='Github' skillIconURL='/icon/CSharpLogo.svg' proficiency='40%'>
+                <AccordionOfSkills skillName='Github' skillIconURL='/icon/teckTools/GitHubLogo.svg' proficiency='40%'>
                     未完成です。
                 </AccordionOfSkills>
-                <AccordionOfSkills skillName='Gimp' skillIconURL='/icon/CSharpLogo.svg' proficiency='20%'>
+                <AccordionOfSkills skillName='GIMP' skillIconURL='/icon/teckTools/GIMP_Logo.svg' proficiency='20%'>
                     未完成です。
                 </AccordionOfSkills>
 
 
             </div>
             <div class="skills-content" data-category="library">
-                <AccordionOfSkills skillName='UniTask' skillIconURL='/icon/CSharpLogo.svg' proficiency='70%'>
+                <AccordionOfSkills skillName='UniTask' proficiency='70%'>
                     未完成です。
                 </AccordionOfSkills>
 
@@ -112,15 +112,16 @@ import AccordionOfSkills from '../components/aboutMe/AccordionOfSkills.astro';
             const contentCategory:string|undefined = skillsContent.dataset.category;
             if(!contentCategory){console.error('データ属性categoryがskillsContentクラスセレクタがある要素に紐づけられていません'); return;}
             if(buttonCategory !== contentCategory){continue};
-            if(showingSkillsContent === skillsContent)return;
+            if(showingSkillsContent === skillsContent){return};
             const nextShowSkillsAccordions:NodeListOf<HTMLElement> = skillsContent.querySelectorAll('accordion-of-skills');
             showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
             showingSkillsAccordions.forEach((e)=>{e.classList.remove('is-open')});
             skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
+
+            skillsContent.classList.add('is-visible');
             nextShowSkillsAccordions.forEach((e)=>{e.dispatchEvent(new CustomEvent('tab-shown'))})
 
             targetButton.classList.add('is-selected');
-            skillsContent.classList.add('is-visible');
             showingSkillsContent = skillsContent;
             return;
             

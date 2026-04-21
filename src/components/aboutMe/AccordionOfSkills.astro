@@ -2,7 +2,7 @@
 //#自分のスキルを表示する用のアコーディオン
 interface Props {
     skillName: string;
-    skillIconURL:string;
+    skillIconURL?:string;
     proficiency:string;
 }
 const {skillName,skillIconURL,proficiency} = Astro.props;
@@ -11,7 +11,14 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
 <accordion-of-skills>
     <div class="header">
         <h3 class="title">{skillName}</h3>
-        <img src={skillIconURL} alt="テスト">
+        {skillIconURL ?
+            <img class="skill-icon" src={skillIconURL} alt={skillName}>  
+        :
+            <div class="none-icon">
+                <span>アイコン</span>
+                <span>なし</span>
+            </div>
+        }
         <div class="skill-bar">
             <div class="skill-bar-fill" style=`--proficiency:${proficiency}`></div>
             <h3>{proficiency}</h3>
@@ -33,11 +40,21 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
         .header{
             position:relative;
             display:grid;
-            grid-template-areas:"img title     show-hide-icon"
-                                "img skill-bar skill-bar";
+            grid-template-areas:"icon title     show-hide-icon"
+                                "icon skill-bar skill-bar";
             grid-template-columns: auto 1fr;    
-            img{
-                grid-area:img;
+            .none-icon{
+                grid-area:icon;
+                align-self: center;
+                margin-left:5px;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items:  center;
+            }
+            .skill-icon{
+                grid-area:icon;
                 align-self: center;
                 margin-left:5px;
             }
@@ -46,7 +63,7 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
                 grid-area:title;
 
                 display:flex;
-                align-items:center ;
+                align-self:center ;
                 margin-left:10px;
             }
             .skill-bar{
@@ -115,8 +132,18 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
             .title{
                 font-size: 30px;
             }
-            img{
-                width:65px;
+            .none-icon{
+                width:70px;
+                aspect-ratio: 1;
+
+                outline:1px solid black;
+                border-radius:50%;
+            }
+            .skill-icon{
+                width:75px;
+                aspect-ratio: 1;
+                
+                object-fit: contain;
             }
             .skill-bar{
                 width:calc(100% - 20px);
@@ -306,6 +333,9 @@ class AccordionOfSkills extends HTMLElement{
         //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
         if(this.targetHeightOfBody < this.content.scrollHeight){
             this.content.classList.add('is-scroll');
+        }
+        else{
+            this.content.classList.remove('is-scroll');
         }
         //#bodyのheightを確定する処理
         this.body.style.setProperty('--height',`${Math.min(this.content.scrollHeight,this.targetHeightOfBody)}px`);
