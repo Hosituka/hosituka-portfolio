@@ -2,7 +2,7 @@
 import AccordionOfSkills from './AccordionOfSkills.astro';
 
 ---
-<section class="my-skills">
+<my-skills role="region">
     <h2>私のスキル</h2>
     <div class="show-skill-buttons"> 
         <button class="is-selected" data-category="language">言語</button>
@@ -132,14 +132,11 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
         </AccordionOfSkills>
 
     </div>
-</section>
+</my-skills>
 <style lang="scss">
 @use '../../styles/_utility' as *;
 @layer Layout{
-    .my-skills{
-        z-index:3;
-        margin-top:35px;
-        margin-bottom:20px;
+    my-skills{
         h2{
             position:relative;
             &::before{
@@ -175,7 +172,7 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
 
 }
 @layer Appearance{
-    .my-skills{
+    my-skills{
         width:900px;
         background-color: white;
         border-right:1px solid black;
@@ -239,12 +236,12 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
     }
 }
 @media (max-width:1000px) {
-    .my-skills{
+    my-skills{
         width:90%;
     }
 }
 @media (max-width:510px) {
-    .my-skills{
+    my-skills{
         width:calc(100% - 16px);
     }
 }
@@ -254,8 +251,8 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
 <script>
     //#スキルをジャンル別に表示非表示を出来るようにするための処理
     const showSkillsButtons:NodeListOf<HTMLElement>=document.querySelectorAll('.show-skill-buttons button');
-    const skillsContents:NodeListOf<HTMLElement>=document.querySelectorAll('.my-skills .skills-content');
-    let showingSkillsContent:HTMLElement|null = document.querySelector('.my-skills .skills-content.is-visible');
+    const skillsContents:NodeListOf<HTMLElement>=document.querySelectorAll('my-skills .skills-content');
+    let showingSkillsContent:HTMLElement|null = document.querySelector('my-skills .skills-content.is-visible');
 
     showSkillsButtons.forEach((e)=>{e.addEventListener('click',TryShowSkillsContent)})
 

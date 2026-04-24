@@ -12,13 +12,14 @@ import AboutMeTimeline from '../components/aboutMe/AboutMeTimeline.astro'
 <Layout title='私について'>
 
 	<GlobalNav/>
-    <ParticleBackGround particleDensity={0.5}/>
     <HeaderOfAboutMe/>
+    <ParticleBackGround zIndex={1} particleDensity={0.25}/>
     <main>
         <div class="my-skills-wrapper">
             <MySkills/>
         </div>
         <div class="about-me-timeline-wrapper">
+            <h2>これまでの歩み</h2>
             <AboutMeTimeline/>
         </div>
     </main>

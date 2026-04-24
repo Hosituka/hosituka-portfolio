@@ -1,34 +1,79 @@
 ---
+interface HistoryItem{
+    date:string;
+    title:string;
+    imgURL:string;
+    explain:string;
+}
 //自分についての歴史をタイムライン形式で表現する奴
+const historyItems:HistoryItem[] = [
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"テスト",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+
+
+
+];
+const listCount:number = historyItems.length;
 ---
 
-<about-me-timeline>
-    <li>
-        <h2>test</h2>
-    </li>
-    <li>
-        <h2>test</h2>
-    </li>
-    <li>
-        <h2>test</h2>
-    </li>
-    <li>
-        <h2>test</h2>
-    </li>
-    <li>
-        <h2>test</h2>
-    </li>
-    <li>
-        <h2>test</h2>
-    </li>
-
-
+<about-me-timeline role="list">
+    {
+        historyItems.map((e:HistoryItem,index:number) => {return(
+            <li style=`--grid-row:${index + 1}`>
+                <div class="date">{e.date}</div>
+                <h2>{e.title}</h2>
+                <div class="body">
+                    <div class="img-wrapper"}>
+                        <img src={e.imgURL} alt="unnko"/>
+                    </div>
+                    <p>
+                        {e.explain}
+                    </p>
+                </div>
+            </li>)
+        })
+    }
 </about-me-timeline>
-<style lang="scss">
+<style lang="scss" define:vars={{listCount}}>
 @use '../../styles/_utility' as *;
 $vertical-line-width:8px;
 $column-gap:10px;
-$max-li-count:6;
+$row-gap:40px;
+$max-li-count:1;
 $left-li-horizontal-line-width:$column-gap  + 2;
 $right-li-horizontal-line-width:$column-gap + 3;
 
@@ -37,31 +82,21 @@ $right-li-horizontal-line-width:$column-gap + 3;
     about-me-timeline{
         display:grid;
         grid-template-columns: 1fr $vertical-line-width 1fr;
-        row-gap: 40px;
+        row-gap: $row-gap;
         column-gap: $column-gap;
         &::before{
             grid-column: 2;
-            grid-row:1 / span $max-li-count;
+            grid-row:1 / span var(--listCount);
         }
         li{
             position:relative;
-            @for $i from 1 through $max-li-count{
-                &:nth-child(#{$i}){
-                    grid-row:$i;
-                }
-            }
-            &::before{
-                position:absolute;
-                top:-1px;
-            }
+            grid-row:var(--grid-row);
             &:first-child{
-                margin-top:20px;
+                margin-top:$row-gap;
             }
             &:last-child{
-                margin-bottom:20px;
+                margin-bottom:$row-gap;
             }
-
-
             //#ある階層の上から数えて奇数の時
             &:nth-child(odd){
                 grid-column: 1;
@@ -69,6 +104,9 @@ $right-li-horizontal-line-width:$column-gap + 3;
 
                 &::before{
                     right:-1 * $left-li-horizontal-line-width ;
+                }
+                .date{
+                    right:5px;
                 }
 
             }
@@ -80,7 +118,28 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 &::before{
                     left:-1 * $right-li-horizontal-line-width ;
                 }
+                .date{
+                    left:5px;
+                }
+            }
+            &::before{
+                position:absolute;
+                top:0px;
+            }
+            .date{
+                position:absolute;
+                top:-1 * ($row-gap - 10);
+            }
 
+            h2{
+                display:flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .body{
+                .img-wrapper{
+                    float:left;
+                }
             }
         }  
     }
@@ -94,27 +153,23 @@ $right-li-horizontal-line-width:$column-gap + 3;
             height:100%; 
             background-color: $light-yellow;
             box-shadow: 2px 2px 2px black;
-            border:1px solid black;
+            border-right:1px solid black;
+            border-bottom:1px solid black;
+            border-left:1px solid black;
             content: "";
         }
         li{
-            width:400px;
-            height:200px;
+            width:350px;
             border:1px solid black;
             box-shadow: 2px 2px 2px black;
             background-color: $light-yellow;
             &::before{
                 height:5px;
+                transform:translateY(-1px);
                 border-top: 1px solid black;
                 border-bottom: 1px solid black;
                 box-shadow: 0px 1px 0px black;
                 content: "";
-            }
-            h2{
-                width:100%;
-                height:40px;
-                background-color: $yellow;
-                border-bottom: 1px solid black;
             }
             //#ある階層の上から数えて奇数の時
             &:nth-child(odd){
@@ -137,7 +192,40 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 h2{
                     border-top-right-radius: 40px;
                 }
+            }
+            .date{
+                font-size:20px;
+            }
+            h2{
+                width:100%;
+                height:40px;
+                background-color: $yellow;
+                border-bottom: 1px solid black;
+            }
+            .body{
+                width:100%;
+                height:210px;
+                padding:5px;
+                .img-wrapper{
+                    width:fit-content;
+                    height:fit-content;
+                    border-right:8px solid $light-yellow;
+                    border-bottom:8px solid $light-yellow;
+                    height:145px;
+                    aspect-ratio: 1/1;
+                    img{
+                        width:100%;
+                        height:100%;
+                        object-fit: cover;
+                        border:3px solid $yellow;
+                    }
 
+                }
+                p{           
+                    width:100%;
+                    height:100%;        
+                    background-color: white; 
+                }
             }
 
         }
@@ -151,7 +239,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
         column-gap: $column-gap;
         &::before{
             grid-column: 1;
-            grid-row:1 / span $max-li-count;
+            grid-row:1 / span var(--listCount);
         }
         li{
             position:relative;
@@ -166,6 +254,11 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 left:-1 * $right-li-horizontal-line-width;
                 background-image:linear-gradient(90deg,$light-yellow,$yellow);
             }
+            .date{
+                inset:0px;
+                top:-1 * ($row-gap - 10);
+                left:5px;
+            }
             h2{
                 border-radius: 0;
                 border-top-right-radius: 40px;
@@ -176,7 +269,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
 @media (max-width:450px) {
     about-me-timeline{
         li{
-            width:320px;
+            width:330px;
         }
     }
 }
