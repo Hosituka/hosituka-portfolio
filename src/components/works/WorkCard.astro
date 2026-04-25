@@ -18,11 +18,11 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 		<h3>{workTitle}</h3>
 		<div class="media-container">
 			{isVideo ?
-				<img class="image-background" src='/icon/MyIcon.webp'></img>
-				<video src={workMediaURL} autoplay loop muted playsinline></video>
+				<img class="background-img" src='/icon/MyIcon.webp'></img>
+				<video class="related-video" src={workMediaURL} autoplay loop muted playsinline></video>
 			:
-				<img class="image-background" src={workMediaURL}></img>
-				<img src={workMediaURL}>
+				<img class="background-img" src={workMediaURL}></img>
+				<img class="related-img"src={workMediaURL}>
 			}
 		</div>
 		<p class="card-specs-wrapper">
@@ -74,13 +74,13 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 			.media-container{
 				position:relative;
 				margin-top:1.1cqh;
-				.image-background{
+				.background-img{
 					position:absolute;
 				}
-				img{
+				.related-img{
 					position:absolute;
 				}
-				video{
+				.related-video{
 					position:absolute;
 				}
 			}
@@ -200,16 +200,16 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 					border-top-left-radius: 20px;	
 					border-top-right-radius: 20px;			
 				}
-				.image-background{
+				.background-img{
 					object-fit: cover;
 					pointer-events: none;
 					filter:blur(20px);
 				}
-				img{
+				.related-img{
 					pointer-events: none;
 					object-fit: contain;
 				}
-				video{
+				.related-video{
 
 				}
 			}

@@ -8,38 +8,38 @@ interface HistoryItem{
 //自分についての歴史をタイムライン形式で表現する奴
 const historyItems:HistoryItem[] = [
     {
-        date:"2018",
-        title:"テスト",
+        date:"2017",
+        title:"初めてのプログラミング",
         imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメン"
+        explain:"scratchという視覚的にゲーム作りをするツールに出会いました。ここで初めてプログラミングにはまりました。"
     },
     {
         date:"2018",
-        title:"テスト",
+        title:"執筆中",
         imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        explain:"執筆中"
     },
     {
         date:"2018",
-        title:"テスト",
+        title:"執筆中",
         imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        explain:"ラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメン"
     },
     {
         date:"2018",
-        title:"テスト",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
-    },
-    {
-        date:"2018",
-        title:"テスト",
+        title:"執筆中",
         imgURL:"/normalImage/work/3thWork.webp",
         explain:"ラーメンラーメンラーメン"
     },
     {
         date:"2018",
-        title:"テスト",
+        title:"執筆中",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2018",
+        title:"執筆中",
         imgURL:"/normalImage/work/3thWork.webp",
         explain:"ラーメンラーメンラーメン"
     },
@@ -58,7 +58,8 @@ const listCount:number = historyItems.length;
                 <h2>{e.title}</h2>
                 <div class="body">
                     <div class="img-wrapper"}>
-                        <img src={e.imgURL} alt="unnko"/>
+                        <img class="background-img"src={e.imgURL} alt="アスペクト比が1/1じゃないときに表示される背景用画像"/>
+                        <img class="related-img"src={e.imgURL} alt=`${e.title}の画像`/>
                     </div>
                     <p>
                         {e.explain}
@@ -124,7 +125,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             &::before{
                 position:absolute;
-                top:0px;
+                top:16px;
             }
             .date{
                 position:absolute;
@@ -138,7 +139,14 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             .body{
                 .img-wrapper{
+                    position:relative;
                     float:left;
+                    .background-img{
+                        position:absolute;
+                    }
+                    .related-img{
+                        position:absolute;
+                    }
                 }
             }
         }  
@@ -164,7 +172,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
             box-shadow: 2px 2px 2px black;
             background-color: $light-yellow;
             &::before{
-                height:5px;
+                height:8px;
                 transform:translateY(-1px);
                 border-top: 1px solid black;
                 border-bottom: 1px solid black;
@@ -209,21 +217,32 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 .img-wrapper{
                     width:fit-content;
                     height:fit-content;
-                    border-right:8px solid $light-yellow;
-                    border-bottom:8px solid $light-yellow;
-                    height:145px;
+                    border-right:5px solid $light-yellow;
+                    margin-right:3px;
+                    border-bottom:5px solid $light-yellow;
+                    margin-bottom:3px;
+                    height:144px;
                     aspect-ratio: 1/1;
-                    img{
+                    overflow: hidden;
+                    .background-img{
                         width:100%;
                         height:100%;
                         object-fit: cover;
+                        pointer-events: none;
+                        filter:blur(10px);
+                    }
+                    .related-img{
+                        width:100%;
+                        height:100%;
+                        pointer-events: none;
+                        object-fit: contain;
                         border:3px solid $yellow;
                     }
 
                 }
                 p{           
                     width:100%;
-                    height:100%;        
+                    height:100%;       
                     background-color: white; 
                 }
             }
