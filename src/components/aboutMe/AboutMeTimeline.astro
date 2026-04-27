@@ -8,7 +8,7 @@ interface HistoryItem{
 //自分についての歴史をタイムライン形式で表現する奴
 const historyItems:HistoryItem[] = [
     {
-        date:"2018年",
+        date:"2017年",
         title:"初めてのプログラミング",
         imgURL:"/icon/ScratchLogo.webp",
         explain:"小学5年の頃に、scratchというゲーム作りをするツールに出会いました。ここで初めてプログラミングにはまりました。この頃はオフライン版をやっており、作品をネットに挙げていないため、ゲームの画像やデータすら残っていません"
@@ -17,7 +17,7 @@ const historyItems:HistoryItem[] = [
         date:"2019年",
         title:"CoderDojoでのプログラミング",
         imgURL:"/icon/CoderdojoLogo.webp",
-        explain:"執筆中"
+        explain:"親の勧めで、学生限定のプログラミングの集まりに参加していました。ここではvrを体験したり、一緒にスクラッチをやったりなど沢山の人と交流しました。その結果、プログラミングに対する興味を深めるきっかけになりました。"
     },
 
     {
@@ -27,29 +27,49 @@ const historyItems:HistoryItem[] = [
         explain:"執筆中"
     },
     {
-        date:"2020年11月",
+        date:"2020年9月",
         title:"Unity学習の始まり",
-        imgURL:"/normalImage/work/3thWork.webp",
+        imgURL:"/icon/frameWork/Unity2021Logo.webp",
         explain:"ラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラ"
     },
     {
-        date:"2018",
-        title:"執筆中",
+        date:"2020年12月",
+        title:"初のオリジナルゲームを公開",
         imgURL:"/normalImage/work/3thWork.webp",
         explain:"ラーメンラーメンラーメン"
     },
     {
-        date:"2018",
-        title:"執筆中",
+        date:"2021年2月",
+        title:"Blender学習を開始",
+        imgURL:"/normalImage/aboutMe/TankOfBlender.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2021年5月",
+        title:"shader学習を開始",
         imgURL:"/normalImage/work/3thWork.webp",
         explain:"ラーメンラーメンラーメン"
     },
     {
-        date:"2018",
-        title:"執筆中",
+        date:"2022年11月",
+        title:"shaderとblenderのスキルが成長",
         imgURL:"/normalImage/work/3thWork.webp",
         explain:"ラーメンラーメンラーメン"
     },
+    {
+        date:"2023年7月~2024年5月",
+        title:"音ゲー制作を進めていたが断念",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+    {
+        date:"2025年12月",
+        title:"ゲーム制作に復帰",
+        imgURL:"/normalImage/work/3thWork.webp",
+        explain:"ラーメンラーメンラーメン"
+    },
+
+
 
 
 
@@ -150,7 +170,11 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             .body{
                 grid-row: 2;
+                display: flex;
+
+                gap:5px;
                 .img-wrapper{
+                    flex-shrink: 0;
                     position:relative;
                     float:left;
                     .background-img{
@@ -159,6 +183,8 @@ $right-li-horizontal-line-width:$column-gap + 3;
                     .related-img{
                         position:absolute;
                     }
+                }
+                p{
                 }
             }
         }  
@@ -231,8 +257,6 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 .img-wrapper{
                     height:185px;
                     aspect-ratio: 1/1;
-                    border-right:5px solid $light-yellow;
-                    margin-right:3px;
                     overflow: hidden;
                     .background-img{
                         width:100%;
@@ -251,6 +275,8 @@ $right-li-horizontal-line-width:$column-gap + 3;
 
                 }
                 p{  
+                    height:fit-content;
+                    width:100%;
                     padding:3px;
                     line-height:1.6;
                     background-color: white; 
@@ -272,6 +298,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
             grid-row:1 / span var(--listCount);
         }
         li{
+            
             justify-self: start;
             grid-column: 2;
             margin-left: 1px;
@@ -292,6 +319,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 border-radius: 0;
                 border-top-right-radius: 40px;
             }
+
         }  
     }
 }
@@ -304,10 +332,14 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 font-size: 20px;
             }
             .body{
-                height:298px;
+                flex-direction: column;
+
                 .img-wrapper{
-                    height:182px;
-                    border-bottom:5px solid $light-yellow;
+                    width:100%;
+                    aspect-ratio: 16/9;
+                }
+                p{
+                    height:160px;
                 }
             }
         }
