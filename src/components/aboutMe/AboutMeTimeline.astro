@@ -2,7 +2,7 @@
 interface HistoryItem{
     date:string;
     title:string;
-    imgURL:string;
+    mediaURL:string;
     explain:string;
 }
 //自分についての歴史をタイムライン形式で表現する奴
@@ -10,71 +10,74 @@ const historyItems:HistoryItem[] = [
     {
         date:"2017年",
         title:"初めてのプログラミング",
-        imgURL:"/icon/ScratchLogo.webp",
-        explain:"小学5年の頃に、scratchというゲーム作りをするツールに出会いました。ここで初めてプログラミングにはまりました。この頃はオフライン版をやっており、作品をネットに挙げていないため、ゲームの画像やデータすら残っていません"
+        mediaURL:"/icon/scratchLogo.webp",
+        explain:"小学5年の頃に、scratchというゲーム作りをするツールに出会いました。この頃はオフライン版をやっていたため、作品のデータすらありませんが、猫のキャラクターを動かしたり、車を動かしたりして、プログラミングの楽しさを知りました。この経験が無ければコードを書いてなかったと思います。"
     },
     {
         date:"2019年",
         title:"CoderDojoでのプログラミング",
-        imgURL:"/icon/CoderdojoLogo.webp",
+        mediaURL:"/icon/coderdojoLogo.webp",
         explain:"親の勧めで、学生限定のプログラミングの集まりに参加していました。ここではvrを体験したり、一緒にスクラッチをやったりなど沢山の人と交流しました。その結果、プログラミングに対する興味を深めるきっかけになりました。"
     },
 
     {
         date:"2020年3月",
-        title:"オンライン版Scratchを開始",
-        imgURL:"/normalImage/aboutMe/OnlineScratch.webp",
-        explain:"執筆中"
+        title:"ブラウザ上のScratchへ移行",
+        mediaURL:"/normalImage/aboutMe/onlineScratch.webp",
+        explain:"オフライン版のScratchからブラウザ上のScratchへ移行しました。ここで、初めてゲームを作り、ネットに載せると言う経験しました。また、他の人の作品の影響から、「3dゲームを作りたい」と言う気持ちが大きくなっていた時期でもあります。私がブラウザ上で動くゲームを作っているのはここに起因します。"
     },
     {
         date:"2020年9月",
         title:"Unity学習の始まり",
-        imgURL:"/icon/frameWork/Unity2021Logo.webp",
-        explain:"ラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラーメンラ"
+        mediaURL:"/icon/frameWork/unity2021Logo.webp",
+        explain:"「3dゲームを作りたい」という気持ちからunityを学び始めました。ネットにはありませんが、最初に3dのブロック崩しを作りました。右も左も分からなかったため、unityのインストールにすら手間取っていた記憶があります。またscratchのようなguiではなくcuiでオブジェクトの性質を定義するため、そこにも苦戦しました。"
     },
     {
-        date:"2020年12月",
+        date:"2020年11月~2020年12月",
         title:"初のオリジナルゲームを公開",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/video/2thWork.mp4",
+        explain:"3dゲームを作る前にunityの操作方法に慣れる事を目的として作ったゲームです。これはネットに挙げています。プログラム以外にもEdgeと言うツールを使ってドット絵を描きました。初めて作ったゲームですので、移動速度が速かったり、一つのアスペクト比にしか対応していない等、拙い部分が目立ちますね。"
     },
     {
         date:"2021年2月",
         title:"Blender学習を開始",
-        imgURL:"/normalImage/aboutMe/TankOfBlender.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/normalImage/aboutMe/tankOfBlender.webp",
+        explain:"この時期は戦車のゲームを作ろうとしていた時期です。それにあたってblenderの学習を開始しました。履帯の再現方法はuvスクロール形式やリギングを行う形式などいくつかありましたが、技術力が足らず、再現できませんでした。今の私ならuvスクロール形式の方は出来るかもしれません。"
     },
     {
         date:"2021年5月",
         title:"shader学習を開始",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/video/shaderStart2021_5.mp4",
+        explain:"戦車のゲームが4月に完成し、次に船のゲームを作っていた時期です。それにあたり、shaderの勉強を開始しました。学習し始めのため、シームレスな海のテクスチャを繰り返し配置しuvスクロールするだけの物です。この映像の頃はcuiですが、難しくて、気が付いたらshaderGraphに逃げてました。いつかcuiにリベンジします。"
     },
     {
         date:"2022年11月",
         title:"shaderとblenderのスキルが成長",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/video/shaderProgrees2022_11.mp4",
+        explain:"この頃になるとblender,shaderGraphともに慣れてきて、それなりのビジュアルを自作できるようになりました。例えば、海において、fbmノイズからノーマルマップを作って立体感を表したり、木において、blenderで作った。幹の頂点カラーの差異を用いてvertex shaderで木の揺らぎを再現したりもしています。"
     },
     {
         date:"2023年7月~2024年5月",
         title:"音ゲー制作を進めていたが断念",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/video/musicGame.mp4",
+        explain:"船のゲームの終わりが見えず、苦しかった為、自分が好きな音楽ゲームを作ろうとしていました。ビジュアルは良いのですが、譜面を生成する仕組みも、読み込む仕組みもできておらずハリボテです。その上、パーテーションを消してしまうという大やらかしをしてしまい、萎えてゲーム制作から1年半も離れてしまいました。"
     },
     {
         date:"2025年12月",
         title:"ゲーム制作に復帰",
-        imgURL:"/normalImage/work/3thWork.webp",
-        explain:"ラーメンラーメンラーメン"
+        mediaURL:"/video/gunSwapShooter.mp4",
+        explain:"リアルが落ち着いてきた上、ゲーム制作をする気力も戻ってきたため、1年半ぶりにゲーム制作に復帰しました。この動画はその復帰作となるARシューティングゲームです。久々にちゃんと完成させました。現状コード的にも、ゲームの楽しさ的にも高い方だと思います。ブラウザ上で、手軽に遊べる為良かったら遊んでみてください。"
     },
-
-
-
-
+    {
+        date:"現在",
+        title:"",
+        mediaURL:"/video/portfolioSite.mp4",
+        explain:"大学2年現在、楽しいを糧に、未完の物含めて、様々な物を作ってきました。その作品をまとめたり、自己分析をしたりするため、ポートフォリオサイトの制作を始めています。将来どんなITエンジニアになるのか分からないですが、今までの経験が必ず自分のためになると信じて、引き続きプログラミングを学んでいきたいと思います。"
+    },
 
 ];
 const listCount:number = historyItems.length;
+import { CheckMedia } from "../../scripts/function";
 ---
 
 <about-me-timeline role="list">
@@ -84,9 +87,14 @@ const listCount:number = historyItems.length;
                 <div class="date">{e.date}</div>
                 <h2>{e.title}</h2>
                 <div class="body">
-                    <div class="img-wrapper"}>
-                        <img class="background-img"src={e.imgURL} alt="アスペクト比が1/1じゃないときに表示される背景用画像"/>
-                        <img class="related-img"src={e.imgURL} alt=`${e.title}の画像`/>
+                    <div class="media-wrapper"}>
+                        {CheckMedia(e.mediaURL)==="video" ?(
+                            <img class="background-img" src='/icon/myIcon.webp'/>
+                            <video src={e.mediaURL} autoplay loop muted playsinline/>
+                        ):(
+                            <img class="background-img"src={e.mediaURL} />
+                            <img class="related-img" src={e.mediaURL} alt=`${e.title}の画像`/>
+                        )}
                     </div>
                     <p>
                         {e.explain}
@@ -100,8 +108,7 @@ const listCount:number = historyItems.length;
 @use '../../styles/_utility' as *;
 $vertical-line-width:8px;
 $column-gap:10px;
-$row-gap:40px;
-$max-li-count:1;
+$row-gap:60px;
 $left-li-horizontal-line-width:$column-gap  + 2;
 $right-li-horizontal-line-width:$column-gap + 3;
 
@@ -158,7 +165,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             .date{
                 position:absolute;
-                top:-1 * ($row-gap - 10);
+                top:-1 * (30px);
             }
 
             h2{
@@ -170,17 +177,13 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             .body{
                 grid-row: 2;
-                display: flex;
-
-                gap:5px;
-                .img-wrapper{
-                    flex-shrink: 0;
+                .media-wrapper{
                     position:relative;
                     float:left;
                     .background-img{
                         position:absolute;
                     }
-                    .related-img{
+                    .related-img,video{
                         position:absolute;
                     }
                 }
@@ -205,7 +208,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
             content: "";
         }
         li{
-            width:500px;
+            width:550px;
             border:1px solid black;
             box-shadow: 2px 2px 2px black;
             background-color: $light-yellow;
@@ -253,11 +256,16 @@ $right-li-horizontal-line-width:$column-gap + 3;
             }
             .body{
                 width:100%;
+                height:248px;
                 padding:5px;
-                .img-wrapper{
-                    height:185px;
-                    aspect-ratio: 1/1;
+                .media-wrapper{
+                    height:177px;
+                    aspect-ratio: 16/9;
                     overflow: hidden;
+                    border-right:5px solid $light-yellow;
+                    border-bottom: 5px solid $light-yellow;
+                    margin-right:5px;
+                    margin-bottom:5px;
                     .background-img{
                         width:100%;
                         height:100%;
@@ -265,18 +273,18 @@ $right-li-horizontal-line-width:$column-gap + 3;
                         pointer-events: none;
                         filter:blur(10px);
                     }
-                    .related-img{
+                    .related-img,video{
                         width:100%;
                         height:100%;
                         pointer-events: none;
                         object-fit: contain;
                         border:3px solid $yellow;
                     }
-
                 }
                 p{  
                     height:fit-content;
                     width:100%;
+                    height:100%;
                     padding:3px;
                     line-height:1.6;
                     background-color: white; 
@@ -287,11 +295,10 @@ $right-li-horizontal-line-width:$column-gap + 3;
         }
     }
 }
-@media (max-width:1050px) {
+@media (max-width:1150px) {
     about-me-timeline{
         display:grid;
         grid-template-columns: $vertical-line-width 1fr;
-        row-gap: 40px;
         column-gap: $column-gap;
         &::before{
             grid-column: 1;
@@ -311,8 +318,6 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 background-image:linear-gradient(90deg,$light-yellow,$yellow);
             }
             .date{
-                inset:0px;
-                top:-1 * ($row-gap - 10);
                 left:5px;
             }
             h2{
@@ -323,23 +328,28 @@ $right-li-horizontal-line-width:$column-gap + 3;
         }  
     }
 }
-@media (max-width:550px) {
+@media (max-width:600px) {
     about-me-timeline{
         li{
             width:340px;
-            border-top-right-radius: 40px;
             h2{
                 font-size: 20px;
             }
             .body{
+                display: flex;
+                gap:5px;
                 flex-direction: column;
 
-                .img-wrapper{
+                height:404px;
+                .media-wrapper{
+                    flex-shrink: 0;
                     width:100%;
                     aspect-ratio: 16/9;
+                    margin:0px;
+                    border:0px;
                 }
                 p{
-                    height:160px;
+                    flex-grow: 1;
                 }
             }
         }

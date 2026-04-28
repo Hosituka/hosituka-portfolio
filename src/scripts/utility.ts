@@ -1,4 +1,4 @@
-//#このファイルには私が独自に作った関数があります。正直車輪の再発明している可能性が高いかもしれません
+//#このファイルには私が独自に作ったクラスとインターフェースがあります。正直車輪の再発明している可能性が高いかもしれません
 //##Mathというやつにない処理を書くところ
 import { createNoise2D, type NoiseFunction2D } from "simplex-noise";
 export abstract class MathUtility{

@@ -58,7 +58,7 @@
                 :global(about-me-card){
                     grid-area:card;
                 }
-                .sns-container{
+                .sns-wrapper{
                     grid-area:sns;
                     display:flex;
                     flex-direction: column;
@@ -173,7 +173,7 @@
                 border:1px solid #333;
                 background-color:  $light-yellow;
 
-                .sns-container{
+                .sns-wrapper{
                     a{
                         background-color: white;
                         outline:3px solid gray;
@@ -292,7 +292,7 @@
                 .about-me-text{
                     width:250px;
                 }
-                .sns-container{
+                .sns-wrapper{
                     gap:10px;
                     margin:10px 0px;
                     flex-direction: row;

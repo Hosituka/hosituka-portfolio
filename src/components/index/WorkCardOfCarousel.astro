@@ -6,11 +6,9 @@ interface Props{
 	playLink?:string;
 	detailLink?:string;
 }
+import { CheckMedia } from '../../scripts/function';
 const {workMediaURL: workMediaURL,workTitle: workTitle,playLink:playLink,detailLink:detailLink}:Props = Astro.props;
 
-//#渡されたmediaが動画か否かのチェックを行う処理
-const videoExtensions:Array<string> = ['.mp4','.webm']
-const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 ---
 
 <work-card-of-carousel data-work-title={workTitle}>
@@ -18,8 +16,8 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 		<div class="card-first-view">				
 			<h3>{workTitle}</h3>
 			<div class="media-container">
-				{isVideo ?(
-					<img class="image-background" src='/icon/MyIcon.webp'></img>
+				{CheckMedia(workMediaURL)==="video" ?(
+					<img class="image-background" src='/icon/myIcon.webp'></img>
 					<video src={workMediaURL} autoplay loop muted playsinline></video>
 				):(
 					<img class="image-background" src={workMediaURL}></img>
@@ -54,7 +52,7 @@ const isVideo:boolean = videoExtensions.some(ext => workMediaURL.endsWith(ext));
 </work-card-of-carousel>	
  
 <style lang="scss">
-@use '../styles/_utility' as *;
+@use '../../styles/_utility' as *;
 
 $cardWidth:355px;
 @layer Layout{

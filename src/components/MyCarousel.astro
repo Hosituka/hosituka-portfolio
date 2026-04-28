@@ -34,6 +34,7 @@ const {speed}:Props = Astro.props;
             cursor:grabbing;
         }
         .cards-container{
+            width:fit-content;
         }
     }
 }
@@ -74,9 +75,23 @@ const {speed}:Props = Astro.props;
                 {this.speed = parseFloat(this.dataset.speed)}
                 else{this.speed = 5;}
                 //##カルーセルのスクロールを受けても余白が生じない程の量のカードを用意する。
-                const CardArray = Array.from(this.cardsContainer.children);
-                
-                for(const item of CardArray){
+                //### ビューポートの横幅を埋め尽くす分のカードを生成
+                let cardArray:Array<Element> = Array.from(this.cardsContainer.children);
+                const allCardWidth:number = this.cardsContainer.scrollWidth;
+                const viewPortWidth:number = document.documentElement.clientWidth;
+                const targetCopyCount:number = Math.floor(viewPortWidth / allCardWidth);
+                console.log("子要素含めての横幅："+this.cardsContainer.clientWidth);
+                console.log("ビューポートの横幅："+ document.documentElement.clientWidth);
+                console.log("目標コピー回数" + targetCopyCount);
+               for(let i = 0;i < targetCopyCount;i++){
+                    for(const item of cardArray){
+                        const cloneItems = item.cloneNode(true);
+                        this.cardsContainer.appendChild(cloneItems);
+                    }
+                }
+                //###上の工程で作られたカード群を二倍増やす
+                cardArray = Array.from(this.cardsContainer.children);
+                for(const item of cardArray){
                     const cloneItems = item.cloneNode(true);
                     this.cardsContainer.appendChild(cloneItems);
                 }
@@ -121,7 +136,7 @@ const {speed}:Props = Astro.props;
                 carouselViewport.addEventListener("touchend", (touch) => {
                     this.timerId = setTimeout(this.StartAutoScroll, 500);
                 })
-                carouselViewport.addEventListener("touchecancel", (touch) => {
+                carouselViewport.addEventListener("touchcancel", (touch) => {
                     this.timerId = setTimeout(this.StartAutoScroll, 500);
                 })
 
