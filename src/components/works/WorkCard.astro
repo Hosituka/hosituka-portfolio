@@ -15,7 +15,7 @@ import { CheckMedia } from '../../scripts/function';
 		<h3>{workTitle}</h3>
 		<div class="media-container">
 			{CheckMedia(workMediaURL)==='video' ?(
-				<img class="background-img" src='/icon/MyIcon.webp'></img>
+				<img class="background-img" src='/icon/myIcon.webp'></img>
 				<video class="related-video" src={workMediaURL} autoplay loop muted playsinline></video>
 			):(
 				<img class="background-img" src={workMediaURL}></img>
@@ -371,8 +371,6 @@ import { CheckMedia } from '../../scripts/function';
 		private Start=()=>{
 			if(this.overviewWrapper===null){console.error('overview-wrapperクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-			console.log("clientHeight："+this.overviewWrapper.clientHeight);
-			console.log("scrollHeight："+this.overviewWrapper.scrollHeight);
 			//##overviewWrapperのスクロール周りの挙動の状態分岐
 			if(this.overviewWrapper.clientHeight < this.overviewWrapper.scrollHeight){
 				this.overviewWrapper.classList.add('is-scroll')
