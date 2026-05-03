@@ -12,12 +12,6 @@ import FrequencyBar from "../FrequencyBar.astro"
     <div class="about-me-wrapper">
         <h1>Hosituka</h1>
         <div class="body">
-            <p>
-                scratchという学習ツールからプログラミングにはまり、今ではunityで3dゲームを作っている人です。
-                <br>その名残から、ブラウザ上で遊べる作品が多いです。
-                <br>最近はwebサイト(フロントエンド)の勉強も始めました。
-                <br>分からないことだらけで、苦戦していますが、楽しめてます。
-            </p>
             <div class="sns-wrapper">
                 <a href="https://unityroom.com/users/hosi" target="_blank" rel="noopener noreferrer">
                     <img src="/icon/unityRoomLogo.webp" alt="UnityRoomLogo">
@@ -32,13 +26,19 @@ import FrequencyBar from "../FrequencyBar.astro"
                     <img class="is-small" src="/icon/connpassLogo.webp" alt="ConnpassLogo">
                 </a>
             </div>
-
+            <p>
+                scratchという学習ツールからプログラミングにはまり、今ではunityで3dゲームを作っている人です。
+                <br>その名残から、ブラウザ上で遊べる作品が多いです。
+                <br>最近はwebサイト(フロントエンド)の勉強も始めました。
+                <br>分からないことだらけで、苦戦していますが、楽しめてます。
+            </p>
         </div>
     </div>
 
 </header-of-about-me>
 <style lang="scss">
 @use '../../styles/_utility' as *;
+@use 'sass:math';
 //#変数たち
 //##弄っても良いプロパティ
 
@@ -46,7 +46,7 @@ $MyIconWidth:376px;
 $MyIconXOffset:265px;
 $MyIconYOffset:65px;
 //##計算の都合上あった方が良い変数、つまり弄るな
-$HalfMyIconWidth:$MyIconWidth / 2;
+$HalfMyIconWidth:math.div($MyIconWidth,2);
 @layer Layout{
     header-of-about-me{
         display:block;
@@ -95,13 +95,19 @@ $HalfMyIconWidth:$MyIconWidth / 2;
             gap:10px;
             flex-direction: column;
             align-items: center;
-            .sns-wrapper{
-                display:flex;
-                justify-content: start;
-                align-self: center;
-                gap:20px;
-                margin-bottom:10px;
-                margin-left: 20px;
+            .body{
+                display: flex;
+                flex-direction: column;
+                gap:5px;
+                .sns-wrapper{
+                    display:flex;
+                    justify-content: start;
+                    align-self: center;
+                    gap:20px;
+                    margin-top:10px;
+                    margin-left: 20px;
+                }
+
             }
 
         }
@@ -166,7 +172,7 @@ $HalfMyIconWidth:$MyIconWidth / 2;
                 background-color: rgba(black,0.5);
                 border-radius: 40px;
                 p{
-                    padding:15px;
+                    padding:0px 15px 15px 15px;
                     line-height: 1.6;
                     color:white;
                 }

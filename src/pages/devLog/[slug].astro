@@ -1,0 +1,24 @@
+---
+//#ここはcontentにあるmdファイルから、.astroファイルを生成する際のひな型です。
+import {getCollection,type CollectionEntry} from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import GlobalNav from '../../components/GlobalNav.astro';
+import Footer from '../../components/Footer.astro';
+//#パスの生成
+export async function getStaticPaths(){
+    const posts = await getCollection('devLog');
+    return posts.map(post =>({
+        params:{slug:post.slug},
+        props:{post},
+    }));
+}
+//#typescriptに受け取るデータの型を教える
+interface Props{
+    post:CollectionEntry<'devLog'>;
+}
+//# 登録した記事データを受け取る
+const {post} = Astro.props;
+
+const {Content} = await post.render();
+---
+

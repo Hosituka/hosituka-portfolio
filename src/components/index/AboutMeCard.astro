@@ -55,18 +55,19 @@
  
 <style lang="scss">
 @use '../../styles/_utility' as *;
+@use "sass:list";
 @function GetStripeValue($step:5px,$count:5){
 	$offset:$step;
 	$result:();
 	@for $countUp from 0 to $count{
 		//#白部分(step分の幅)
 		$startOfWhiteLine:$countUp * $step * 3 + $offset;
-		$result:append($result,$light-yellow $startOfWhiteLine,comma);
-		$result:append($result,$light-yellow $startOfWhiteLine + $step,comma);
+		$result:list.append($result,$light-yellow $startOfWhiteLine,comma);
+		$result:list.append($result,$light-yellow $startOfWhiteLine + $step,comma);
 		//#透明部分(2step分の幅)
 		$startOfTransparent:$startOfWhiteLine;
-		$result:append($result,transparent $startOfTransparent,comma);
-		$result:append($result,transparent $startOfTransparent + $step * 2,comma);
+		$result:list.append($result,transparent $startOfTransparent,comma);
+		$result:list.append($result,transparent $startOfTransparent + $step * 2,comma);
 	}
 	@return $result;
 }
