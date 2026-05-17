@@ -2,15 +2,12 @@
 //このファイルはuiコンポーネントのテスト用に使うページコンポーネントです。
 import Layout from '../layouts/Layout.astro';
 import ParticleBackGround from '../components/ParticleBackGround.astro';
-import GlobalNav from '../components/GlobalNav.astro';
-import Footer from '../components/Footer.astro';
 import HeaderOfAboutMe from '../components/aboutMe/HeaderOfAboutMe.astro';
 import MySkills from '../components/aboutMe/MySkills.astro'
 import AboutMeTimeline from '../components/aboutMe/AboutMeTimeline.astro'
 ---
 <Layout title='私について'>
 
-	<GlobalNav/>
     <HeaderOfAboutMe/>
     <ParticleBackGround zIndex={1} particleDensity={0.25}/>
     <main>
@@ -22,7 +19,6 @@ import AboutMeTimeline from '../components/aboutMe/AboutMeTimeline.astro'
             <AboutMeTimeline/>
         </div>
     </main>
-	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
 <style lang="scss">
     @import url('../styles/pages/aboutMe.scss');

@@ -46,8 +46,10 @@ export abstract class MathUtility{
 }
 export class Time{
     static{
-        requestAnimationFrame(Time.UpdateTimeDelta);
-        requestAnimationFrame(Time.UpdateTimeInSeconds);
+        if(typeof window !== 'undefined'){
+            requestAnimationFrame(Time.UpdateTimeDelta);
+            requestAnimationFrame(Time.UpdateTimeInSeconds);
+        }
     }
 
     private static LastTime:number = 0;
@@ -94,3 +96,18 @@ export class WidthResizeObserver{
         this.resizeObserver.observe(target);
     }
 }
+//#toLocaleDateStringの引数指定
+export const jaDateOptions:Intl.DateTimeFormatOptions ={
+    year:'numeric',
+    month:'long',
+    day:'numeric'
+}
+export const jaDateArgument:[string,Intl.DateTimeFormatOptions] =  
+[
+    'ja-JP',
+    {
+        year:'numeric',
+        month:'long',
+        day:'numeric'
+    }
+]

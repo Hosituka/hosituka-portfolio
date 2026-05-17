@@ -13,7 +13,6 @@ import WorkCard from '../components/works/WorkCard.astro';
 <Layout title='作品紹介'>
 
     <ParticleBackGround zIndex={1} particleDensity={0.5}/>
-	<GlobalNav/>
     <WorksOfHeader/>
     <main>
         <WorkCardsSection sectionTitle='ゲーム作品' zIndex='2'>
@@ -180,7 +179,6 @@ import WorkCard from '../components/works/WorkCard.astro';
             </WorkCard>
         </WorkCardsSection>
     </main>
-	<Footer zIndex="2" blendMode='multiply'/>
 </Layout>
 <style>
     @import url("../styles/pages/works.scss");

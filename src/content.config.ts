@@ -1,16 +1,16 @@
 import { defineCollection, z } from 'astro:content';
 
-const devLog = defineCollection({
+const blogCollection = defineCollection({
 	// 型定義 (Schema)
+	type:"content",
 	schema: z.object({
 		title: z.string(),
 		pubDate: z.date(),
-		description: z.string(),
-		author: z.string(),
+		writer: z.string(),
 		tags: z.array(z.string()),
 		image: z.string().optional(),
 	}),	
 });
 
 // コレクションをエクスポート
-export const collections = { devLog };
+export const collections = {blog:blogCollection};

@@ -80,27 +80,25 @@ import { CheckMedia } from "../../scripts/function";
 ---
 
 <about-me-timeline role="list">
-    {
-        historyItems.map((e:HistoryItem,index:number) => {return(
-            <li style=`--grid-row:${index + 1}`>
-                <div class="date">{e.date}</div>
-                <h2>{e.title}</h2>
-                <div class="body">
-                    <div class="media-wrapper"}>
-                        {CheckMedia(e.mediaURL)==="video" ?(
-                            <img class="background-img" src='/icon/myIcon.webp'/>
-                            <video src={e.mediaURL} autoplay loop muted playsinline/>
-                        ):(
-                            <img class="background-img"src={e.mediaURL} />
-                            <img class="related-img" src={e.mediaURL} alt=`${e.title}の画像`/>
-                        )}
-                    </div>
-                    <p>
-                        {e.explain}
-                    </p>
+    {historyItems.map((e:HistoryItem,index:number) => {return(
+        <li style=`--grid-row:${index + 1}`>
+            <div class="date">{e.date}</div>
+            <h2>{e.title}</h2>
+            <div class="body">
+                <div class="media-wrapper"}>
+                    {CheckMedia(e.mediaURL)==="video" ?(
+                        <img class="background-img" src='/icon/myIcon.webp'/>
+                        <video src={e.mediaURL} autoplay loop muted playsinline/>
+                    ):(
+                        <img class="background-img"src={e.mediaURL} />
+                        <img class="related-img" src={e.mediaURL} alt=`${e.title}の画像`/>
+                    )}
                 </div>
-            </li>)
-        })
+                <p>
+                    {e.explain}
+                </p>
+            </div>
+        </li>)})
     }
 </about-me-timeline>
 <style lang="scss" define:vars={{listCount}}>
@@ -262,7 +260,7 @@ $right-li-horizontal-line-width:$column-gap + 3;
                 .media-wrapper{
                     height:177px;
                     aspect-ratio: 16/9;
-                    overflow: hidden;
+                    overflow: clip;
                     border-right:5px solid $light-yellow;
                     border-bottom: 5px solid $light-yellow;
                     .background-img{

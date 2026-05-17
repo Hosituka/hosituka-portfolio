@@ -1,0 +1,138 @@
+---
+//#ここはcontentにあるmdファイルから、.astroファイルを生成する際のひな型です。
+import {getCollection,type CollectionEntry} from 'astro:content';
+import {FormatDateOfJP} from '../../scripts/function'
+import BlogLayout from '../../layouts/BlogLayout.astro';
+//#パスの生成をする関数の中身を書く、この関数名はunityのイベント関数みたいに変えれないastroによるもの
+export async function getStaticPaths(){
+    const posts:CollectionEntry<'blog'>[] = await getCollection('blog');
+    return posts.map(post =>({
+        
+        params:{slug:post.slug},
+        props:{post},
+    }));
+}
+//# htmlに対応するmdの情報を流し込む部分の処理
+//## 登録した記事データを受け取る
+const post:CollectionEntry<'blog'> = Astro.props.post;
+const blogData = post.data;
+//## コンテント(mdx)をastroコンポーネントにする処理とのこと、気持ち悪い
+const {Content} = await post.render();
+---
+<BlogLayout title = {blogData.title}>
+    <header>
+        <h1>{blogData.title}</h1>
+        <div class="tag-wrapper">{
+            blogData.tags.map((e) =>{return (
+                <span class="tag">{e}</span>
+            )})
+        }</div>
+        <span class="pub-date">{FormatDateOfJP(blogData.pubDate)}</span>
+    </header>
+    <main>
+        <Content/>
+    </main>
+</BlogLayout>
+<style is:global lang="scss">
+@use '../../styles/_utility' as *;
+@layer Layout{
+    header{
+        position:relative;
+        display:flex;
+        flex-direction:column;
+        gap:5px;
+        h1{
+        }
+        .tag-wrapper{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+    }
+    main{
+        position:relative;
+        h1,h2,h3,h4{
+            margin:10px 0px;
+        }
+        ul{
+            li{
+                position: relative;
+                &::before{
+                    position: absolute;
+                    left:0px;
+                    top:50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+}
+@layer Appearance{
+    header{
+        width:100%;
+        padding:10px 20px;
+        background-color:$yellow;
+        border-bottom:1px solid gray;
+        h1{
+            font-weight: 900;
+            font-size:50px;
+            color: white;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+            paint-order: stroke fill;
+            font-family:"Noto Sans JP" , sans-serif;
+            overflow-wrap:anywhere;
+            /** */
+        }
+        .tag-wrapper{
+            .tag{
+                background-color:white;
+                outline:1px solid gray;
+                padding:2px 20px;
+                border-radius:5px;
+            }
+
+        }
+    }
+    main{
+        padding:10px;
+        h1{
+            background-color: $light-yellow;
+            border-left:18px solid $yellow;
+            outline:1px solid gainsboro;
+            border-top-left-radius: 15px;
+            border-bottom-left-radius: 15px;
+            padding:4px 0px 4px 1px;
+        }
+        h2,h3,h4{
+            border-bottom:1px solid gainsboro;
+            padding-left:15px;
+        }
+        
+        ul{
+            li{
+                list-style: none;
+                padding-left:10px;
+                &::before{
+                    aspect-ratio: 1/1;
+                    height:8px;
+                    background-color: black;
+                    border-radius: 50%;
+                    content: "";
+                }
+            }
+        }
+        ol{
+            list-style-position:inside;
+        }
+    }
+}
+@media(max-width:700px){
+    header{
+        h1{
+            font-size:40px;
+        }
+    }
+}
+
+</style>

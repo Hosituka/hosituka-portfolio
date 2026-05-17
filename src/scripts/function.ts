@@ -13,3 +13,14 @@ export function CheckMedia(mediaURL:string):"video" | "image"| "undefined"{
     }
     return "undefined";
 }
+export function FormatDateOfJP(date:Date):string
+{
+    return date.toLocaleDateString(
+        'ja-JP',
+        {
+            year:'numeric',
+            month:'long',
+            day:'numeric'
+        }
+    )
+}

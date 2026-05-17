@@ -8,10 +8,12 @@
 	--nav-height:50px;
 }
 @Layer CssReset{
-	*,
-	*::before,
-	*::after {
-		box-sizing: border-box;
+	html{
+		box-sizing: border-box; /* 1. 大元で指定 */
+	}
+	*,*::before,*::after {
+		/* 2. すべての要素に「親から継承しろ」と命じる */
+		box-sizing: inherit;
 	}
 
 	body,

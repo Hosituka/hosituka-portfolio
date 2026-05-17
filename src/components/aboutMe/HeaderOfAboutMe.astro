@@ -101,8 +101,6 @@ $HalfMyIconWidth:math.div($MyIconWidth,2);
                 gap:5px;
                 .sns-wrapper{
                     display:flex;
-                    justify-content: start;
-                    align-self: center;
                     gap:20px;
                     margin-top:10px;
                     margin-left: 20px;
@@ -236,7 +234,7 @@ $HalfMyIconWidth:math.div($MyIconWidth,2);
         height:800px;
         $MyIconXOffset:0px;
         $MyIconWidth:300px;
-        $HalfMyIconWidth:$MyIconWidth / 2;
+        $HalfMyIconWidth:math.div($MyIconWidth,2);
 
         :global(frequency-bar){
             --offset-x:-60px;

@@ -1,0 +1,44 @@
+---
+import {getCollection,type CollectionEntry} from 'astro:content';
+import {FormatDateOfJP} from '../scripts/function';
+//このファイルはuiコンポーネントのテスト用に使うページコンポーネントです。
+import Layout from '../layouts/Layout.astro';
+import ParticleBackGround from '../components/ParticleBackGround.astro';
+const blogs:CollectionEntry<"blog">[] = await getCollection("blog");
+//#最新の奴が一番上に出てくるように配列を並び替える処理
+blogs.sort((a,b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+---
+<Layout title='ブログ一覧'>
+
+    <ParticleBackGround zIndex={1} particleDensity={0.1}/>
+    <header>
+        <h1>ブログ一覧</h1>
+    </header>	
+    <main>
+        <div class="blog-intro-wrapper"> 
+            {blogs.map((e) => {return(
+                <a class="blog-intro" href=`/blog/${e.slug}`>
+                    <div class="img-wrapper">
+                        {e.data.image ?(
+                            <img class="background-img" src={e.data.image}/>
+                            <img class="related-img"src={e.data.image}/>
+                        ):(
+                            <img class="placeholder-img" src="/icon/myIcon.webp"/>
+                        )}
+                    </div>
+                    <span class="pub-date">{FormatDateOfJP(e.data.pubDate)}</span>
+                    <h2>{e.data.title}</h2>
+                    <div class="tag-wrapper">
+                        {e.data.tags.map((e) => {return(
+                            <span class="tag">{e}</span>
+                        )})}
+                    </div>
+                </a>
+            )})}
+
+        </div>
+    </main>
+</Layout>
+<style lang="scss">
+    @import url('../styles/pages/blog.scss');
+</style>
