@@ -27,7 +27,8 @@ const {Content} = await post.render();
                 <span class="tag">{e}</span>
             )})
         }</div>
-        <span class="pub-date">{FormatDateOfJP(blogData.pubDate)}</span>
+        <span class="pub-date">公開日：{FormatDateOfJP(blogData.pubDate)}</span>
+        <span class="rev-date">更新日：{FormatDateOfJP(blogData.revDate)}</span>
     </header>
     <main>
         <Content/>
@@ -96,7 +97,13 @@ const {Content} = await post.render();
     }
     main{
         padding:10px;
+        font-size:30px;
+        h2,h3,h4{
+            border-bottom:1px solid gainsboro;
+            padding-left:15px;
+        }
         h1{
+            font-size:100%;
             background-color: $light-yellow;
             border-left:18px solid $yellow;
             outline:1px solid gainsboro;
@@ -104,10 +111,16 @@ const {Content} = await post.render();
             border-bottom-left-radius: 15px;
             padding:4px 0px 4px 1px;
         }
-        h2,h3,h4{
-            border-bottom:1px solid gainsboro;
-            padding-left:15px;
+        h2{
+            font-size:90%;
         }
+        h3{
+            font-size:80%;
+        }
+        h4{
+            font-size:70%;
+        }
+
         
         ul{
             li{
@@ -129,8 +142,9 @@ const {Content} = await post.render();
 }
 @media(max-width:700px){
     header{
+        padding:10px;
         h1{
-            font-size:40px;
+            font-size:30px;
         }
     }
 }

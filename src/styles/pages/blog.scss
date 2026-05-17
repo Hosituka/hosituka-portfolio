@@ -20,7 +20,6 @@
         .blog-intro-wrapper{
             display:flex;
             flex-direction: column;
-            gap:4px;
             margin-top:20px;
             margin-bottom:20px;
             z-index:2;
@@ -39,13 +38,14 @@
                         position:absolute;
                     }
                     .placeholder-img{
-                        transform:translateY(-20%);
+                        top:calc(50%);
+                        transform:translateY(-50%);
                     }
                 }
                 .pub-date{
                     grid-area:pub-date;
                     align-self:end;
-                    margin-bottom:3px;
+                    margin-top:10px;
                 }
                 h2{
                     grid-area:title;
@@ -55,7 +55,8 @@
                     display:flex;
                     flex-wrap:wrap;
                     gap:8px;
-                    margin-top:10px;
+                    margin-top:5px;
+                    margin-bottom:10px;
                 }
             }
         }
@@ -89,14 +90,16 @@
         }
         .blog-intro-wrapper{
             width:1000px;
-            background-color: whitesmoke;
             box-shadow:0px 0px 6px gray;
             .blog-intro{
                 background-color: white;
                 text-decoration: none;
+                &:not(.blog-intro:last-child){
+                    border-bottom:1px solid gray;
+                }
                 .img-wrapper{
-                    aspect-ratio: 16/9;
-                    height:125px;
+                    width: 184px;
+                    height:100%;
                     background-color: black;
                     overflow: clip;
                     .background-img{
@@ -117,6 +120,7 @@
                         aspect-ratio: 1/1;
                         object-fit: cover;
                         pointer-events: none;
+                        object-position: 0px 3px;
                     }
                 }
                 .pub-date{
@@ -158,14 +162,16 @@
         .blog-intro-wrapper{
             width:calc(100% - 20px);
             .blog-intro{
-                padding:8px;
                 grid-template-columns: auto;
                 grid-template-rows: auto auto auto auto;
                 grid-template-areas:'pub-date'
                                     'title'
                                     'tag-wrapper';
                 .img-wrapper{
-                    display: none;
+                    display:none;
+                }
+                .pub-date,h2,.tag-wrapper{
+                    margin-left: 9px;
                 }
             }
 
