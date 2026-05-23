@@ -45,7 +45,7 @@
                 .pub-date{
                     grid-area:pub-date;
                     align-self:end;
-                    margin-top:10px;
+                    margin-top:25px;
                 }
                 h2{
                     grid-area:title;
@@ -56,7 +56,7 @@
                     flex-wrap:wrap;
                     gap:8px;
                     margin-top:5px;
-                    margin-bottom:10px;
+                    margin-bottom:25px;
                 }
             }
         }
@@ -98,7 +98,7 @@
                     border-bottom:1px solid gray;
                 }
                 .img-wrapper{
-                    width: 184px;
+                    width:237px;
                     height:100%;
                     background-color: black;
                     overflow: clip;

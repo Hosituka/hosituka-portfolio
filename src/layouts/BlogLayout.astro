@@ -1,6 +1,6 @@
 ---
 //ここは全てのBlog系のwebページにおいて、共通する内容を書くところです。cssレイヤーの都合から各ページコンポーネントのフロントマターで一番最初に読み込んでください
-import GlobalNav from '../components/GlobalNav.astro';
+import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -25,7 +25,7 @@ const {title}:Props = Astro.props;
 
 	</head>
 	<body>
-        <GlobalNav/>
+        <Navigation/>
 		<div class="blog-wrapper">
 			<slot/>
 		</div>
@@ -63,7 +63,7 @@ const {title}:Props = Astro.props;
 	html {
 		
 		//#ios特有のびよーんってなってもとにもどる挙動を防ぐコード
-		 overscroll-behavior: none;
+		overscroll-behavior: none;
 		body{
 			overscroll-behavior: none;
             background-image: linear-gradient(to bottom,

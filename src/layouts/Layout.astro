@@ -1,6 +1,6 @@
 ---
 //ここは全てのBlog以外のwebページにおいて、共通する内容を書くところです。cssレイヤーの都合から各ページコンポーネントのフロントマターで一番最初に読み込んでください
-import GlobalNav from '../components/GlobalNav.astro';
+import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 
 interface Props {
@@ -24,7 +24,7 @@ const {title}:Props = Astro.props;
 		</style>
 
 	<body>
-		<GlobalNav/>	
+		<Navigation/>	
 		<slot />
 		<Footer zIndex='2' blendMode='multiply'/>
 	</body>
@@ -32,7 +32,6 @@ const {title}:Props = Astro.props;
 
 <style is:global lang="scss">
 //#ここで全てのコンポーネントで共通するcssレイヤーの順序と読み込みを行っている
-@charset "UTF-8";
 /*##ユーザーエージェントスタイルシートを統一するスタイルシートをlayerとして読み込んでいる、*/
 @import url("../styles/Normalize.css") layer(Normalize);
 /*##webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/
