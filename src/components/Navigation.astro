@@ -25,7 +25,10 @@ const devLogURL:string = "/blog";
 		<a href={worksURL} class:list={[{"is-current":isActive(worksURL)}]}>作品</a>
 		<a href={devLogURL} class:list={[{"is-current":isActive(devLogURL)}]}>日誌</a>
 	</div>
-	<button class="humburger-button">
+	<div class="logo">
+		Portfolio
+	</div>
+	<button class="hamburger-button">
 		<span class="bar1"></span>
 		<span class="bar2"></span>
 		<span class="bar3"></span>
@@ -39,6 +42,12 @@ const devLogURL:string = "/blog";
 		position: fixed;
 		z-index: 1000;
 		top: 0px;
+		.logo{
+			position:absolute;
+			left:5px;
+			top:0px;
+			display: none;
+		}
 		.nav-links{
 			position:relative;
 			margin: 0px;
@@ -58,7 +67,7 @@ const devLogURL:string = "/blog";
 				}
 			}
 		}
-		.humburger-button{
+		.hamburger-button{
 			position:absolute;
 			top:0px;
 			right:20px;
@@ -82,11 +91,16 @@ const devLogURL:string = "/blog";
 }
 @layer Appearance{
     my-nav {
-		width: 100dvw;
+		width: 100%;
 		height:auto;
 		opacity: 0.9;
 		background-color: $dark-gray;
-
+		.logo{
+			color:white;
+			font-family: sans-serif;
+			font-size: 40px;
+			font-weight: 900;	
+		}
 		.nav-links{
 			width: 100%;
 
@@ -94,7 +108,6 @@ const devLogURL:string = "/blog";
 				width: 25%;
 				height:50px;
 				background-color: $dark-gray;
-				opacity: 0.9;
 				border-bottom: 1px solid gray;
 
 				font-size: 1.5rem;
@@ -127,7 +140,7 @@ const devLogURL:string = "/blog";
 				}
 			}
 		}
-		.humburger-button{
+		.hamburger-button{
 			width:40px;
 			height:50px;
 			border:none;
@@ -153,6 +166,9 @@ const devLogURL:string = "/blog";
 		overflow-y: hidden;
 		transition:height 0.3s ease-in-out; 
 		border-bottom: 2px solid white;
+		.logo{
+			display: block;
+		}
 		.nav-links{
 			padding-top:50px;
 			flex-direction: column;
@@ -170,13 +186,13 @@ const devLogURL:string = "/blog";
 				}
 			}
 		}
-		.humburger-button{
+		.hamburger-button{
 			display:block;
 		}
 	}
-	my-nav.open-humburger{
+	my-nav.open-hamburger{
 		height:var(--nav-links-height);
-		.humburger-button{
+		.hamburger-button{
 			.bar1{
 				transform:translateY(-3px) rotateZ(45deg);
 			}
@@ -196,27 +212,41 @@ const devLogURL:string = "/blog";
 }
 </style>
 <script>
+
 class Navigation extends HTMLElement{
+	private resizeObserver:ResizeObserver|null = null;
+	private hamburgerButton:HTMLElement|null = null;
     connectedCallback(){
-        requestAnimationFrame(this.#Start);
+        requestAnimationFrame(this.start);
     }
-    #Start=() =>{
-        const openHumburgerButton:HTMLElement|null = this.querySelector(".humburger-button");
-        if(!openHumburgerButton){console.error(".humburger-buttonが見つかりません");return;}
+    private start=() =>{
+        this.hamburgerButton= this.querySelector(".hamburger-button");
+        if(!this.hamburgerButton){console.error(".hamburger-buttonが見つかりません");return;}
         const navLinks:HTMLElement|null = this.querySelector(".nav-links");
         if(!navLinks){console.error(".nav-linksが見つかりません");return;}
 
         this.style.setProperty('--nav-links-height',`${navLinks.scrollHeight}px`);
 
-        const resizeObserver = new ResizeObserver(()=>{
+        this.resizeObserver = new ResizeObserver(()=>{
             this.style.setProperty('--nav-links-height',`${navLinks.scrollHeight}px`);
         })
-        resizeObserver.observe(navLinks);
-        openHumburgerButton.addEventListener('click',()=>{
-            this.classList.toggle("open-humburger");
-        })
+        this.resizeObserver.observe(navLinks);
+        this.hamburgerButton.addEventListener('click',this.openHumburger)
     }
+	private openHumburger=()=>{
+		this.classList.toggle("open-hamburger");
+	}
+	disconnectedCallback(){
+		if(!this.resizeObserver || !this.hamburgerButton) return;
+		this.resizeObserver.disconnect();
+		this.resizeObserver = null;
+
+		this.hamburgerButton.removeEventListener('click',this.openHumburger);
+		this.hamburgerButton = null;
+	}
 }
-customElements.define("my-nav",Navigation);
+if(!customElements.get("my-nav")){
+	customElements.define("my-nav",Navigation);
+}
 
 </script>

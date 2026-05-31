@@ -20,7 +20,7 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
         <AccordionOfSkills skillName='HTML' skillIconURL='/icon/language/HTML5Logo.webp' proficiency='80%'>
             <strong>執筆日</strong>：2026/4/21
             <br><strong>初学習日</strong>：2025年8月
-            <br><strong>開発経験</strong>：2回
+            <br><strong>開発経験</strong>：3回
             <br>※現在記述中
         </AccordionOfSkills>
         <AccordionOfSkills skillName='Sass(SCSS)/CSS' skillIconURL='/icon/language/sassLogo.webp' proficiency='70%'>
@@ -28,7 +28,7 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
             <br><strong>SCSSでの初学習日</strong>：2026年3月
             <br><strong>SCSSでの開発経験</strong>：1回
             <br><strong>CSSでの初学習日</strong>：2025年8月
-            <br><strong>CSSでの開発経験</strong>：1回
+            <br><strong>CSSでの開発経験</strong>：2回
             <br>※現在記述中
         </AccordionOfSkills>
         <AccordionOfSkills skillName='TS/JS' skillIconURL='/icon/language/typeScriptLogo.webp' proficiency='50%'>
@@ -36,7 +36,7 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
             <br><strong>TSでの初学習日</strong>：2026年3月
             <br><strong>TSでの開発経験</strong>：1回
             <br><strong>JSでの初学習日</strong>：2025年8月
-            <br><strong>JSでの開発経験</strong>：1回
+            <br><strong>JSでの開発経験</strong>：2回
             <br><strong>#JSについて</strong>
             <br>大学のサークルで、ホームページを作れと言われたのがきっかけで学びました。c#とは異なり、「関数そのものを引数として渡す」というのが頻出したり、thisの意味が「あるクラスのインスタンス」を指すとは限らなかったりして、かなり苦戦しました。
             <br><strong>#TSについて</strong>
@@ -253,40 +253,49 @@ import AccordionOfSkills from './AccordionOfSkills.astro';
 
 </style>
 <script>
+class MySkills extends HTMLElement{
     //#スキルをジャンル別に表示非表示を出来るようにするための処理
-    const showSkillsButtons:NodeListOf<HTMLElement>=document.querySelectorAll('.show-skill-buttons button');
-    const skillsContents:NodeListOf<HTMLElement>=document.querySelectorAll('my-skills .skills-content');
-    let showingSkillsContent:HTMLElement|null = document.querySelector('my-skills .skills-content.is-visible');
+    private showSkillsButtons:NodeListOf<HTMLElement>|null = null;
+    private skillsContents:NodeListOf<HTMLElement>|null = null;
+    private showingSkillsContent:HTMLElement|null = null;
 
-    showSkillsButtons.forEach((e)=>{e.addEventListener('click',TryShowSkillsContent)})
+    connectedCallback(){
+        this.showSkillsButtons = this.querySelectorAll('.show-skill-buttons button');
+        this.skillsContents = this.querySelectorAll('my-skills .skills-content');
+        this.showingSkillsContent = this.querySelector('my-skills .skills-content.is-visible');
 
-    function TryShowSkillsContent(event:MouseEvent){
-        if(!showingSkillsContent)return;
+        this.showSkillsButtons.forEach((e)=>{e.addEventListener('click',this.TryShowSkillsContent)})
+    }
 
-        const showingSkillsAccordions:NodeListOf<HTMLElement> = showingSkillsContent.querySelectorAll('accordion-of-skills')
+    TryShowSkillsContent=(event:MouseEvent)=>{
+        if(!(this.showingSkillsContent&&this.skillsContents&&this.showSkillsButtons))return;
+        const showingSkillsAccordions:NodeListOf<HTMLElement> = this.showingSkillsContent.querySelectorAll('accordion-of-skills')
         const targetButton:HTMLElement = event.currentTarget as HTMLElement;
         const buttonCategory:string|undefined = targetButton.dataset.category;
         if(!buttonCategory){console.error('データ属性categoryがbutton要素に紐づけられていません'); return;}
 
 
-        for(const skillsContent of skillsContents){
+        for(const skillsContent of this.skillsContents){
             const contentCategory:string|undefined = skillsContent.dataset.category;
             if(!contentCategory){console.error('データ属性categoryがskillsContentクラスセレクタがある要素に紐づけられていません'); return;}
             if(buttonCategory !== contentCategory){continue};
-            if(showingSkillsContent === skillsContent){return};
+            if(this.showingSkillsContent === skillsContent){return};
             const nextShowSkillsAccordions:NodeListOf<HTMLElement> = skillsContent.querySelectorAll('accordion-of-skills');
-            showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
+            this.showSkillsButtons.forEach((e)=>{e.classList.remove('is-selected')});
             showingSkillsAccordions.forEach((e)=>{e.classList.remove('is-open')});
-            skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
+            this.skillsContents.forEach((e)=>{e.classList.remove('is-visible')});
 
             skillsContent.classList.add('is-visible');
             nextShowSkillsAccordions.forEach((e)=>{e.dispatchEvent(new CustomEvent('tab-shown'))})
 
             targetButton.classList.add('is-selected');
-            showingSkillsContent = skillsContent;
+            this.showingSkillsContent = skillsContent;  
             return;
-            
         }
-        console.error('eventの発信者となったボタンが持つcategoryデータ属性に対応するskillsContentが存在しません');
+        console.error('eventの発信者となったボタンが持つcategoryデータ属性に対応するskillsContentが存在しません');              
     }
+}
+if(!customElements.get('my-skills')){
+    customElements.define('my-skills',MySkills);
+}
 </script>

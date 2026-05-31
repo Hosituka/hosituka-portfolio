@@ -6,13 +6,11 @@ interface Props{
 }
 const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props; 
 ---
-<!-- ##グローバルナビゲーションの要素ノード-->
  <particle-back-ground style={`--z-index:${zIndex}`} data-particle-density={particleDensity}>
 	<canvas>
 
 	</canvas>
  </particle-back-ground>
-<!-- ##グローバルナビゲーションのスタイル-->
 <style lang="scss">
 @layer Layout{
 	particle-back-ground{
@@ -107,6 +105,7 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 		private canvas:HTMLCanvasElement|null = null;
 		private ctx2D:CanvasRenderingContext2D|null = null;
 		private particles:Particle[] = [];
+		private resizeObserver:ResizeObserver|null = null;
 		private isResize:boolean = false;
 		connectedCallback(){
 			const GenerateParticle=()=>{
@@ -138,10 +137,10 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 			requestAnimationFrame(GenerateParticle);
 			requestAnimationFrame(this.Update);
 			//##リサイズを検知するための初期化
-			const observer = new ResizeObserver(() => {
+			this.resizeObserver = new ResizeObserver(() => {
 				this.isResize = true;
 			});
-			observer.observe(this);
+			this.resizeObserver.observe(this);
 
 		}
 
@@ -191,7 +190,16 @@ const {zIndex:zIndex = -1,particleDensity:particleDensity}:Props = Astro.props;
 			//console.log("現在のパーティクル数：" + this.particleCount);
 			//console.log("目標のパーティクル数：" + this.targetParticleCount);
 		}
+		disconnectedCallback(){
+			this.ctx2D = null;
+			this.canvas = null;			
+			this.particles = [];
+			this.resizeObserver?.disconnect();
+		}
+
 	}
-	customElements.define('particle-back-ground',ParticleBackGround);
+	if(!customElements.get('particle-back-ground')){
+		customElements.define('particle-back-ground',ParticleBackGround);
+	}
 </script>
 

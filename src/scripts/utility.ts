@@ -54,7 +54,7 @@ export class Time{
 
     private static LastTime:number = 0;
     static DeltaTime:number = 0;
-    static UpdateTimeDelta(time:number){
+    private static UpdateTimeDelta(time:number){
         //#TimeDelta([ms]ではなく[s])を算出するための処理
         Time.DeltaTime = (time - Time.LastTime) / 1000;
         Time.LastTime = time;
@@ -64,7 +64,7 @@ export class Time{
 
     static TimeInS:number = 0;
     static TimeInMS:number = 0;
-    static UpdateTimeInSeconds(time:number){
+    private static UpdateTimeInSeconds(time:number){
         //#Timeを更新するための処理
         Time.TimeInMS = time;
         Time.TimeInS = time / 1000;
@@ -72,15 +72,66 @@ export class Time{
     }
 
 }
-export interface Vector2{
-    x:number;
-    y:number;
+export class PointerSystem{
+    private static prevPointerPos:Vector2 = {x:0,y:0};
+    private static currentPointerPos:Vector2 ={x:0,y:0};
+    private static _dragDeltaPos:Vector2 = {x:0,y:0};
+    static get DragDeltaPos(){
+        return PointerSystem._dragDeltaPos;
+    }
+
+    private static UpdateDragDelta=()=>{
+        this._dragDeltaPos = Vector2.Subtract(this.currentPointerPos,this.prevPointerPos);
+        this.prevPointerPos = this.currentPointerPos;
+        requestAnimationFrame(PointerSystem.UpdateDragDelta);
+    }
+
+    static{
+        if(typeof window !== 'undefined'){
+            window.addEventListener("mousedown", (mouse) => {
+                this.currentPointerPos = {x:mouse.pageX,y:mouse.pageY};
+                this.prevPointerPos = this.currentPointerPos;
+            })
+            window.addEventListener("mousemove", (mouse) => {
+                this.currentPointerPos = {x:mouse.pageX,y:mouse.pageY};
+            })
+
+            window.addEventListener("touchstart", (touch) => {
+                this.currentPointerPos = {x:touch.touches[0].pageX,y:touch.touches[0].pageY};
+                this.prevPointerPos = this.currentPointerPos;
+            })
+            window.addEventListener("touchmove", (touch) => {
+                this.currentPointerPos = {x:touch.touches[0].pageX,y:touch.touches[0].pageY};
+            })
+
+            requestAnimationFrame(PointerSystem.UpdateDragDelta);
+        }
+    }
+
+
+}
+
+export class Vector2{
+    x:number = 0;
+    y:number = 0;
+    static Subtract(v1:Vector2,v2:Vector2):Vector2{
+        let result:Vector2 = {x:0,y:0};
+        result.x = v1.x - v2.x;
+        result.y = v1.y - v2.y;
+        return result;
+    }
+    static Add(v1:Vector2,v2:Vector2):Vector2{
+        let result:Vector2 = {x:0,y:0};
+        result.x = v1.x + v2.x;
+        result.y = v1.y + v2.y;
+        return result;
+    }
 }
 export class WidthResizeObserver{
-    private resizeObserver:ResizeObserver;
     private currentWidth:number = 0;
     private latestWidth:number = 0;
     private target:Element|null=null;
+    private resizeObserver:ResizeObserver;
     constructor(resizedCallBack:()=>void){
         this.resizeObserver = new ResizeObserver(()=>{
             if(!this.target){return};
@@ -90,10 +141,14 @@ export class WidthResizeObserver{
             this.latestWidth = this.currentWidth;
         })
     }
-    observe(target:Element){
+    observe=(target:Element)=>{
         this.target = target;
         this.latestWidth=target.clientWidth;
         this.resizeObserver.observe(target);
+    }
+    disconnect=()=>{
+        this.resizeObserver.disconnect();
+        this.target = null;
     }
 }
 //#toLocaleDateStringの引数指定

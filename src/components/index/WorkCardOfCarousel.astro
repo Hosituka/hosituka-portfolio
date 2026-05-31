@@ -39,7 +39,7 @@ const {workMediaURL: workMediaURL,workTitle: workTitle,playLink:playLink,detailL
 				<slot />
 			</p>
 			<div class="link-buttons">
-				<a class="show-first-view-button">戻る</a>
+				<a class="hide-overview-button">戻る</a>
 				{detailLink ?(
 					<a href={detailLink} target="_blank" rel="noopener noreferrer">詳細</a>
 				):(
@@ -283,52 +283,71 @@ $cardWidth:355px;
 </style>
 <script>
 	class WorkCardOfCarousel extends HTMLElement{
+		private workTitle:string|undefined = undefined;
+		private cardOverview:HTMLElement|null = null;
+		private hideOverviewButton:HTMLElement|null = null;
+		private showOverviewButton:HTMLElement|null = null;
+		private targetCarousel:HTMLElement|null = null;
+		
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
-			const showFirstViewButton:HTMLElement|null = this.querySelector('.show-first-view-button');
-			if(showFirstViewButton===null){console.error('show-info-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+			this.hideOverviewButton = this.querySelector('.hide-overview-button');
+			if(!this.hideOverviewButton){console.error('hide-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
-			const showOverviewButton:HTMLElement|null = this.querySelector('.show-overview-button');
-			if(showOverviewButton===null){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
+			this.showOverviewButton = this.querySelector('.show-overview-button');
+			if(!this.showOverviewButton){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-			const cardOverview :HTMLElement|null = this.querySelector('.card-overview');
-			if(cardOverview===null){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
+			this.cardOverview = this.querySelector('.card-overview');
+			if(!this.cardOverview){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-			const title:string|undefined = this.dataset.workTitle;
-			if(title===undefined){console.error('data-work-titleが指定されていません。')
+			this.workTitle = this.dataset.workTitle;
+			if(!this.workTitle){console.error('data-work-titleが指定されていません。')
 				return;}
-			const carouselAsElement:HTMLElement|null = this.closest('my-carousel');
-			if(carouselAsElement===null){console.error('カルーセル用のカードなのに、祖先要素の中においてカルーセルが見つかりません')
+			this.targetCarousel = this.closest('my-carousel');
+			if(!this.targetCarousel){console.error('カルーセル用のカードなのに、祖先要素の中においてカルーセルが見つかりません')
 				return;}
 
 			//#メインとなる処理
 			//##関数の購読
-			showFirstViewButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('click-info-button',{
-					bubbles:true,
-					detail:{title:title,isShow:false}
-				}));
-			});
-			showOverviewButton.addEventListener('click',()=>{
-				this.dispatchEvent(new CustomEvent('click-info-button',{
-					bubbles:true,
-					detail:{title:title,isShow:true}
-				}));
+			this.showOverviewButton.addEventListener('click',this.RequestShowOverview)
 
-			})
+			this.hideOverviewButton.addEventListener('click',this.RequestHideOverview);
 
-			carouselAsElement.addEventListener('update-card-ui',(e:any) =>{
-				if(e.detail.title !== title){return};
-				
-				if(e.detail.isShow){
-					cardOverview.classList.add('is-show')
-				}
-				else{
-					cardOverview.classList.remove('is-show')
-				}
-			})
+			this.targetCarousel.addEventListener('sync-card-overview-visibility',this.SyncCardOverview)
+		}
+		private RequestHideOverview = () => {
+			this.dispatchEvent(new CustomEvent('request-card-overview-visibility',{
+				bubbles:true,
+				detail:{title:this.workTitle,isShow:false}
+			}));
+		}
+		private RequestShowOverview = () => {
+			this.dispatchEvent(new CustomEvent('request-card-overview-visibility',{
+				bubbles:true,
+				detail:{title:this.workTitle,isShow:true}
+			}));
+		}
+		private SyncCardOverview = (e:any)=>{
+			if(e.detail.title !== this.workTitle){return};
+			
+			if(e.detail.isShow){
+				this.cardOverview?.classList.add('is-show')
+			}
+			else{
+				this.cardOverview?.classList.remove('is-show')
+			}
+		}
+		disconnectCallback = () =>{
+			this.showOverviewButton?.removeEventListener('click',this.RequestShowOverview)
+
+			this.hideOverviewButton?.removeEventListener('click',this.RequestHideOverview);
+
+			this.targetCarousel?.removeEventListener('sync-card-overview-visibility',this.SyncCardOverview)
+
 		}
 	}
-	customElements.define('work-card-of-carousel',WorkCardOfCarousel);
+	if(!customElements.get('work-card-of-carousel')){
+		customElements.define('work-card-of-carousel',WorkCardOfCarousel);
+	}
 
 </script>

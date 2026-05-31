@@ -92,10 +92,11 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
 
         private offsetY:number = 0;
         private barWidth:number = 2.5;
+        private barSpacing:number = 7;
         private canvas:null|HTMLCanvasElement=null;
         private ctx2D:null|CanvasRenderingContext2D=null;
         private verticalBars:VerticalBar[] = [];
-        private barSpacing:number = 7;
+        private resizeObserver:ResizeObserver|null = null;
 		connectedCallback(){
             this.canvas = this.querySelector('canvas');
             if(!this.canvas){console.error('canvas要素がみつかりません');return}
@@ -104,10 +105,10 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             requestAnimationFrame(this.GenerateVerticalBar);
             requestAnimationFrame(this.Update);
             //#リサイズを検知するための初期化
-			const observer = new ResizeObserver(() => {
+			this.resizeObserver = new ResizeObserver(() => {
 				this.OnResize();
 			});
-			observer.observe(this);
+			this.resizeObserver.observe(this);
 
         }
         private OnResize=():void=>{
@@ -142,6 +143,14 @@ import {type Vector2,MathUtility,Time} from '../scripts/utility'
             }
             requestAnimationFrame(this.Update);
         }
+        disconnectedCallback(){
+            this.canvas = null;
+            this.ctx2D = null;
+            this.verticalBars = [];
+            this.resizeObserver?.disconnect();
+        }
     }
-    customElements.define('frequency-bar',FrequencyBar);
+    if(!customElements.get('frequency-bar')){
+        customElements.define('frequency-bar',FrequencyBar);
+    }
 </script>

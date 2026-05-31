@@ -37,25 +37,23 @@ const {Content} = await post.render();
 <style is:global lang="scss">
 @use '../../styles/_utility' as *;
 @layer Layout{
-    header{
-        position:relative;
-        display:flex;
-        flex-direction:column;
-        gap:5px;
-        h1{
-        }
-        .tag-wrapper{
-            display:flex;
-            flex-wrap:wrap;
-            gap:10px;
-        }
-    }
     main{
-        position:relative;
-        h1,h2,h3,h4{
-            margin:10px 0px;
+        > h1,> h2,> h3,> h4{
+            margin:20px 0px;
         }
-        ul{
+        > ul{
+            margin-left:10px;
+            > li{
+                position: relative;
+                &::before{
+                    position: absolute;
+                    left:0px;
+                    top:50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+        > ol{
             li{
                 position: relative;
                 &::before{
@@ -66,91 +64,80 @@ const {Content} = await post.render();
                 }
             }
         }
+        > p{
+            margin:10px 0px;
+        }
     }
 }
 @layer Appearance{
-    header{
-        width:100%;
-        padding:10px 20px;
-        background-color:$yellow;
-        border-bottom:1px solid gray;
-        h1{
-            font-weight: 900;
-            font-size:50px;
-            color: white;
-            -webkit-text-stroke-width: 1px;
-            -webkit-text-stroke-color: black;
-            paint-order: stroke fill;
-            font-family:"Noto Sans JP" , sans-serif;
-            overflow-wrap:anywhere;
-            /** */
-        }
-        .tag-wrapper{
-            .tag{
-                background-color:white;
-                outline:1px solid gray;
-                padding:2px 20px;
-                border-radius:5px;
-            }
-
-        }
-    }
     main{
-        padding:10px;
-        font-size:30px;
-        h2,h3,h4{
-            border-bottom:1px solid gainsboro;
-            padding-left:15px;
-        }
-        h1{
+        > h1{
             font-size:100%;
+            background-image:repeating-linear-gradient(to right,
+            $yellow 0px, $yellow 10px,
+            $light-yellow 10px, $light-yellow 100%,
+            );
+            padding:2px 4px;
             background-color: $light-yellow;
-            border-left:18px solid $yellow;
             outline:1px solid gainsboro;
-            border-top-left-radius: 15px;
-            border-bottom-left-radius: 15px;
-            padding:4px 0px 4px 1px;
         }
-        h2{
+        > h2,> h3,> h4{
+            border-bottom:1px solid gainsboro;
+            padding-bottom: 5px;
+            padding-left:5px;
+        }
+
+        > h2{
             font-size:90%;
         }
-        h3{
+        > h3{
             font-size:80%;
         }
-        h4{
+        > h4{
             font-size:70%;
         }
-        p{
-            font-size:60%;
+        > p{
+            font-size:16px;
+            line-height: 1.6;
         }
         
-        ul{
-            li{
-                list-style: none;
-                padding-left:10px;
+       
+        > ul > li{
+            font-size:16px;
+            list-style: none;
+            padding-left:20px;
+            line-height: 1.6;
+            &::before{
+                aspect-ratio: 1/1;
+                height:8px;
+                background-color: black;
+                border-radius: 50%;
+                content: "";
+            }
+        }
+        > ol{
+            list-style: none;
+            counter-reset: rank;
+            > li{
+                padding-left:20px;
+                line-height: 1.6;
+                font-size:16px;
+                counter-increment: rank;
                 &::before{
-                    aspect-ratio: 1/1;
-                    height:8px;
-                    background-color: black;
-                    border-radius: 50%;
-                    content: "";
+                    height:100%;
+                    content: counter(rank)".";
+                    font-weight: 700;
                 }
             }
         }
-        ol{
-            list-style-position:inside;
+        .astro-code{
+            border-radius: 10px;
+            padding:10px;
+            > code{
+                font-size:16px;
+                line-height:1.6;
+            }
         }
-    }
-}
-@media(max-width:700px){
-    header{
-        padding:10px;
-        h1{
-            font-size:30px;
-        }
-    }
-    main { 
-        font-size:25px;
     }
 }
 

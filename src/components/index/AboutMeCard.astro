@@ -307,28 +307,31 @@
 <script>
 
 	class AboutMeCard extends HTMLElement{
+		private card:HTMLElement|null = null;
 		connectedCallback(){
-			const card:HTMLElement|null = this.querySelector('.card')
-			if(card===null){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+			this.card = this.querySelector('.card')
+			if(!this.card){console.log('cardクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 
-			this.addEventListener('click',()=>{
-				card.classList.toggle('is-flipped');
-				//console.log("クリックされました")
-			});
+			this.addEventListener('click',this.ToggleIsFlipped);
 			//#マウス操作可能な時に登録するイベントに対するコールバック関数；
 			const isTouchDevice:boolean=window.matchMedia('(pointer:coarse)').matches; 
 			if(!isTouchDevice){
-				this.addEventListener('mouseenter',()=>{
-					card.classList.add('is-flipped');
-				});
-				this.addEventListener('mouseleave',()=>{
-					card.classList.remove('is-flipped');
-					//console.log("マウスポインターが離れました");
-				});
+				this.addEventListener('mouseenter',this.FlipToBack);
+				this.addEventListener('mouseleave',this.ResetFlip);
 			}
 		}
+		private ToggleIsFlipped = ()=> this.card?.classList.toggle('is-flipped');
+		private FlipToBack = ()=> this.card?.classList.add('is-flipped');
+		private ResetFlip = ()=> this.card?.classList.remove('is-flipped');
+		disconnectedCallback(){
+			this.removeEventListener('click',this.ToggleIsFlipped);
+			this.removeEventListener('mouseenter',this.FlipToBack);
+			this.removeEventListener('mouseleave',this.ResetFlip);
+		}
 	}
-	customElements.define('about-me-card',AboutMeCard);
+	if(!customElements.get('about-me-card')){
+		customElements.define('about-me-card',AboutMeCard);
+	}
 
 </script>

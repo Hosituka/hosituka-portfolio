@@ -1,28 +1,19 @@
-/*全てのwebページで共通してほしいスタイルを書くcss*/
-@charset "UTF-8";
 
 
-@layer CssReset;
-/*マジックナンバー防ぐよう*/
-:root{
-	--nav-height:50px;
+html{
+	box-sizing: border-box; /* 1. 大元で指定 */
 }
-@Layer CssReset{
-	html{
-		box-sizing: border-box; /* 1. 大元で指定 */
-	}
-	*,*::before,*::after {
-		/* 2. すべての要素に「親から継承しろ」と命じる */
-		box-sizing: inherit;
-	}
-
-	body,
-	h1, h2, h3, h4, h5, h6,
-	p,
-	ul, ol, li,
-	figure, figcaption, blockquote, dl, dd {
-		margin: 0;
-		padding: 0;
-	}
-
+*,*::before,*::after {
+	/* 2. すべての要素に「親から継承しろ」と命じる */
+	box-sizing: inherit;
 }
+
+body,
+h1, h2, h3, h4, h5, h6,
+p,
+ul, ol, li,
+figure, figcaption, blockquote, dl, dd {
+	margin: 0;
+	padding: 0;
+}
+

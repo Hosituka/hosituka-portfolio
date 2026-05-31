@@ -22,7 +22,7 @@ const {title}:Props = Astro.props;
 		<style is:inline>
 			@layer Normalize, CssReset, Layout, Appearance;
 		</style>
-
+	</head>
 	<body>
 		<Navigation/>	
 		<slot />
@@ -31,7 +31,6 @@ const {title}:Props = Astro.props;
 </html>
 
 <style is:global lang="scss">
-//#ここで全てのコンポーネントで共通するcssレイヤーの順序と読み込みを行っている
 /*##ユーザーエージェントスタイルシートを統一するスタイルシートをlayerとして読み込んでいる、*/
 @import url("../styles/Normalize.css") layer(Normalize);
 /*##webページ全体で共通するスタイルをレイヤーとして読み込んでいる*/

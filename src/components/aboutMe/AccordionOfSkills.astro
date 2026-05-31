@@ -283,6 +283,7 @@ class AccordionOfSkills extends HTMLElement{
     private header:HTMLElement|null = null;
     private body:HTMLElement|null = null;
     private content:HTMLElement|null = null;
+    private widthResizeObserver:WidthResizeObserver|null = null;
     connectedCallback(){
         requestAnimationFrame(this.Start);
     }
@@ -295,31 +296,25 @@ class AccordionOfSkills extends HTMLElement{
         if(!this.content){console.error('contentが見つかりませんでした');return;}
 
         //#イベント関数の購読
-        //##headerがクリックされた時の処理
-        this.header.addEventListener('click',()=>{
-            this.classList.toggle('is-open');
-        })
+        this.header.addEventListener('click',this.ToggleOpenState)
+        this.addEventListener('tab-shown',this.DefineHeightNextFrame)
         //##マウス操作可能な時に登録するイベントに対するコールバック関数；
         const isTouchDevice:boolean=window.matchMedia('(pointer:coarse)').matches; 
         if(!isTouchDevice){
             //#headerに対するhover処理
-            this.header.addEventListener('mouseenter',()=>{
-                this.classList.add('is-header-hover')
-            })
-            //#リサイズを検知するための初期化
-            this.header.addEventListener('mouseleave',()=>{
-                this.classList.remove('is-header-hover')
-            })
+            this.header.addEventListener('mouseenter',this.EnableHighlight)
+            this.header.addEventListener('mouseleave',this.DisableHightlight)
         }
-        const observer = new WidthResizeObserver(() => {
-            this.DefineHeight();
-        });
-        observer.observe(document.documentElement);
-        this.addEventListener('tab-shown',()=>{
-            requestAnimationFrame(this.DefineHeight);
-        })
+        this.widthResizeObserver = new WidthResizeObserver(this.DefineHeight);
+        this.widthResizeObserver.observe(document.documentElement);
         this.DefineHeight();
     }
+    private ToggleOpenState= ()=>this.classList.toggle('is-open');
+    private EnableHighlight= ()=>this.classList.add('is-header-hover');
+    private DisableHightlight= ()=>this.classList.remove('is-header-hover');
+
+    private animFrameId:number|null = null;
+    private DefineHeightNextFrame = ()=>this.animFrameId = requestAnimationFrame(this.DefineHeight);
     private DefineHeight=()=>{
         if(!this.body||!this.header||!this.content){return;}
         //#contentにスクロールバーを表示するか否かの処理orコンテンツ分bodyが小さくなるようにする処理
@@ -333,6 +328,16 @@ class AccordionOfSkills extends HTMLElement{
         this.body.style.setProperty('--height',`${Math.min(this.content.scrollHeight,this.targetHeightOfBody)}px`);
 
     }
+    disconnectedCallback(){
+        this.header?.removeEventListener('click',this.ToggleOpenState)  
+        this.header?.removeEventListener('mouseenter',this.EnableHighlight)
+        this.header?.removeEventListener('mouseleave',this.DisableHightlight)
+        this.removeEventListener('tab-shown',this.DefineHeightNextFrame)
+        this.widthResizeObserver?.disconnect();
+        if(this.animFrameId){cancelAnimationFrame(this.animFrameId)};
+    }
 }
-customElements.define('accordion-of-skills',AccordionOfSkills);
+if(!customElements.get('accordion-of-skills')){
+    customElements.define('accordion-of-skills',AccordionOfSkills);
+}
 </script>

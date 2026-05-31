@@ -40,7 +40,7 @@ import { CheckMedia } from '../../scripts/function';
 			<slot name="overview"/>
 		</section>
 		<div class="link-button-wrapper">
-			<a class="show-first-view-button">戻る</a>
+			<a class="close-overview-button">戻る</a>
 			{detailLink ?(
 				<a href={detailLink} target="_blank" rel="noopener noreferrer">詳細</a>
 			):(
@@ -344,29 +344,36 @@ import { CheckMedia } from '../../scripts/function';
 <script>
 	class WorkCard extends HTMLElement{
 		private overviewWrapper:HTMLElement|null=null
+		private cardOverview:HTMLElement|null = null;
+		private showOverviewButton:HTMLElement|null = null;
+		private closeOverviewButton:HTMLElement|null = null;
 		connectedCallback(){
 			//#Cardとしての役割を果たせるかのチェック
-			const showFirstViewButton:HTMLElement|null = this.querySelector('.show-first-view-button');
-			if(showFirstViewButton===null){console.error('show-first-view-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
+			this.showOverviewButton = this.querySelector('.show-overview-button');
+			if(!this.showOverviewButton){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
 				return;}
-			const showOverviewButton:HTMLElement|null = this.querySelector('.show-overview-button');
-			if(showOverviewButton===null){console.error('show-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした');
-				return;}
-				
-			const cardOverview :HTMLElement|null = this.querySelector('.card-overview');
-			if(cardOverview===null){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
+			this.closeOverviewButton = this.querySelector('.close-overview-button');
+			if(!this.closeOverviewButton){console.error('close-overview-buttonクラス属性が付与されたhtml要素が見つかりませんでした。'); 
 				return;}
 			this.overviewWrapper = this.querySelector('.overview-wrapper');
+			if(!this.overviewWrapper){console.error('overview-wrapperクラス属性が付与されたhtml要素が見つかりませんでした。');
+				return;}
+	
+			this.cardOverview = this.querySelector('.card-overview');
+			if(!this.cardOverview){console.error('card-overviewクラス属性が付与されたhtml要素が見つかりませんでした');
+				return;}
 			//#メインとなる処理
 			//##関数の購読
-			showFirstViewButton.addEventListener('click',()=>{
-				cardOverview.classList.remove('is-show')
-			});
-			showOverviewButton.addEventListener('click',()=>{
-				console.log("showOverviewButtonが押されました");
-				cardOverview.classList.add('is-show')
-			})
+			this.showOverviewButton.addEventListener('click',this.showOverview)
+			this.closeOverviewButton.addEventListener('click',this.closeOverview)
+
 			requestAnimationFrame(this.Start);
+		}
+		private closeOverview=()=>{
+			this.cardOverview?.classList.remove('is-show')
+		}
+		private showOverview=()=>{
+			this.cardOverview?.classList.add('is-show')
 		}
 		private Start=()=>{
 			if(this.overviewWrapper===null){console.error('overview-wrapperクラス属性が付与されたhtml要素が見つかりませんでした');
@@ -377,8 +384,14 @@ import { CheckMedia } from '../../scripts/function';
 			}
 
 		}
+		disconnectedCallback(){
+			this.showOverviewButton?.removeEventListener('click',this.showOverview);
+			this.closeOverviewButton?.removeEventListener('click',this.closeOverview);
+		}
 	}
-	customElements.define('work-card',WorkCard);
+	if(!customElements.get('work-card')){
+		customElements.define('work-card',WorkCard);	
+	}
 
 </script>
 
