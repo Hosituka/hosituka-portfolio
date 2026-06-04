@@ -1,3 +1,5 @@
+import type { CollectionEntry, CollectionKey, DataEntryMap } from "astro:content";
+
 //#関数だけを置くファイルです。
 export function CheckMedia(mediaURL:string):"video" | "image"| "undefined"{
 
@@ -22,5 +24,16 @@ export function FormatDateOfJP(date:Date):string
             month:'long',
             day:'numeric'
         }
+    )
+}
+export async function GetRenderAndEntrys<T extends CollectionKey>(collectionEntrys:CollectionEntry<T>[]){
+    return await Promise.all(
+        collectionEntrys.map(async (entry) => {
+            const {Content} = await entry.render();
+            return{
+                entry,
+                Content,
+            };
+        })
     )
 }

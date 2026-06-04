@@ -1,4 +1,8 @@
 ---
+import {getCollection,type CollectionEntry} from 'astro:content';
+import {workExplainCategory as workExplainCategory} from '../content.config'
+import {GetRenderAndEntrys} from '../scripts/function';
+
 //このファイルは各作品の紹介に特化したページコンポーネントです。
 import Layout from '../layouts/Layout.astro';
 import ParticleBackGround from '../components/ParticleBackGround.astro';
@@ -7,7 +11,17 @@ import WorksOfHeader from '../components/works/HeaderOfWorks.astro';
 import WorkCardsSection from '../components/works/WorkCardsSection.astro'
 import WorkCard from '../components/works/WorkCard.astro';
 
+const workExplains:CollectionEntry<"workExplain">[] = await getCollection("workExplain");
 
+const gameExplains = workExplains
+    .filter(e => e.data.category.some(tag => tag === workExplainCategory.game))
+    .sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+const otherExplains = workExplains
+    .filter(e => e.data.category.some(tag => tag === workExplainCategory.other))
+    .sort((a, b) => a.data.displayOrder - b.data.displayOrder);
+
+const renderedGameExplains = await GetRenderAndEntrys<"workExplain">(gameExplains);
+const renderedOtherExplains = await GetRenderAndEntrys<"workExplain">(otherExplains);
 ---
 <Layout title='作品紹介'>
 
@@ -15,167 +29,35 @@ import WorkCard from '../components/works/WorkCard.astro';
     <WorksOfHeader/>
     <main>
         <WorkCardsSection sectionTitle='ゲーム作品' zIndex='2'>
-            <WorkCard  workTitle='GunSwapShooter' workMediaURL='/video/gunSwapShooter.mp4' playLink='https://unityroom.com/games/gun_swap_shooter' detailLink='https://github.com/Hosituka/GunSwapShooter'>
+        {renderedGameExplains.map(({entry,Content}) => {return(
+            <WorkCard  workTitle={entry.data.workTitle} workMediaURL={entry.data.workMediaURL} playLink={entry.data.playLink} detailLink={entry.data.detailLink}>
                 <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#,blender,gimp<br>
-                    shadergraph,git/github,GeminiCLI<br>
-                    <strong>・制作期間</strong>：2025/11月～2026/3月。<br> 
-                    <strong>・開発人数</strong>：一人           
+                    <li><strong>・使用技術</strong>：{entry.data.techs.join(" ")}</li>
+                    <li><strong>・制作期間</strong>：{entry.data.period}</li> 
+                    <li><strong>・開発人数</strong>：{entry.data.members}</li>
                 </Fragment>
                 <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/3/31<br>
-                    <strong>#このゲームについて</strong>
-                    <br>・的の色に合わせて赤い銃と青い銃を打ち分けるARシューティングゲームです。大学生活が落ち着いてきたため、一年半ぶりに作りました。
-                    <br>・現状プログラミングの成長的にも、ゲームの面白さ的にも一番だと感じています。良かったら遊んでみてね。
-                    <br><strong>#学んだ事について</strong>
-                    <br>・この開発では初めてAIエージェントであるGeminiCLIとgit/githubを導入しました。
-                    <br>・AIの活用方法としてはバイブコーディングではなく、コードを書く上での設計や実装のレビュー用途として活用していました。
-                    <br>・その結果、ジェネリックプログラミングといった新たなプログラミングの考え方と、メモリによる負荷を均一にするためのオブジェクトプール、CRTP、テンプレートメソッドパターン等のデザインパターンを沢山学べました。だから、冒頭の「プログラマーとして一番成長できた作品」という意見に繋がります。
-                    <br><strong>##git/githubについて</strong>
-                    <br>・まだ理解は浅いですが、git/githubの有難みについて学べました。 具体的には、開発をしていく中で、全体的な変更をしなければならないことがあったのですが、いつでも過去のセーブ(コミット)に戻れる安心感は頼もしく、より使いこなせるようになりたいという気持ちに繋がりました。
+                    <strong>・執筆日</strong>：{entry.data.pubDate}<br>
+                    <Content/>
                 </Fragment>
             </WorkCard>
-            <WorkCard  workTitle='音ゲー※中止' workMediaURL='/video/musicGame.mp4'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#,blender,gimp<br>
-                    shadergraph<br>
-                    <strong>・制作期間</strong>：2023/7月～2024/5月中止<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/3/31
-                    <br><strong>#このゲームについて</strong>
-                    <br>・マウスをフリックする動作はIIDX(ゲーム)のターンテーブルを回すのに近い感覚が得られるのでは？という発想から、作ろうとしていた幻のゲームです。
-                    <br>・音楽ゲームは大好きなジャンルのため、絶対に完成させたかったのですが色々な理由から完遂できなかったです。
-                    <br><strong>#完成しなかった理由</strong>
-                    <br>・bpm？ 拍？っていうレベルで音楽の知識がない上、このころは継承やインターフェースといったc#の機能も十分に理解していなかったため、見た目はともかく、操作性や譜面生成の仕組み等、目に見えない部分がボロボロでした。
-                    <br>・そんな中でリアルが忙しくなったのとパーテーションを間違えて消してしまうというやらかしまでしてしまったため、完璧にやる気が消えて、未完成となりました。
-                    <br><strong>#学んだことについて</strong>
-                    <br>・このゲームから得たものとしては、gimpとshaderGraphの組み合わせ方を学べました。このゲームのビジュアルが良いのはそれに起因します。
-                    <br>・また、操作性が悪いと言っても、スライダーとターンテーブルの行ったり来たりが壊滅的なだけで、メインとなるターンテーブル自体の操作性はけっこう良いという収穫が得られました。
-                    <br>・長々と綴りましたが、流石に自分の好きなジャンルが完成しなかったのは悔しいので、いつかリベンジします。
-                </Fragment>
-            </WorkCard>
-
-            <WorkCard  workTitle='PIRATE SHIP' workMediaURL='/video/pirateShip.mp4' playLink='https://unityroom.com/games/hositukage-mu6'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#,blender,shadergraph<br> 
-                    <strong>・制作期間</strong>：2021/4月～2023/7月。<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/4/03
-                    <br><strong>#このゲームについて</strong>
-                    <br>・戦車の次は船という浅はかな考えと、無謀にもオープンワールドにしようとした結果、工数が爆発的に増えたスカスカゲームです。自分でもゴールが分かっておらず、投げ出しました。
-                    <br>・一応楽しみ方としては、マップを開くと、町やら敵がいる要塞などが記されており、そこを旅することでゲーム性を見出せるかもしれません。問題は敵の生成間隔が早すぎるせいですぐに絡まれることですかね...
-                    <br><strong>#学んだことについて</strong>
-                    <br>・前作の戦車のゲームでは出来なかった障害物を避けながら向かってくるという仕組みを実装しました。
-                          具体的にはNavMeshを用いて実装しています。
-                    <br>・また、Terrainによるマップの作り方を学びました。これにより、広大なマップを効率的に作る方法を学びました。
-                    <br>・最後に大きな収穫となったshaderGraphも学びました。これによりビジュアルの向上に大きく貢献したと思います。
-                        具体的に作った物としては、skyboxにある動く雲と昼夜の表現、頂点アニメーションによる帆が揺れる表現、海などが挙げられます。
-                        一方で、GUI(shaderGraph)で作っているからかzバッファやPassといった概念が曖昧という課題があります。
-                        実をいうと最初はCUIで作ろうとしていたのですが、難しすぎて断念したんですよね、いつかCUIでもバリバリかける様になりたいです。
-                </Fragment>
-            </WorkCard>
-            <WorkCard  workTitle='戦車のゲーム' workMediaURL='/normalImage/work/gameOfTank.webp' playLink='https://unityroom.com/games/hositukage-mu5'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#,blender<br>
-                    <strong>・制作期間</strong>：2021/2月～2021/4月。<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>執筆日</strong>：2026/4/03
-                    <br><strong>#このゲームについて</strong>
-                    <br>・オリジナルの中では初めて作った3dゲームです。ゲーム性としては、自機(戦車)を操作して、全ての敵を倒したらクリアするという感じです。
-                    <br>・3ステージあります。今やってみると、特攻して自爆する敵の耐久が高すぎて避けるのがほぼ不可能みたいな感じで理不尽さが凄いです。
-                    <br><strong>#学んだこと</strong>
-                    <br><strong>##blenderについて</strong>
-                    <br>・このゲームでは始めてblenderを用いた3dモデル作成を学びました。具体的には頂点や辺、面を作成する。つまり、モデリングと、それにテクスチャを貼る工程を学びました。
-                    <br>・一方でuv展開に関してはシームレステクスチャとスマートuv展開に甘えてばかりでそこが課題です。
-                    <br>・また履帯を再現しようとしたのですが、技術力不足で、履帯がない見た目となってしまったのも心残りです。
-                    <br><strong>##プログラミングについて</strong>
-                    <br>・プログラミング方面では、physics raycasterの使い方を学びました。具体的には、(敵から自機に向けて見えない光を飛ばす→もし自機に当たったら敵が自機を視認したとする→攻撃フェーズへ)みたいな形で使いました。
-                    <br>・一方で、障害物を迂回しながら向かってくるといった事は実装できず、妥協案として、まっすぐ向かってくるだけだったり、一定のルートを通るだけだったりします。よって、そこが課題でした。
-                </Fragment>
-            </WorkCard>
-            <WorkCard  workTitle='チュートリアル見て作った奴2' workMediaURL='/normalImage/work/4thWork.webp' playLink='https://unityroom.com/games/hositukage-mu4'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#<br>
-                    <strong>・制作期間</strong>：2021/2月/14日完成<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/4/03
-                    <br><strong>#このゲームについて</strong>
-                    <br>・一番開発期間が短いと思います。チュートリアルみながら作ったシンプルなシューティングゲームです。
-                    <br>・制作動機は5年程前なのでおぼろげですが、二作ぐらい作った上でunityの基礎が足りていないと感じたため、復習として作ったような記憶があります。
-                </Fragment>
-            </WorkCard>
-            <WorkCard  workTitle='チュートリアル見て作った奴1' workMediaURL='/normalImage/work/3thWork.webp' playLink='https://unityroom.com/games/hositukage-mu3' >
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#<br>
-                    <strong>・制作期間</strong>：2021/2月/7日完成<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/4/03
-                    <br><strong>#このゲームについて、</strong>
-                    <br>・unityを学ぶ動機である「3dゲームを作りたい」を達成するため、手始めにチュートリアル動画を見ながら作ったゲームです。
-                    <br>・ゲーム性としては女の子のキャラ(※アセット)が様々な障害物を乗り越えながらゴールを目指すというシンプルな構成です。
-                    <br><strong>#学んだ事について</strong>
-                    <br>・前作のシューティングゲームが2dのため、3dにおける回転や座標の捉え方が全く身についていませんでした。今作を通して、そんな3d空間の回転や座標を知るきっかけになりました。
-                    <br>・また、前作がtransformコンポーネント、つまり座標を直接指定して移動を実現していましたが、今作ではrigidbody、つまりunityの物理エンジンを介して座標を操作する方法も少しだけ学べました。 
-                </Fragment>
-            </WorkCard>
-
-            <WorkCard  workTitle='シューティングゲーム' workMediaURL='/video/2thWork.mp4' playLink='https://unityroom.com/games/hositukage-mu2'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：unity,c#,Edge(ドット絵制作ツール)<br>
-                    <strong>・制作期間</strong>：2020/12月～2021/3月。<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/4/01
-                    <br><strong>#このゲームについて</strong>
-                    <br>・unityで作った1作目となるオリジナル、シューティングゲームです。時間の経過とともに敵が出現するシンプルな構成ですが、ドット絵を自作するなど、プログラミング以外の事も挑戦しています。
-                    <br>・数年ぶりにプレイしてみると難易度がかなり高く、当時の幼さが残っていると思います。
-                    <br>・実はこれよりも前に作ったゲームとしてブロック崩しがありましたが、手元にデータが無いのでこのサイトには載せていません、おそらくチュートリアルで作った物なので消したのだ思います。
-                    <br><strong>#学んだ事について</strong>
-                    <br>・執筆日から5年ほど前なのでうろ覚えですが、敵が出現するタイミングの制御はコールチンを使用していました。これが非同期処理に触れるきっかけになったと思います。
-                    <br>・現在はよりメモリ効率や自由度の高いUniTaskをメインに使っていますが、この時の試行錯誤が現在に繋がっていると思います。
-                </Fragment>
-            </WorkCard>
+        )})}
         </WorkCardsSection>
 
         <WorkCardsSection sectionTitle='その他' zIndex='2'>
-            <WorkCard  workTitle='ポートフォリオサイト' workMediaURL='/video/portfolioSite.mp4' detailLink='https://github.com/Hosituka/hosituka-portfolio'>
-                <Fragment slot="card-specs">
-                    <strong>・使用技術</strong>：Astro,SCSS,HTML,TS,GeminiCLI<br>
-                    <strong>・制作期間</strong>：2026/3月～現在まで。<br> 
-                    <strong>・開発人数</strong>：一人           
-                </Fragment>
-                <Fragment slot="overview">
-                    <strong>・執筆日</strong>：2026/4/03
-                    <br><strong>#このwebサイトについて、</strong>
-                    <br>・制作物の振り返りと自己分析を目的としたポートフォリオサイトです。
-                    <br>・これまでの制作経験を整理し、技術的な成長を可視化する為に作りました。
-                    <br>・ゲームプログラミングがメインのため、学習コストはありましたが、webプログラミングへの理解が深まり有意義な時間となりました。
-                    <br><strong>#学んだ事について</strong>
-                    <br>・フレームワークを用いたwebサイト制作の基礎を学びました。具体的にはAstroというフレームワークを用いました。またコンピュータ言語ではSCSS,TSを新たに学びました。
-                    <br><strong>#技術の選考理由</strong>
-                    <br>・実をいうとwebサイトを作るのは初めてではなく、大学で部活のホームページを作ったことがあります。この時の技術構成が(HTML,CSS,JS,フレームワーク無し)という純粋な物であり、その時の不満が現在の技術構成に繋がっております。
-                    <br><strong>##Astroの選考理由</strong>
-                    <br>・大学のweb制作ではファイル分割の基準がUI単位ではなく言語基準であり、一つのUI修正に複数ファイルの編集が必要で保守性に欠けていました。
-                    <br>・この問題はNext.jsなどのReact系フレームワークでも解決可能ですが、AstroではHTMLベースで書けるため、従来のweb制作の延長として学習コストを抑えつつ同様の課題を解決できる点を評価し、選びました。
-                    <br><strong>##TSの選考理由</strong>
-                    <br>・JSでコードを書いている時、存在しないメンバにアクセスする際、実行前エラーとして出してくれない等、かなり不満がありました。
-                    <br>・それについてAIに聞いたらTSを採用すると解決できると言われたため採用しました。
-                    <br><strong>##SCSSの選考理由</strong>
-                    <br>・cssとは異なり、セレクタのネスト構造をインデントで表すため、可読性の向上に一役買うと感じました。
-                    <br>・それに加えて、mixInやfunction,forなどにより、効率的にスタイル宣言が可能な点も評価し選びました。
-                </Fragment>
-            </WorkCard>
+            {renderedOtherExplains.map(({entry,Content}) => {return(
+                <WorkCard  workTitle={entry.data.workTitle} workMediaURL={entry.data.workMediaURL} playLink={entry.data.playLink} detailLink={entry.data.detailLink}>
+                    <Fragment slot="card-specs">
+                        <li><strong>・使用技術</strong>：{entry.data.techs.join(" ")}</li>
+                        <li><strong>・制作期間</strong>：{entry.data.period}</li> 
+                        <li><strong>・開発人数</strong>：{entry.data.members}</li>
+                    </Fragment>
+                    <Fragment slot="overview">
+                        <strong>・執筆日</strong>：{entry.data.pubDate}<br>
+                        <Content/>
+                    </Fragment>
+                </WorkCard>
+            )})}
         </WorkCardsSection>
     </main>
 </Layout>

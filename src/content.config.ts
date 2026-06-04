@@ -12,6 +12,30 @@ const blogCollection = defineCollection({
 		image: z.string().optional(),
 	}),	
 });
+export const workExplainCategory = {
+	game:"game",
+	web:"web",
+	other:"other"
+} 
+const workExplainCollection = defineCollection({
+	type:"content",
+	schema:z.object({
+		workTitle:z.string(),
+		workMediaURL:z.string(),
+		playLink:z.string().optional(),
+		detailLink:z.string().optional(),
+		category: z.array(z.enum([
+			workExplainCategory.game,
+			workExplainCategory.web,
+			workExplainCategory.other
+		])),
+		pubDate:z.string(),
+		techs:z.array(z.string()),
+		period:z.string(),
+		members:z.string(),
+		displayOrder:z.number(),
+	})
+})
 
 // コレクションをエクスポート
-export const collections = {blog:blogCollection};
+export const collections = {blog:blogCollection,workExplain:workExplainCollection};

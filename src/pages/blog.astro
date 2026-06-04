@@ -5,6 +5,7 @@ import {FormatDateOfJP} from '../scripts/function';
 import Layout from '../layouts/Layout.astro';
 import ParticleBackGround from '../components/ParticleBackGround.astro';
 const blogs:CollectionEntry<"blog">[] = await getCollection("blog");
+console.log(blogs.length);
 //#最新の奴が一番上に出てくるように配列を並び替える処理
 blogs.sort((a,b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 ---

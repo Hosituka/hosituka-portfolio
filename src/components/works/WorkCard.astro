@@ -22,9 +22,9 @@ import { CheckMedia } from '../../scripts/function';
 				<img class="related-img"src={workMediaURL}>
 			)}
 		</div>
-		<p class="card-specs-wrapper">
+		<ul class="card-specs-wrapper">
 			<slot name="card-specs"></slot>
-		</p>
+		</ul>
 		<div class="link-button-wrapper">
 			<a class="show-overview-button">制作談</a>
 			{playLink ?(
@@ -105,9 +105,10 @@ import { CheckMedia } from '../../scripts/function';
 			}
 		}
 		.card-overview{
-			transform:translateY(calc(-100% - 10px));
+			position:relative;
+			top:calc(-100% - 10px);
 			&.is-show{
-				transform:translateY(0px);
+				transform:translateY(calc(100% + 10px));
 			}
 			h3{
 				display:flex;
@@ -221,6 +222,9 @@ import { CheckMedia } from '../../scripts/function';
 				border-bottom-right-radius: 20px;			
 				background-color: white;		
 				font-size: 4cqw;	
+				list-style-type: none;
+				li{
+				}
 			}
 
 			.link-button-wrapper{
