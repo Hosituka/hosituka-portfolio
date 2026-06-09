@@ -290,6 +290,17 @@ import { CheckMedia } from '../../scripts/function';
 				word-break: normal;
 				overflow-wrap: break-word;
 				overscroll-behavior-y: auto;
+				:global(h1){
+					font-size:6cqw;
+					border-left:2cqw solid $blue;
+					padding-left:1cqw;
+				}
+				:global(h2){
+					font-size:5.5cqw;
+					padding-bottom:1cqw;
+					border-bottom:1px solid black;
+				}
+
 				&:not(.is-scroll){
 				}
 				&.is-scroll{

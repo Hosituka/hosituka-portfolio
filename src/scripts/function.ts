@@ -29,7 +29,7 @@ export function FormatDateOfJP(date:Date):string
 export async function GetRenderAndEntrys<T extends CollectionKey>(collectionEntrys:CollectionEntry<T>[]){
     return await Promise.all(
         collectionEntrys.map(async (entry) => {
-            const {Content} = await entry.render();
+            const Content = (await entry.render()).Content;
             return{
                 entry,
                 Content,

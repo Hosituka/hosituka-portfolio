@@ -12,6 +12,7 @@ const blogCollection = defineCollection({
 		image: z.string().optional(),
 	}),	
 });
+
 export const workExplainCategory = {
 	game:"game",
 	web:"web",
@@ -37,5 +38,25 @@ const workExplainCollection = defineCollection({
 	})
 })
 
+export const skillCategory={
+	language:"language",
+	framework:"framework",
+	tool:"tool",
+	library:"library",
+}
+const skillCollection = defineCollection({
+	type:"content",
+	schema:z.object({
+		skillName:z.string(),
+		skillIconURL:z.string().optional(),
+		proficiency:z.number(),
+		category:z.array(z.enum([
+			skillCategory.language,
+			skillCategory.framework,
+			skillCategory.tool,
+			skillCategory.library,
+		])),
+	})
+})
 // コレクションをエクスポート
-export const collections = {blog:blogCollection,workExplain:workExplainCollection};
+export const collections = {blog:blogCollection,workExplain:workExplainCollection,skills:skillCollection};
