@@ -337,7 +337,7 @@ $cardWidth:355px;
 				this.cardOverview?.classList.remove('is-show')
 			}
 		}
-		disconnectCallback = () =>{
+		disconnectedCallback = () =>{
 			this.showOverviewButton?.removeEventListener('click',this.RequestShowOverview)
 
 			this.hideOverviewButton?.removeEventListener('click',this.RequestHideOverview);

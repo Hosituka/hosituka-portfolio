@@ -155,7 +155,7 @@ const {speed}:Props = Astro.props;
             this.dragging = false;
             this.hovering = false;
         }
-        disconnectCallback(){
+        disconnectedCallback(){
             this.removeEventListener("mouseenter",this.StartHover)
             this.removeEventListener("mousedown", this.StartDrag)
 
