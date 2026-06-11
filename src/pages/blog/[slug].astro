@@ -42,27 +42,24 @@ const {Content} = await post.render();
             margin:20px 0px;
         }
         > ul{
-            margin-left:10px;
             > li{
                 position: relative;
                 margin:7px 0px;
                 &::before{
                     position: absolute;
                     left:0px;
-                    top:50%;
-                    transform: translateY(-50%);
+                    top:6px;
                 }
             }
         }
         > ol{
-            li{
+            > li{
                 position: relative;
                 margin:7px 0px;
                 &::before{
                     position: absolute;
                     left:0px;
-                    top:50%;
-                    transform: translateY(-50%);
+                    top:0px;
                 }
             }
         }
@@ -126,7 +123,6 @@ const {Content} = await post.render();
                 line-height: 1.2;
                 counter-increment: rank;
                 &::before{
-                    height:100%;
                     content: counter(rank)".";
                     font-weight: 700;
                 }

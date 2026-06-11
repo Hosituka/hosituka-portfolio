@@ -1,4 +1,5 @@
 ---
+import WorkCardMDcontent from './WorkCardMDcontent.astro';
 //カルーセルの構成要素にならないカード、なる方のカードはWorkCardOfCarousel.astroを参照
 interface Props{
 	workMediaURL:string;
@@ -37,7 +38,9 @@ import { CheckMedia } from '../../scripts/function';
 	<div class="card-overview">
 		<h3>{workTitle}</h3>
 		<section class="overview-wrapper">
-			<slot name="overview"/>
+			<WorkCardMDcontent>
+				<slot name="overview"/>
+			</WorkCardMDcontent>
 		</section>
 		<div class="link-button-wrapper">
 			<a class="close-overview-button">戻る</a>
@@ -70,7 +73,7 @@ import { CheckMedia } from '../../scripts/function';
 			}
 			.media-container{
 				position:relative;
-				margin-top:1.1cqh;
+				margin-top:1.7cqh;
 				.background-img{
 					position:absolute;
 				}
@@ -85,7 +88,6 @@ import { CheckMedia } from '../../scripts/function';
 				margin-top:2cqh;
 			}
 			.link-button-wrapper{
-				margin-bottom:1cqw;
 				display: flex;
 				justify-content: center;
 				align-items:center;
@@ -116,6 +118,7 @@ import { CheckMedia } from '../../scripts/function';
 				justify-content: center;
 			}
 			.overview-wrapper{
+
 			}
 			.link-button-wrapper{
 				display: flex;
@@ -222,9 +225,7 @@ import { CheckMedia } from '../../scripts/function';
 				border-bottom-right-radius: 20px;			
 				background-color: white;		
 				font-size: 4cqw;	
-				list-style-type: none;
-				li{
-				}
+				list-style: none;
 			}
 
 			.link-button-wrapper{
@@ -283,28 +284,7 @@ import { CheckMedia } from '../../scripts/function';
 				border-bottom:2px solid $blue;
 				overflow-x: hidden;
 
-				line-height:1.5;
-				padding:2px 5px;
-				word-break: normal;
-				overflow-wrap: break-word;
 				overscroll-behavior-y: auto;
-				:global(h1){
-					font-size:6cqw;
-					border-left:2cqw solid $blue;
-					padding-left:1cqw;
-					font-family: sans-serif;
-				}
-				:global(h2){
-					font-size:5.5cqw;
-					padding-bottom:1cqw;
-					border-bottom:1px solid black;
-					font-family: sans-serif;
-				}
-				:global(p){
-					font-size:4cqw;
-					font-family: serif;
-
-				}
 				&:not(.is-scroll){
 				}
 				&.is-scroll{

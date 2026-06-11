@@ -1,0 +1,70 @@
+---
+
+---
+<workcard-md-content>
+    <slot/>
+</workcard-md-content>
+<style is:global lang="scss">
+@use '../../styles/utility' as *;
+@layer Layout{
+    workcard-md-content{
+        display:block;
+        h1,h2{
+            margin:8px 0px;
+        }
+        p{
+            margin:8px 0px;
+        }
+        ul{
+            li{
+                position:relative;
+                margin:7px 0px;
+                &::before{
+                    position:absolute;
+                    left:0px;
+                    top:6px;
+                }
+            }
+        }
+    }
+}
+@layer Appearance{
+    workcard-md-content{
+        padding:5px 5px;
+        h1{
+            font-size:6cqw;
+            border-left:2cqw solid $blue;
+            padding-left:1cqw;
+            font-family: sans-serif;
+        }
+        h2{
+            font-size:5.5cqw;
+            padding-bottom:1cqw;
+            border-bottom:1px solid black;
+            font-family: sans-serif;
+        }
+        p{
+            font-size:16px;
+            font-family: serif;
+            line-height:1.5;
+            word-break: normal;
+            overflow-wrap: break-word;
+
+        }
+        ul{
+            list-style: none;
+            li{
+                padding-left:15px;
+                line-height: 1.2;
+                &::before{
+                    aspect-ratio: 1/1;
+                    height:8px;
+                    border-radius:50%;
+                    background-color: black;
+                    content: "";
+                }
+            }
+        }
+    }
+}
+</style>
