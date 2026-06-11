@@ -45,6 +45,7 @@ const {Content} = await post.render();
             margin-left:10px;
             > li{
                 position: relative;
+                margin:7px 0px;
                 &::before{
                     position: absolute;
                     left:0px;
@@ -56,6 +57,7 @@ const {Content} = await post.render();
         > ol{
             li{
                 position: relative;
+                margin:7px 0px;
                 &::before{
                     position: absolute;
                     left:0px;
@@ -65,7 +67,7 @@ const {Content} = await post.render();
             }
         }
         > p{
-            margin:10px 0px;
+            margin:7px 0px;
         }
     }
 }
@@ -106,7 +108,7 @@ const {Content} = await post.render();
             font-size:16px;
             list-style: none;
             padding-left:20px;
-            line-height: 1.6;
+            line-height: 1.2;
             &::before{
                 aspect-ratio: 1/1;
                 height:8px;
@@ -120,8 +122,8 @@ const {Content} = await post.render();
             counter-reset: rank;
             > li{
                 padding-left:20px;
-                line-height: 1.6;
                 font-size:16px;
+                line-height: 1.2;
                 counter-increment: rank;
                 &::before{
                     height:100%;

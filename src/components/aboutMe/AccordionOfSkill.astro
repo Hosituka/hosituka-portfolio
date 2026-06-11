@@ -115,6 +115,18 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
                 :global(p){
                     margin:8px 0px;
                 }
+                :global(ul){
+                    :global(li){
+                        position:relative;
+                        margin:7px 0px;
+                        &::before{
+                            position:absolute;
+                            left:0px;
+                            top:50%;
+                            transform: translateY(-50%);
+                        }
+                    }
+                }
             }
         }
     }
@@ -246,7 +258,21 @@ const {skillName,skillIconURL,proficiency} = Astro.props;
                     width:100%;
                     max-width:450px;
                 }
+                :global(ul){
+                    list-style: none;
+                    :global(li){
+                        padding-left:15px;
+                        line-height: 1.2;
+                        &::before{
+                            aspect-ratio: 1/1;
+                            height:8px;
+                            border-radius:50%;
+                            background-color: black;
+                            content: "";
+                        }
 
+                    }
+                }
             }
         }
 
